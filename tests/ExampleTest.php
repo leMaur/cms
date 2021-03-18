@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Skeleton\Tests;
+namespace Lemaur\Cms\Tests;
 
 class ExampleTest extends TestCase
 {

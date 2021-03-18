@@ -1,16 +1,16 @@
 {
-    "name": ":vendor_name/:package_name",
-    "description": ":package_description",
+    "name": "lemaur/laravel-cms",
+    "description": "laravel-cms",
     "keywords": [
-        ":vendor_name",
-        ":package_name"
+        "lemaur",
+        "laravel-cms"
     ],
-    "homepage": "https://github.com/:vendor_name/:package_name",
+    "homepage": "https://github.com/lemaur/laravel-cms",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": ":author_email",
+            "name": "Maurizio",
+            "email": "hello@lemaur.me",
             "role": "Developer"
         }
     ],
@@ -27,13 +27,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\Skeleton\\": "src",
-            "Spatie\\Skeleton\\Database\\Factories\\": "database/factories"
+            "Lemaur\\Cms\\": "src",
+            "Lemaur\\Cms\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\Skeleton\\Tests\\": "tests"
+            "Lemaur\\Cms\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -47,10 +47,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Spatie\\Skeleton\\SkeletonServiceProvider"
+                "Lemaur\\Cms\\CmsServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "Spatie\\Skeleton\\SkeletonFacade"
+                "Cms": "Lemaur\\Cms\\CmsFacade"
             }
         }
     },
