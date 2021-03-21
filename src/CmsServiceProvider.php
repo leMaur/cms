@@ -2,10 +2,9 @@
 
 namespace Lemaur\Cms;
 
+use Lemaur\Cms\Commands\CmsCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Lemaur\Cms\Commands\CmsCommand;
-use Spatie\Tags\TagsServiceProvider;
 
 class CmsServiceProvider extends PackageServiceProvider
 {
@@ -22,7 +21,7 @@ class CmsServiceProvider extends PackageServiceProvider
 //            ->hasViews()
             ->hasMigrations([
                 'create_cms_tables',
-                'create_tag_tables'
+                'create_tag_tables',
             ])
 //            ->hasCommand(CmsCommand::class)
         ;

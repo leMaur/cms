@@ -4,8 +4,8 @@ namespace Lemaur\Cms\Tests;
 
 use Dyrynda\Database\LaravelEfficientUuidServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 use Lemaur\Cms\CmsServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\EloquentSortable\EloquentSortableServiceProvider;
 use Spatie\SchemalessAttributes\SchemalessAttributesServiceProvider;
 use Spatie\Tags\TagsServiceProvider;

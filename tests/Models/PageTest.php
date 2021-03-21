@@ -61,7 +61,7 @@ class PageTest extends TestCase
             'meta' => [
                 'title' => 'Meta Title',
                 'description' => 'Meta Description',
-            ]
+            ],
         ]);
 
         $this->assertEquals([
