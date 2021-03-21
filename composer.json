@@ -16,8 +16,15 @@
     ],
     "require": {
         "php": "^8.0",
+        "dyrynda/laravel-efficient-uuid": "^4.3",
+        "dyrynda/laravel-model-uuid": "^6.4",
+        "illuminate/contracts": "^8.0",
+        "lemaur/eloquent-publishing": "^1.0",
+        "spatie/eloquent-sortable": "^3.11",
         "spatie/laravel-package-tools": "^1.4.3",
-        "illuminate/contracts": "^8.0"
+        "spatie/laravel-schemaless-attributes": "^1.8",
+        "spatie/laravel-sluggable": "^2.6",
+        "spatie/laravel-tags": "^4.0"
     },
     "require-dev": {
         "orchestra/testbench": "^6.13",
@@ -38,6 +45,7 @@
     },
     "scripts": {
         "psalm": "vendor/bin/psalm",
+        "format" : "vendor/bin/php-cs-fixer fix --allow-risky=yes",
         "test": "vendor/bin/phpunit --colors=always",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
     },

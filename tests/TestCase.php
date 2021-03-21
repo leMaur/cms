@@ -2,9 +2,14 @@
 
 namespace Lemaur\Cms\Tests;
 
+use Dyrynda\Database\LaravelEfficientUuidServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Lemaur\Publishing\PublishingServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Lemaur\Cms\CmsServiceProvider;
+use Spatie\EloquentSortable\EloquentSortableServiceProvider;
+use Spatie\SchemalessAttributes\SchemalessAttributesServiceProvider;
+use Spatie\Tags\TagsServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -21,6 +26,10 @@ class TestCase extends Orchestra
     {
         return [
             CmsServiceProvider::class,
+            SchemalessAttributesServiceProvider::class,
+            TagsServiceProvider::class,
+            EloquentSortableServiceProvider::class,
+            LaravelEfficientUuidServiceProvider::class,
         ];
     }
 
@@ -33,9 +42,7 @@ class TestCase extends Orchestra
             'prefix' => '',
         ]);
 
-        /*
-        include_once __DIR__.'/../database/migrations/create_laravel_cms_table.php.stub';
-        (new \CreatePackageTable())->up();
-        */
+        include_once __DIR__.'/../database/migrations/create_cms_tables.php.stub';
+        (new \CreateCmsTables())->up();
     }
 }

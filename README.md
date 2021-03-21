@@ -28,6 +28,7 @@ You can publish and run the migrations with:
 
 ```bash
 php artisan vendor:publish --provider="Lemaur\Cms\CmsServiceProvider" --tag="cms-migrations"
+php artisan vendor:publish --provider="Spatie\Tags\TagsServiceProvider" --tag="tags-migrations"
 php artisan migrate
 ```
 
@@ -76,3 +77,10 @@ Please review [our security policy](../../security/policy) on how to report secu
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+## Battery Included
+- https://github.com/leMaur/eloquent-publishing
+- https://github.com/spatie/laravel-tags
+- https://github.com/spatie/eloquent-sortable
+- https://github.com/michaeldyrynda/laravel-efficient-uuid
+- https://github.com/michaeldyrynda/laravel-model-uuid
