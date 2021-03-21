@@ -69,4 +69,20 @@ class PageTest extends TestCase
             'description' => 'Meta Description',
         ], $page->getExtraAttribute('meta'));
     }
+
+    /** @test */
+    public function it_finds_page_from_different_key()
+    {
+        // Find by ID
+        $page = Page::factory()->create();
+        $this->assertEquals($page->id, Page::findOrFail(1)->id);
+
+        // Find by UUID
+        $page = Page::factory()->create();
+        $this->assertEquals($page->id, Page::findOrFail($page->uuid)->id);
+
+        // Find by SLUG
+        $page = Page::factory()->create(['slug' => 'my-page']);
+        $this->assertEquals($page->id, Page::findOrFail('my-page')->id);
+    }
 }

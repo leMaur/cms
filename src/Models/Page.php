@@ -4,12 +4,15 @@ namespace Lemaur\Cms\Models;
 
 use Dyrynda\Database\Casts\EfficientUuid;
 use Dyrynda\Database\Support\GeneratesUuid;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Lemaur\Cms\Models\Concerns\HasSchemalessAttributes;
 use Lemaur\Cms\Models\Concerns\HasSlug;
 use Lemaur\Publishing\Database\Eloquent\Publishes;
+use Ramsey\Uuid\Exception\InvalidUuidStringException;
+use Ramsey\Uuid\Lazy\LazyUuidFromString;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 
@@ -30,12 +33,12 @@ class Page extends Model implements Sortable
         'extra_attributes' => 'array',
     ];
 
-    public static function findOrFail(int|string $mixed): self
+    public static function findOrFail(int|string $mixed): Model
     {
-        return static::query()
-            ->whereUuid($mixed)
-            ->orWhere('slug', $mixed)
-            ->orWhere('id', $mixed)
-            ->firstOrFail();
+        try {
+          return static::whereUuid($mixed)->firstOrFail();
+        } catch (InvalidUuidStringException $e) {
+            return static::where('id', $mixed)->orWhere('slug', $mixed)->firstOrFail();
+        }
     }
 }
