@@ -1,7 +1,7 @@
 # laravel-cms
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/lemaur/laravel-cms.svg?style=flat-square)](https://packagist.org/packages/lemaur/laravel-cms)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/lemaur/laravel-cms/run-tests?label=tests)](https://github.com/lemaur/laravel-cms/actions?query=workflow%3ATests+branch%3Amaster)
+[![GitHub Tests Action Status](https://github.com/leMaur/laravel-cms/actions/workflows/run-tests.yml/badge.svg)](https://github.com/leMaur/laravel-cms/actions/workflows/run-tests.yml)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/lemaur/laravel-cms/Check%20&%20fix%20styling?label=code%20style)](https://github.com/lemaur/laravel-cms/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/lemaur/laravel-cms.svg?style=flat-square)](https://packagist.org/packages/lemaur/laravel-cms)
 
