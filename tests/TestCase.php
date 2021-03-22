@@ -4,6 +4,7 @@ namespace Lemaur\Cms\Tests;
 
 use Dyrynda\Database\LaravelEfficientUuidServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Route;
 use Lemaur\Cms\CmsServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\EloquentSortable\EloquentSortableServiceProvider;
@@ -19,6 +20,8 @@ class TestCase extends Orchestra
         Factory::guessFactoryNamesUsing(
             fn (string $modelName) => 'Lemaur\\Cms\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
+
+        Route::cms('/', 'cms');
     }
 
     protected function getPackageProviders($app)

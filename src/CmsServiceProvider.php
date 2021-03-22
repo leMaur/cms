@@ -18,11 +18,9 @@ class CmsServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-cms')
 //            ->hasConfigFile()
-//            ->hasViews()
-            ->hasMigrations([
-                'create_cms_tables',
-                'create_tag_tables',
-            ])
+            ->hasViews()
+            ->hasMigration('create_cms_tables')
+            ->hasRoute('cms')
 //            ->hasCommand(CmsCommand::class)
         ;
     }

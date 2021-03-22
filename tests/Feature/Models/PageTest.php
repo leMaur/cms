@@ -1,6 +1,6 @@
 <?php
 
-namespace Lemaur\Cms\Tests\Models;
+namespace Lemaur\Cms\Tests\Feature\Models;
 
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Tests\TestCase;
