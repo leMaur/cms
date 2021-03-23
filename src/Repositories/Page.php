@@ -26,7 +26,8 @@ class Page implements Repository
 
         try {
             return $this->findByUuid($slug);
-        } catch (InvalidUuidStringException) {}
+        } catch (InvalidUuidStringException) {
+        }
 
         return $this->findBySlug($slug);
     }

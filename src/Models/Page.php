@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Lemaur\Cms\Models\Concerns\HasSchemalessAttributes;
 use Lemaur\Cms\Models\Concerns\HasSlug;
 use Lemaur\Publishing\Database\Eloquent\Publishes;
-use Ramsey\Uuid\Exception\InvalidUuidStringException;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 
