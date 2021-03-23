@@ -10,17 +10,17 @@ class CreateCmsTables extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
-            $table->efficientUuid('uuid')->index();
-            $table->string('parent')->nullable()->index();
-            $table->string('slug')->unique();
+            $table->efficientUuid('uuid');
+            $table->string('parent')->nullable();
+            $table->string('slug');
             $table->string('title');
             $table->longText('content')->nullable();
             $table->schemalessAttributes('extra_attributes');
             $table->integer('order_column')->nullable();
 
             $table->timestampsTz();
-            $table->timestampTz('published_at')->nullable()->index();
-            $table->softDeletesTz()->index();
+            $table->timestampTz('published_at')->nullable();
+            $table->softDeletesTz();
         });
     }
 }

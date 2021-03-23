@@ -1,20 +1,12 @@
-# laravel-cms
+# A simple CMS backend functionality for Laravel
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/lemaur/laravel-cms.svg?style=flat-square)](https://packagist.org/packages/lemaur/laravel-cms)
-[![GitHub Tests Action Status](https://github.com/leMaur/laravel-cms/actions/workflows/run-tests.yml/badge.svg)](https://github.com/leMaur/laravel-cms/actions/workflows/run-tests.yml)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/lemaur/laravel-cms/Check%20&%20fix%20styling?label=code%20style)](https://github.com/lemaur/laravel-cms/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amaster)
-[![Total Downloads](https://img.shields.io/packagist/dt/lemaur/laravel-cms.svg?style=flat-square)](https://packagist.org/packages/lemaur/laravel-cms)
-
+[![Latest Stable Version](https://poser.pugx.org/lemaur/laravel-cms/v)](//packagist.org/packages/lemaur/laravel-cms)
+[![Total Downloads](https://poser.pugx.org/lemaur/laravel-cms/downloads)](//packagist.org/packages/lemaur/laravel-cms)
+[![License](https://poser.pugx.org/lemaur/laravel-cms/license)](//packagist.org/packages/lemaur/laravel-cms)
+![Tests](https://github.com/leMaur/laravel-cms/workflows/Tests/badge.svg)
+[![Treeware](https://img.shields.io/badge/dynamic/json?color=brightgreen&label=Treeware&query=%24.total&url=https%3A%2F%2Fpublic.offset.earth%2Fusers%2Ftreeware%2Ftrees)](https://treeware.earth)
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/package-laravel-cms-laravel.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/package-laravel-cms-laravel)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
 
 ## Installation
 
@@ -77,6 +69,12 @@ Please review [our security policy](../../security/policy) on how to report secu
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+## Treeware
+
+If you use it in production, then I ask that you [**buy the world a tree**](https://plant.treeware.earth/leMaur/eloquent-publishing) to thank me for my work. By contributing to the Treeware forest you’ll be creating employment for local families and restoring wildlife habitats.
+
+Read more about [Treeware](https://treeware.earth).
 
 ## Battery Included
 - https://github.com/leMaur/eloquent-publishing
