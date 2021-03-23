@@ -7,7 +7,6 @@ use Illuminate\Support\Str;
 use Lemaur\Cms\Models\Page as PageModel;
 use Lemaur\Cms\Models\ReservedSlug;
 use Lemaur\Cms\Repositories\Contracts\Repository;
-use Ramsey\Uuid\Exception\InvalidUuidStringException;
 
 class Page implements Repository
 {
@@ -24,22 +23,12 @@ class Page implements Repository
             return $this->findHomepage();
         }
 
-        try {
-            return $this->findByUuid($slug);
-        } catch (InvalidUuidStringException) {
-        }
-
         return $this->findBySlug($slug);
     }
 
     private function findHomepage(): PageModel
     {
-        return $this->page->whereSlug(ReservedSlug::HOMEPAGE)->firstOrFail();
-    }
-
-    private function findByUuid(string $uuid): PageModel
-    {
-        return $this->page->whereUuid($uuid)->firstOrFail();
+        return $this->page->where('slug', ReservedSlug::HOMEPAGE)->firstOrFail();
     }
 
     private function findBySlug(string $slug): PageModel
@@ -47,9 +36,9 @@ class Page implements Repository
         $slugs = Str::of($slug)->explode('/')->toBase();
 
         $page = $slugs->pop();
-        $parent = $slugs->join('/');
+        $parent = $slugs->count() === 0 ? null : $slugs->join('/');
 
-        return $this->page->query()
+        return $this->page
             ->where('slug', $page)
             ->when($parent, function (Builder $query) use ($parent) {
                 $query->where('parent', $parent);

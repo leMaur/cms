@@ -16,8 +16,6 @@
     ],
     "require": {
         "php": "^8.0",
-        "dyrynda/laravel-efficient-uuid": "^4.3",
-        "dyrynda/laravel-model-uuid": "^6.4",
         "illuminate/contracts": "^8.0",
         "lemaur/eloquent-publishing": "^1.0",
         "spatie/eloquent-sortable": "^3.11",

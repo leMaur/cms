@@ -2,7 +2,6 @@
 
 namespace Lemaur\Cms\Tests;
 
-use Dyrynda\Database\LaravelEfficientUuidServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Route;
 use Lemaur\Cms\CmsServiceProvider;
@@ -31,7 +30,6 @@ class TestCase extends Orchestra
             SchemalessAttributesServiceProvider::class,
             TagsServiceProvider::class,
             EloquentSortableServiceProvider::class,
-            LaravelEfficientUuidServiceProvider::class,
         ];
     }
 

@@ -2,8 +2,6 @@
 
 namespace Lemaur\Cms\Models;
 
-use Dyrynda\Database\Casts\EfficientUuid;
-use Dyrynda\Database\Support\GeneratesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,25 +19,33 @@ class Page extends Model implements Sortable
     use Publishes;
     use SoftDeletes;
     use SortableTrait;
-    use GeneratesUuid;
 
     protected $guarded = [];
 
     protected $casts = [
-        'uuid' => EfficientUuid::class,
         'extra_attributes' => 'array',
     ];
 
     public function setParentAttribute($value): void
     {
+        $slug = collect();
+
         if ($value instanceof Page) {
-            $parent = $value->slug;
+            $slug->push($value->parent);
+            $slug->push($value->slug);
+
+            $parent = $slug->filter()->join('/');
         }
 
         if (is_string($value)) {
-            $parent = $value;
+            $ancestor = self::where('slug', $value)->first()?->parent;
+
+            $slug->push($ancestor);
+            $slug->push($value);
+
+            $parent = $slug->filter()->join('/');
         }
 
-        $this->attributes['parent'] = $parent ?? null;
+        $this->attributes['parent'] = $parent ?? $value;
     }
 }

@@ -46,21 +46,8 @@ class PageControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_shows_404_if_no_page_match()
+    public function it_shows_404_if_page_not_found()
     {
-        $this->get('/no-page')->assertNotFound();
-    }
-
-    /** @test */
-    public function it_shows_page_by_its_uuid()
-    {
-        $page = Page::factory()->create([
-            'slug' => 'about',
-            'content' => 'Hello world!',
-        ]);
-
-        $this->get($page->uuid)
-            ->assertOk()
-            ->assertSee('Hello world!');
+        $this->get('/page-not-found')->assertNotFound();
     }
 }
