@@ -2,7 +2,6 @@
 
 namespace Lemaur\Cms\Tests\Feature\Models;
 
-use Illuminate\Foundation\Auth\User;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Tests\TestCase;
 
