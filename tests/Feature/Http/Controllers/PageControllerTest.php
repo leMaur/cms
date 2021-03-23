@@ -25,15 +25,8 @@ class PageControllerTest extends TestCase
     /** @test */
     public function it_shows_nested_page()
     {
-        Page::factory()->create([
-            'slug' => 'blog',
-        ]);
-
-        Page::factory()->create([
-            'parent' => 'blog',
-            'slug' => 'article',
-            'content' => 'Once upon a time...',
-        ]);
+        Page::factory()->create(['slug' => 'blog']);
+        Page::factory()->create(['parent' => 'blog', 'slug' => 'article', 'content' => 'Once upon a time...']);
 
         $this->get('/blog/article')
             ->assertOk()
@@ -43,22 +36,11 @@ class PageControllerTest extends TestCase
     /** @test */
     public function it_shows_a_third_level_nested_page()
     {
-        Page::factory()->create([
-            'slug' => 'page-1',
-        ]);
+        Page::factory()->create(['slug' => 'first']);
+        Page::factory()->create(['parent' => 'first', 'slug' => 'second']);
+        Page::factory()->create(['parent' => 'first/second', 'slug' => 'third', 'content' => 'Hello world!']);
 
-        Page::factory()->create([
-            'parent' => 'page-1',
-            'slug' => 'page-2',
-        ]);
-
-        Page::factory()->create([
-            'parent' => 'page-1/page-2',
-            'slug' => 'page-3',
-            'content' => 'Hello world!',
-        ]);
-
-        $this->get('/page-1/page-2/page-3')
+        $this->get('/first/second/third')
             ->assertOk()
             ->assertSee('Hello world!');
     }
@@ -66,8 +48,7 @@ class PageControllerTest extends TestCase
     /** @test */
     public function it_shows_404_if_no_page_match()
     {
-        $this->get('/no-page')
-            ->assertNotFound();
+        $this->get('/no-page')->assertNotFound();
     }
 
     /** @test */

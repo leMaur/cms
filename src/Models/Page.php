@@ -31,12 +31,16 @@ class Page extends Model implements Sortable
         'extra_attributes' => 'array',
     ];
 
-    public static function findOrFail(int | string $mixed): Model
+    public function setParentAttribute($value): void
     {
-        try {
-            return static::whereUuid($mixed)->firstOrFail();
-        } catch (InvalidUuidStringException $e) {
-            return static::where('id', $mixed)->orWhere('slug', $mixed)->firstOrFail();
+        if ($value instanceof Page) {
+            $parent = $value->slug;
         }
+
+        if (is_string($value)) {
+            $parent = $value;
+        }
+
+        $this->attributes['parent'] = $parent ?? null;
     }
 }

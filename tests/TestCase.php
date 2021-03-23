@@ -37,6 +37,7 @@ class TestCase extends Orchestra
 
     public function getEnvironmentSetUp($app)
     {
+        $app['config']->set('app.key', 'base64:cleW+WFKXjFtOo55Vz5SvfFGxDWc+vmr7kk2G5JYHqU=');
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite', [
             'driver' => 'sqlite',
