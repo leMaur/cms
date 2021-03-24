@@ -2,9 +2,7 @@
 
 namespace Lemaur\Cms\Tests\Feature\Models;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Tests\Feature\User;
 use Lemaur\Cms\Tests\Feature\User as TestUser;
