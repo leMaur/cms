@@ -2,6 +2,7 @@
 
 namespace Lemaur\Cms\Tests\Feature\Models;
 
+use Illuminate\Support\Collection;
 use Lemaur\Cms\Models\ReservedSlug;
 use Lemaur\Cms\Tests\TestCase;
 
@@ -12,7 +13,8 @@ class ReservedSlugTest extends TestCase
     {
         $list = ReservedSlug::list();
 
-        $this->assertArrayHasKey('homepage', $list);
-        $this->assertArrayHasKey('sitemap', $list);
+        $this->assertInstanceOf(Collection::class, $list);
+        $this->assertArrayHasKey('@home', $list);
+        $this->assertArrayHasKey('@sitemap', $list);
     }
 }

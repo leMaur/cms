@@ -3,12 +3,13 @@
 namespace Lemaur\Cms\Repositories;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Lemaur\Cms\Models\Page as PageModel;
 use Lemaur\Cms\Models\ReservedSlug;
 use Lemaur\Cms\Repositories\Contracts\Repository;
 
-class Page implements Repository
+class PageRepository implements Repository
 {
     private PageModel $page;
 
@@ -17,10 +18,14 @@ class Page implements Repository
         $this->page = $page;
     }
 
-    public function find(?string $slug): PageModel
+    public function find(string $slug = null): PageModel
     {
         if (is_null($slug)) {
             return $this->findHomepage();
+        }
+
+        if(ReservedSlug::list()->keys()->contains($slug)) {
+            abort(404);
         }
 
         return $this->findBySlug($slug);
@@ -42,6 +47,9 @@ class Page implements Repository
             ->where('slug', $page)
             ->when($parent, function (Builder $query) use ($parent) {
                 $query->where('parent', $parent);
+            })
+            ->when(Auth::guest(), function (Builder $query) {
+                $query->onlyPublished();
             })
             ->firstOrFail();
     }

@@ -4,7 +4,7 @@ namespace Lemaur\Cms\Http\Controllers;
 
 use Illuminate\Contracts\View\View as ViewContract;
 use Illuminate\Support\Facades\View;
-use Lemaur\Cms\Repositories\Page as PageRepository;
+use Lemaur\Cms\Repositories\PageRepository;
 
 class PageController
 {

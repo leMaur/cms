@@ -14,13 +14,13 @@ class UserTest extends TestCase
     public function it_may_has_pages()
     {
         $user = User::create(['email' => 'maurizio@example.com']);
-        $user->pages()->create(['title' => 'My Page']);
+        $user->pages()->create(['title' => 'My PageRepository']);
 
         $this->assertInstanceOf(HasMany::class, $user->pages());
         $this->assertInstanceOf(Collection::class, $user->pages);
         $this->assertCount(1, $user->pages);
 
-        $user->pages()->create(['title' => 'Another Page Too']);
+        $user->pages()->create(['title' => 'Another PageRepository Too']);
 
         $this->assertCount(2, $user->fresh()->pages);
         $this->assertInstanceOf(Page::class, $user->pages->first());

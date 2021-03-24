@@ -25,8 +25,8 @@ class PageControllerTest extends TestCase
     /** @test */
     public function it_shows_nested_page()
     {
-        Page::factory()->create(['slug' => 'blog']);
-        Page::factory()->create(['parent' => 'blog', 'slug' => 'article', 'content' => 'Once upon a time...']);
+        Page::factory()->published()->create(['slug' => 'blog']);
+        Page::factory()->published()->create(['parent' => 'blog', 'slug' => 'article', 'content' => 'Once upon a time...']);
 
         $this->get('/blog/article')
             ->assertOk()
@@ -36,9 +36,9 @@ class PageControllerTest extends TestCase
     /** @test */
     public function it_shows_a_third_level_nested_page()
     {
-        Page::factory()->create(['slug' => 'first']);
-        Page::factory()->create(['parent' => 'first', 'slug' => 'second']);
-        Page::factory()->create(['parent' => 'first/second', 'slug' => 'third', 'content' => 'Hello world!']);
+        Page::factory()->published()->create(['slug' => 'first']);
+        Page::factory()->published()->create(['parent' => 'first', 'slug' => 'second']);
+        Page::factory()->published()->create(['parent' => 'first/second', 'slug' => 'third', 'content' => 'Hello world!']);
 
         $this->get('/first/second/third')
             ->assertOk()

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Lemaur\Cms\Models\Concerns\HasSchemalessAttributes;
 use Lemaur\Cms\Models\Concerns\HasSlug;
-use Lemaur\Cms\Tests\Feature\User;
 use Lemaur\Publishing\Database\Eloquent\Publishes;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -30,7 +29,7 @@ class Page extends Model implements Sortable
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo((string) config('cms.users.model'));
+        return $this->belongsTo((string) config('cms.users.model'), 'user_id');
     }
 
     public function setParentAttribute($value): void
