@@ -75,7 +75,7 @@ class PageRepositoryTest extends TestCase
         Auth::login(User::create(['email' => 'me@example.com']));
 
         Page::factory()->create(['slug' => 'blog']);
-        $page =(new PageRepository(new Page()))->find('blog');
+        $page = (new PageRepository(new Page()))->find('blog');
         $this->assertEquals('blog', $page->slug);
     }
 }
