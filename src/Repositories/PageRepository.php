@@ -24,7 +24,7 @@ class PageRepository implements Repository
             return $this->findHomepage();
         }
 
-        if(ReservedSlug::list()->keys()->contains($slug)) {
+        if (ReservedSlug::list()->keys()->contains($slug)) {
             abort(404);
         }
 

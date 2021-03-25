@@ -77,7 +77,7 @@ class PageRepositoryTest extends TestCase
 
         Page::factory()->create(['slug' => 'blog']);
 
-        $page =(new PageRepository(new Page()))->find('blog');
+        $page = (new PageRepository(new Page()))->find('blog');
         $this->assertEquals('blog', $page->slug);
     }
 }
