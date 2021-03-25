@@ -18,7 +18,7 @@ class PageRepository implements Repository
         $this->page = $page;
     }
 
-    public function find(string $slug = null): PageModel
+    public function find(?string $slug): PageModel
     {
         if (is_null($slug)) {
             return $this->findHomepage();
