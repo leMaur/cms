@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Lemaur\Cms\Models\Concerns\HasExcerpt;
+use Lemaur\Cms\Models\Concerns\HasParent;
 use Lemaur\Cms\Models\Concerns\HasSchemalessAttributes;
 use Lemaur\Cms\Models\Concerns\HasSlug;
 use Lemaur\Publishing\Database\Eloquent\Publishes;
@@ -14,12 +16,16 @@ use Spatie\EloquentSortable\SortableTrait;
 
 class Page extends Model implements Sortable
 {
+    use HasExcerpt;
     use HasFactory;
+    use HasParent;
     use HasSchemalessAttributes;
     use HasSlug;
     use Publishes;
     use SoftDeletes;
     use SortableTrait;
+
+    public const EXCERPT_LIMIT = 160;
 
     protected $guarded = [];
 
@@ -30,28 +36,5 @@ class Page extends Model implements Sortable
     public function user(): BelongsTo
     {
         return $this->belongsTo((string) config('cms.users.model'), 'user_id');
-    }
-
-    public function setParentAttribute($value): void
-    {
-        $slug = collect();
-
-        if ($value instanceof Page) {
-            $slug->push($value->parent);
-            $slug->push($value->slug);
-
-            $parent = $slug->filter()->join('/');
-        }
-
-        if (is_string($value)) {
-            $ancestor = self::where('slug', $value)->first()?->parent;
-
-            $slug->push($ancestor);
-            $slug->push($value);
-
-            $parent = $slug->filter()->join('/');
-        }
-
-        $this->attributes['parent'] = $parent ?? $value;
     }
 }

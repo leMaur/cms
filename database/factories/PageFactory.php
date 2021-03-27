@@ -18,7 +18,7 @@ class PageFactory extends Factory
             'parent' => null,
             'slug' => Str::slug($title),
             'title' => $title,
-            'content' => $this->faker->paragraphs(4, true),
+            'content' => $this->faker->paragraphs(10, true),
         ];
     }
 
