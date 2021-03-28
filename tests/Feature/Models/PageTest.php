@@ -4,14 +4,13 @@ namespace Lemaur\Cms\Tests\Feature\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
-use Lemaur\Cms\Traits\HasExcerpt;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Tests\Feature\User;
 use Lemaur\Cms\Tests\Feature\User as TestUser;
 use Lemaur\Cms\Tests\TestCase;
+use Lemaur\Cms\Traits\HasExcerpt;
 use Lemaur\Cms\Traits\HasMetaDescription;
 use Lemaur\Cms\Traits\HasMetaTitle;
-use function Couchbase\fastlzCompress;
 
 class PageTest extends TestCase
 {
@@ -192,7 +191,7 @@ class PageTest extends TestCase
         $this->assertEquals('excerpt', $page->fresh()->excerpt);
     }
 
-        /** @test */
+    /** @test */
     public function it_may_has_layout()
     {
         $content = Page::factory()->raw(['layout' => 'basic']);
