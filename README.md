@@ -24,6 +24,12 @@ php artisan vendor:publish --provider="Spatie\Tags\TagsServiceProvider" --tag="t
 php artisan migrate
 ```
 
+You can use the route with:
+
+```blade
+Route::cms('/', 'cms');
+```
+
 You can publish the config file with:
 ```bash
 php artisan vendor:publish --provider="Lemaur\Cms\CmsServiceProvider" --tag="cms-config"
