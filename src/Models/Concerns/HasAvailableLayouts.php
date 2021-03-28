@@ -13,5 +13,5 @@ trait HasAvailableLayouts
             ->get()
             ->pluck('extra_attributes->layout')
             ->all();
-}
+    }
 }
