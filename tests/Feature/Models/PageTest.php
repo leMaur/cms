@@ -264,6 +264,20 @@ class PageTest extends TestCase
         $this->assertIsArray(Page::getAvailableLayouts());
         $this->assertCount(3, Page::getAvailableLayouts());
     }
+
+    /** @test */
+    public function it_belogs_to_its_author()
+    {
+        $user = User::create(['email' => 'john.doe@example.com']);
+
+        $this->actingAs($user);
+
+        $content = Page::factory()->raw();
+
+        $page = Page::create($content);
+
+        $this->assertEquals($user->id, $page->user->id);
+    }
 }
 
 class TestPage extends Page

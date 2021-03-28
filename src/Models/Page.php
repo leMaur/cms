@@ -5,6 +5,7 @@ namespace Lemaur\Cms\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use Lemaur\Cms\Models\Concerns\HasAvailableLayouts;
 use Lemaur\Cms\Models\Concerns\HasAvailableParents;
 use Lemaur\Cms\Models\Concerns\HasLayout;
@@ -38,4 +39,15 @@ class Page extends Model implements Sortable
     protected $casts = [
         'extra_attributes' => 'array',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        if (Auth::check()) {
+            static::creating(function ($model) {
+                $model->user_id = Auth::user()?->id;
+            });
+        }
+    }
 }

@@ -54,10 +54,7 @@
         "laravel": {
             "providers": [
                 "Lemaur\\Cms\\CmsServiceProvider"
-            ],
-            "aliases": {
-                "Cms": "Lemaur\\Cms\\CmsFacade"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",
