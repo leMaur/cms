@@ -5,6 +5,7 @@ namespace Lemaur\Cms\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Lemaur\Cms\Models\Concerns\HasAvailableLayouts;
 use Lemaur\Cms\Models\Concerns\HasAvailableParents;
 use Lemaur\Cms\Models\Concerns\HasLayout;
 use Lemaur\Cms\Models\Concerns\HasParent;
@@ -17,6 +18,7 @@ use Spatie\EloquentSortable\SortableTrait;
 
 class Page extends Model implements Sortable
 {
+    use HasAvailableLayouts;
     use HasAvailableParents;
     use HasFactory;
     use HasLayout;
@@ -36,15 +38,4 @@ class Page extends Model implements Sortable
     protected $casts = [
         'extra_attributes' => 'array',
     ];
-
-    public static function getAvailableLayouts(): array
-    {
-        return static::distinct()
-                ->select('extra_attributes->layout as layout_name')
-                ->whereNotNull('layout_name')
-                ->orderBy('layout_name', 'asc')
-                ->get()
-                ->pluck('layout_name')
-                ->all();
-    }
 }
