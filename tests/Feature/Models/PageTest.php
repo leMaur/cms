@@ -253,6 +253,18 @@ class PageTest extends TestCase
         $this->assertCount(3, Page::getAvailableParents());
         $this->assertArrayNotHasKey($child->slug, Page::getAvailableParents());
     }
+
+    /** @test */
+    public function it_returns_the_available_layouts()
+    {
+        Page::factory()->create(['layout' => 'service']);
+        Page::factory()->create(['layout' => 'blog']);
+        Page::factory()->count(5)->create(['layout' => 'basic']);
+        Page::factory()->create();
+
+        $this->assertIsArray(Page::getAvailableLayouts());
+        $this->assertCount(3, Page::getAvailableLayouts());
+    }
 }
 
 class TestPage extends Page

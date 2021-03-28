@@ -36,4 +36,15 @@ class Page extends Model implements Sortable
     protected $casts = [
         'extra_attributes' => 'array',
     ];
+
+    public static function getAvailableLayouts(): array
+    {
+        return static::distinct()
+                ->select('extra_attributes->layout as layout_name')
+                ->whereNotNull('layout_name')
+                ->orderBy('layout_name', 'asc')
+                ->get()
+                ->pluck('layout_name')
+                ->all();
+    }
 }
