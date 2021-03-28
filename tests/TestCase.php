@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
 use Lemaur\Cms\CmsServiceProvider;
+use Lemaur\Cms\Models\Navigation;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Tests\Feature\User;
 use Orchestra\Testbench\TestCase as Orchestra;
@@ -46,6 +47,8 @@ class TestCase extends Orchestra
         $app['config']->set('cms.users.model', User::class);
         $app['config']->set('cms.pages.table', 'pages');
         $app['config']->set('cms.pages.model', Page::class);
+        $app['config']->set('cms.navigations.table', 'navigations');
+        $app['config']->set('cms.navigations.model', Navigation::class);
 
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite', [

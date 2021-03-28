@@ -41,8 +41,9 @@ return [
     |
     */
 
-    'excluded_routes' => [
-        '/nova',
+    'navigations' => [
+        'table' => 'navigation',
+        'model' => 'Lemaur\Cms\Models\Navigation',
     ],
 
 
