@@ -42,7 +42,7 @@ return [
     */
 
     'navigations' => [
-        'table' => 'navigation',
+        'table' => 'navigations',
         'model' => 'Lemaur\Cms\Models\Navigation',
     ],
 

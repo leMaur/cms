@@ -4,16 +4,19 @@ namespace Lemaur\Cms\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Lemaur\Cms\Traits\InteractsWithMedia;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
+use Spatie\MediaLibrary\HasMedia;
 
-class Navigation extends Model implements Sortable
+class Navigation extends Model implements Sortable, HasMedia
 {
+    use InteractsWithMedia;
     use SortableTrait;
 
-    public const PRIMARY = 'primary_navigation';
-    public const SECONDARY = 'secondary_navigation';
-    public const SOCIAL = 'social_navigation';
+    public const PRIMARY = 'primary';
+    public const SECONDARY = 'secondary';
+    public const SOCIAL = 'social';
 
     protected $guarded = [];
 

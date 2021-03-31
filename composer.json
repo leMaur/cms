@@ -19,6 +19,7 @@
         "illuminate/contracts": "^8.0",
         "lemaur/eloquent-publishing": "^1.0",
         "spatie/eloquent-sortable": "^3.11",
+        "spatie/laravel-medialibrary": "^9.0.0",
         "spatie/laravel-package-tools": "^1.4.3",
         "spatie/laravel-schemaless-attributes": "^1.8",
         "spatie/laravel-sluggable": "^2.6",
