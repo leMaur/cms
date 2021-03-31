@@ -41,3 +41,12 @@ jobs:
 
       - name: Execute tests
         run: vendor/bin/phpunit --coverage-html coverage
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: coverage-report
+          path: |
+            coverage.html
+            .coverage/
