@@ -30,7 +30,7 @@ class ReservedSlug
         $reflector = new ReflectionClass(static::class);
 
         if (collect($reflector->getConstants())->values()->containsStrict($slug)) {
-           return static::$lookup[$slug];
+            return static::$lookup[$slug];
         }
 
         return $slug;
