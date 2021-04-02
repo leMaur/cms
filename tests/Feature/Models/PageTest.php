@@ -315,6 +315,19 @@ class PageTest extends TestCase
 
         $this->assertSame($image->name, $page->getMedia('page.image.collection')->first()->file_name);
     }
+
+    /** @test */
+    public function it_may_has_type()
+    {
+        $page1 = Page::factory()->create();
+        $page2 = Page::factory()->create(['type' => 'article']);
+
+        $article = Page::withType(null)->first();
+        $this->assertEquals($page1->id, $article->id);
+
+        $article = Page::withType('article')->first();
+        $this->assertEquals($page2->id, $article->id);
+    }
 }
 
 class TestPage extends Page
