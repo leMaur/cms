@@ -73,6 +73,6 @@ class Page extends Model implements Sortable, HasMedia
             return $query;
         }
 
-        return $query->where('type', $type)->ordered();
+        return $query->where('type', $type);
     }
 }
