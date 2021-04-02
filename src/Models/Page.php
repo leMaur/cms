@@ -15,7 +15,10 @@ use Lemaur\Cms\Models\Concerns\HasLayout;
 use Lemaur\Cms\Models\Concerns\HasParent;
 use Lemaur\Cms\Models\Concerns\HasSchemalessAttributes;
 use Lemaur\Cms\Models\Concerns\HasSlug;
+use Lemaur\Cms\Traits\HasExcerpt;
 use Lemaur\Cms\Traits\HasMediaCollections;
+use Lemaur\Cms\Traits\HasMetaDescription;
+use Lemaur\Cms\Traits\HasMetaTitle;
 use Lemaur\Publishing\Database\Eloquent\Publishes;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -23,12 +26,15 @@ use Spatie\MediaLibrary\HasMedia;
 
 class Page extends Model implements Sortable, HasMedia
 {
+    use HasAuthor;
     use HasAvailableLayouts;
     use HasAvailableParents;
+    use HasExcerpt;
     use HasFactory;
     use HasLayout;
-    use HasAuthor;
     use HasMediaCollections;
+    use HasMetaDescription;
+    use HasMetaTitle;
     use HasParent;
     use HasSchemalessAttributes;
     use HasSlug;
