@@ -2,6 +2,7 @@
 
 namespace Lemaur\Cms\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -58,5 +59,14 @@ class Page extends Model implements Sortable, HasMedia
     public function navigations(): HasMany
     {
         return $this->hasMany((string) config('cms.navigations.model'), 'page_id');
+    }
+
+    public function scopeWithType(Builder $query, string $type = null): Builder
+    {
+        if (is_null($type)) {
+            return $query;
+        }
+
+        return $query->where('type', $type)->ordered();
     }
 }

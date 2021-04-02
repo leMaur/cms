@@ -15,6 +15,7 @@ class CreateCmsTables extends Migration
             $table->string('slug')->unique();
             $table->string('title');
             $table->longText('content')->nullable();
+            $table->string('type')->nullable();
             $table->schemalessAttributes('extra_attributes');
             $table->integer('order_column')->nullable();
             $table->timestampsTz();
@@ -25,9 +26,9 @@ class CreateCmsTables extends Migration
         Schema::create((string) config('cms.navigations.table'), function (Blueprint $table) {
             $table->id();
             $table->foreignId('page_id')->nullable()->constrained((string) config('cms.pages.table'))->cascadeOnDelete();
-            $table->string('type')->nullable();
             $table->string('name')->nullable();
             $table->string('url')->nullable();
+            $table->string('type')->nullable();
             $table->integer('order_column')->nullable();
             $table->timestampsTz();
         });
