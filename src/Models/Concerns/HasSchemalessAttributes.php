@@ -2,7 +2,6 @@
 
 namespace Lemaur\Cms\Models\Concerns;
 
-use Illuminate\Database\Eloquent\Builder;
 use Spatie\SchemalessAttributes\SchemalessAttributes;
 
 /**

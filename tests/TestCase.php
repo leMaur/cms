@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
 use Lemaur\Cms\CmsServiceProvider;
-use Lemaur\Cms\Models\Navigation;
-use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Tests\Feature\User;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\EloquentSortable\EloquentSortableServiceProvider;

@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Lemaur\Cms\Models\Navigation;
 use Lemaur\Cms\Models\Page;
@@ -16,9 +15,6 @@ use Lemaur\Cms\Tests\TestCase;
 use Lemaur\Cms\Traits\HasExcerpt;
 use Lemaur\Cms\Traits\HasMetaDescription;
 use Lemaur\Cms\Traits\HasMetaTitle;
-use Lemaur\Cms\Traits\HasSingleImage;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
 class PageTest extends TestCase
 {
