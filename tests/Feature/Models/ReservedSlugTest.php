@@ -15,4 +15,20 @@ class ReservedSlugTest extends TestCase
         self::assertArrayHasKey('@home', $list);
         self::assertArrayHasKey('@sitemap', $list);
     }
+
+    /** @test */
+    public function it_gets_the_slug_associated_with_the_reserved_slug()
+    {
+        $slug = ReservedSlug::handle('@home');
+
+        self::assertEquals('/', $slug);
+    }
+
+    /** @test */
+    public function it_returns_the_slug_itself_if_the_reserved_slug_is_not_found()
+    {
+        $slug = ReservedSlug::handle('about');
+
+        self::assertEquals('about', $slug);
+    }
 }

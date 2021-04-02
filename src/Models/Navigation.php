@@ -4,14 +4,14 @@ namespace Lemaur\Cms\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Lemaur\Cms\Traits\InteractsWithMedia;
+use Lemaur\Cms\Traits\HasSingleImage;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
 
 class Navigation extends Model implements Sortable, HasMedia
 {
-    use InteractsWithMedia;
+    use HasSingleImage;
     use SortableTrait;
 
     public const PRIMARY = 'primary';

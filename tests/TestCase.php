@@ -41,14 +41,10 @@ class TestCase extends Orchestra
 
     public function getEnvironmentSetUp($app)
     {
-        $app['config']->set('app.key', 'base64:ygJ6fXnImxW2fktgrY06dCqkaVOuzxcSNI4jXWqB2E4=');
-
-        $app['config']->set('cms.users.table', 'users');
+        $app['config']->set('cms', include __DIR__.'/../config/cms.php');
         $app['config']->set('cms.users.model', User::class);
-        $app['config']->set('cms.pages.table', 'pages');
-        $app['config']->set('cms.pages.model', Page::class);
-        $app['config']->set('cms.navigations.table', 'navigations');
-        $app['config']->set('cms.navigations.model', Navigation::class);
+
+        $app['config']->set('app.key', 'base64:ygJ6fXnImxW2fktgrY06dCqkaVOuzxcSNI4jXWqB2E4=');
 
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite', [
@@ -56,6 +52,11 @@ class TestCase extends Orchestra
             'database' => ':memory:',
             'prefix' => '',
         ]);
+
+        $app['config']->set('media-library.disk_name', 'local');
+        $app['config']->set('media-library.max_file_size', 1024 * 1024 * 10);
+        $app['config']->set('media-library.media_model', \Spatie\MediaLibrary\MediaCollections\Models\Media::class);
+        $app['config']->set('media-library.path_generator', \Spatie\MediaLibrary\Support\PathGenerator\DefaultPathGenerator::class);
     }
 
     private function getDatabaseSetup($app)
@@ -68,5 +69,8 @@ class TestCase extends Orchestra
 
         include_once __DIR__.'/../database/migrations/create_cms_tables.php.stub';
         (new \CreateCmsTables())->up();
+
+        include_once __DIR__.'/../vendor/spatie/laravel-medialibrary/database/migrations/create_media_table.php.stub';
+        (new \CreateMediaTable())->up();
     }
 }

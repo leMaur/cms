@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | xxx
+    | Define User Model and Migration
     |--------------------------------------------------------------------------
     |
     | xxx
@@ -19,7 +19,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | xxx
+    | Define Page Model and Migration
     |--------------------------------------------------------------------------
     |
     | xxx
@@ -34,7 +34,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | xxx
+    | Define Navigation Model and Migration
     |--------------------------------------------------------------------------
     |
     | xxx
@@ -49,7 +49,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | xxx
+    | Define a domain
     |--------------------------------------------------------------------------
     |
     | xxx
@@ -57,4 +57,59 @@ return [
     */
 
     'domain' => env('CMS_DOMAIN', null),
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Define Media Collections
+    |--------------------------------------------------------------------------
+    | For mime types refer to the IANA archives.
+    | https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
+    |
+    */
+
+    'media' => [
+        'single_image' => [
+            'name' => 'image.single',  // this will generate a media collection name like "{model}.image.single"
+            'only_keep_latest' => 1,
+            'accepts_mime_types' => [
+                'image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/webp', 'image/heic', 'image/heic-sequence', 'image/heif', 'image/heif-sequence', 'image/hej2k', 'image/hsj2', 'image/jp2',
+            ],
+        ],
+
+        'collection_image' => [
+            'name' => 'image.collection',
+            'only_keep_latest' => null,
+            'accepts_mime_types' => [
+                'image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/webp', 'image/heic', 'image/heic-sequence', 'image/heif', 'image/heif-sequence', 'image/hej2k', 'image/hsj2', 'image/jp2',
+            ],
+        ],
+
+        'collection_video' => [
+            'name' => 'video.collection',
+            'only_keep_latest' => null,
+            'accepts_mime_types' => [
+                'video/x-msvideo', 'video/mp4', 'video/mpeg', 'video/ogg', 'video/webm', 'video/3gpp', 'video/3gpp2', 'video/quicktime', 'video/H265', 'video/H264', 'video/H263', 'video/H261',
+            ],
+        ],
+
+        'collection_document' => [
+            'name' => 'document.collection',
+            'only_keep_latest' => null,
+            'accepts_mime_types' => [
+                'application/rtf', 'text/plain', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.oasis.opendocument.text',
+                'application/epub+zip', 'application/pdf',
+                'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.oasis.opendocument.presentation',
+                'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.oasis.opendocument.spreadsheet', 'text/csv',
+            ],
+        ],
+
+        'collection_archive' => [
+            'name' => 'archive.collection',
+            'only_keep_latest' => null,
+            'accepts_mime_types' => [
+                'application/zip', 'application/x-7z-compressed', 'application/java-archive', 'application/gzip',
+            ],
+        ],
+    ],
 ];

@@ -15,11 +15,6 @@ trait HasSchemalessAttributes
         return SchemalessAttributes::createForModel($this, 'extra_attributes');
     }
 
-    public function scopeWithExtraAttributes(): Builder
-    {
-        return SchemalessAttributes::scopeWithSchemalessAttributes('extra_attributes');
-    }
-
     public function getExtraAttribute(string $name, $default = null): mixed
     {
         return $this->extra_attributes->get($name, $default);

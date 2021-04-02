@@ -13,7 +13,7 @@ class ReservedSlug
 
     private static array $lookup = [
         '@home' => '/',
-        '@sitemap' => '/sitemap.xml',
+        '@sitemap' => 'sitemap.xml',
     ];
 
     public static function list(): Collection

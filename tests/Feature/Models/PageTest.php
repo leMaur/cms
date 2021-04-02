@@ -5,6 +5,8 @@ namespace Lemaur\Cms\Tests\Feature\Models;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Lemaur\Cms\Models\Navigation;
 use Lemaur\Cms\Models\Page;
@@ -14,6 +16,9 @@ use Lemaur\Cms\Tests\TestCase;
 use Lemaur\Cms\Traits\HasExcerpt;
 use Lemaur\Cms\Traits\HasMetaDescription;
 use Lemaur\Cms\Traits\HasMetaTitle;
+use Lemaur\Cms\Traits\HasSingleImage;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 class PageTest extends TestCase
 {
@@ -303,6 +308,17 @@ class PageTest extends TestCase
 
         $this->assertEquals($user->id, $page->user->id);
     }
+
+    /** @test */
+    public function it_may_has_media_collections()
+    {
+        $page = Page::factory()->create();
+
+        $image = UploadedFile::fake()->image('image.png');
+        $page->addMedia($image)->toMediaCollection('page.image.collection');
+
+        $this->assertSame($image->name, $page->getMedia('page.image.collection')->first()->file_name);
+    }
 }
 
 class TestPage extends Page
@@ -310,6 +326,4 @@ class TestPage extends Page
     use HasExcerpt;
     use HasMetaTitle;
     use HasMetaDescription;
-
-    protected $table = 'pages';
 }
