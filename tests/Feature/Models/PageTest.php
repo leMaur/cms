@@ -337,10 +337,10 @@ class PageTest extends TestCase
         $third = Page::create(['title' => 'Third', 'parent' => $second->slug]);
         $fourth = Page::create(['title' => 'Fourth', 'parent' => $third->slug]);
 
-        $this->assertEquals('/first', $first->fullSlug);
-        $this->assertEquals('/first/second', $second->fullSlug);
-        $this->assertEquals('/first/second/third', $third->fullSlug);
-        $this->assertEquals('/first/second/third/fourth', $fourth->fullSlug);
+        $this->assertEquals('/first', $first->full_slug);
+        $this->assertEquals('/first/second', $second->full_slug);
+        $this->assertEquals('/first/second/third', $third->full_slug);
+        $this->assertEquals('/first/second/third/fourth', $fourth->full_slug);
     }
 }
 
