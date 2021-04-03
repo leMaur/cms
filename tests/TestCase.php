@@ -70,5 +70,8 @@ class TestCase extends Orchestra
 
         include_once __DIR__.'/../vendor/spatie/laravel-medialibrary/database/migrations/create_media_table.php.stub';
         (new \CreateMediaTable())->up();
+
+        include_once __DIR__.'/../vendor/spatie/laravel-tags/database/migrations/create_tag_tables.php.stub';
+        (new \CreateTagTables())->up();
     }
 }
