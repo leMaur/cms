@@ -16,6 +16,21 @@ class ReservedSlug
         '@sitemap' => 'sitemap.xml',
     ];
 
+    public static function find(string $slug): string
+    {
+        if (strlen($slug) > 1) {
+            $slug = trim($slug, '/');
+        }
+
+        $flippedLookup = collect(static::$lookup)->flip();
+
+        if ($flippedLookup->keys()->containsStrict($slug)) {
+            return $flippedLookup->get($slug);
+        }
+
+        return $slug;
+    }
+
     public static function list(): Collection
     {
         $reflector = new ReflectionClass(static::class);
@@ -34,5 +49,10 @@ class ReservedSlug
         }
 
         return $slug;
+    }
+
+    public static function isReserved(string $slug): bool
+    {
+        return collect(static::$lookup)->keys()->containsStrict($slug);
     }
 }

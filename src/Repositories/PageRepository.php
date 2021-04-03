@@ -18,26 +18,25 @@ class PageRepository implements Repository
         $this->page = $page;
     }
 
-    public function find(?string $slug = null): PageModel
+    public function find(string | null $slug = null): PageModel
     {
-        if (is_null($slug)) {
-            return $this->findHomepage();
-        }
-
         if (ReservedSlug::list()->keys()->contains($slug)) {
             abort(404);
         }
 
-        return $this->findBySlug($slug);
-    }
+        if (is_null($slug)) {
+            $slug = '/';
+        }
 
-    private function findHomepage(): PageModel
-    {
-        return $this->page->where('slug', ReservedSlug::HOMEPAGE)->firstOrFail();
+        return $this->findBySlug(ReservedSlug::find($slug));
     }
 
     private function findBySlug(string $slug): PageModel
     {
+        if (ReservedSlug::isReserved($slug)) {
+            return $this->page->where('slug', $slug)->firstOrFail();
+        }
+
         $slugs = Str::of($slug)->explode('/')->toBase();
 
         $page = $slugs->pop();
@@ -51,9 +50,6 @@ class PageRepository implements Repository
             ->when(Auth::guest(), function (Builder $query) {
                 $query->onlyPublished();
             })
-            ->reorder()
-            ->latestPublished()
-            ->latest('id')
             ->firstOrFail();
     }
 }

@@ -6,5 +6,5 @@ use Lemaur\Cms\Models\Page;
 
 interface Repository
 {
-    public function find(?string $slug = null): Page;
+    public function find(string | null $slug = null): Page;
 }
