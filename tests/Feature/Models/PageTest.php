@@ -1,4 +1,4 @@
-<?php /** @noinspection ALL */
+<?php
 
 namespace Lemaur\Cms\Tests\Feature\Models;
 

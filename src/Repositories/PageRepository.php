@@ -51,6 +51,9 @@ class PageRepository implements Repository
             ->when(Auth::guest(), function (Builder $query) {
                 $query->onlyPublished();
             })
+            ->reorder()
+            ->latestPublished()
+            ->latest('id')
             ->firstOrFail();
     }
 }
