@@ -328,6 +328,20 @@ class PageTest extends TestCase
         $article = Page::withType('article')->first();
         $this->assertEquals($page2->id, $article->id);
     }
+
+    /** @test */
+    public function it_generates_full_slug()
+    {
+        $first = Page::create(['title' => 'First']);
+        $second = Page::create(['title' => 'Second', 'parent' => $first->slug]);
+        $third = Page::create(['title' => 'Third', 'parent' => $second->slug]);
+        $fourth = Page::create(['title' => 'Fourth', 'parent' => $third->slug]);
+
+        $this->assertEquals('/first', $first->fullSlug);
+        $this->assertEquals('/first/second', $second->fullSlug);
+        $this->assertEquals('/first/second/third', $third->fullSlug);
+        $this->assertEquals('/first/second/third/fourth', $fourth->fullSlug);
+    }
 }
 
 class TestPage extends Page

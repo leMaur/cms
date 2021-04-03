@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 use Lemaur\Cms\Models\Concerns\HasAuthor;
 use Lemaur\Cms\Models\Concerns\HasAvailableLayouts;
 use Lemaur\Cms\Models\Concerns\HasAvailableParents;
@@ -74,5 +75,10 @@ class Page extends Model implements Sortable, HasMedia
         }
 
         return $query->where('type', $type);
+    }
+
+    public function getFullSlugAttribute(): string
+    {
+        return (string) Str::of(vsprintf('/%s/%s', [$this->parent, $this->slug]))->replace('//', '/');
     }
 }
