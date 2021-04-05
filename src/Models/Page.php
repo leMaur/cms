@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Str;
 use Lemaur\Cms\Models\Concerns\HasAuthor;
 use Lemaur\Cms\Models\Concerns\HasAvailableLayouts;
 use Lemaur\Cms\Models\Concerns\HasAvailableParents;
