@@ -12,19 +12,28 @@ class ReservedSlug
     public const SITEMAP = '@sitemap';
 
     private static array $lookup = [
-        '@home' => '/',
-        '@sitemap' => 'sitemap.xml',
+        self::HOMEPAGE => '/',
+        self::SITEMAP => 'sitemap.xml',
     ];
 
     public static function find(string $slug): string
     {
         if (strlen($slug) > 1) {
-            $slug = trim($slug, '/');
+            $shortenedSlug = Str::of($slug)->explode('/')->last();
+            $shortenedSlug = Str::of($shortenedSlug)->explode('.')->first();
+
+            $collection = collect(static::$lookup)->filter(function ($item) use ($shortenedSlug) {
+                $shortenedItem = Str::of($item)->explode('.')->first();
+                return (bool) preg_match(sprintf('|%s|', $shortenedItem), $shortenedSlug);
+            });
+
+            if ($collection->count() === 1) {
+                return $collection->flip()->first();
+            }
         }
 
         $flippedLookup = collect(static::$lookup)->flip();
-
-        if ($flippedLookup->keys()->containsStrict($slug)) {
+        if ($flippedLookup->keys()->contains($slug)) {
             return $flippedLookup->get($slug);
         }
 

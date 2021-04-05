@@ -11,7 +11,6 @@ class PageControllerTest extends TestCase
     /** @test */
     public function it_shows_homepage()
     {
-        $this->withoutExceptionHandling();
         Page::factory()->create([
             'title' => 'Welcome',
             'slug' => ReservedSlug::HOMEPAGE,
@@ -50,5 +49,65 @@ class PageControllerTest extends TestCase
     public function it_shows_404_if_page_not_found()
     {
         $this->get('/page-not-found')->assertNotFound();
+
+        Page::factory()->create([
+            'title' => 'Sitemap',
+            'slug' => ReservedSlug::SITEMAP,
+            'layout' => 'sitemap_index',
+        ]);
+
+        $this->get('/sitemaps/sitemap-not-found')->assertNotFound();
+    }
+
+    /** @test */
+    public function it_shows_sitemap_index()
+    {
+        Page::factory()->count(5)->create();
+
+        Page::factory()->create(['slug' => 'blog']);
+        Page::factory()->count(5)->create(['type' => 'article', 'parent' => 'blog']);
+
+        Page::factory()->create(['slug' => 'services-shop']);
+        Page::factory()->count(5)->create(['type' => 'service', 'parent' => 'services-shop']);
+
+        Page::factory()->create([
+            'title' => 'Sitemap',
+            'slug' => ReservedSlug::SITEMAP,
+            'layout' => 'sitemap_index',
+        ]);
+
+        $this->get('/sitemap.xml')
+            ->assertOk()
+            ->assertHeader('Content-Type', 'text/xml; charset=UTF-8')
+            ->assertSee('http://localhost/sitemaps/sitemap-articles.xml')
+            ->assertSee('http://localhost/sitemaps/sitemap-pages.xml')
+            ->assertSee('http://localhost/sitemaps/sitemap-services.xml');
+    }
+
+    /** @test */
+    public function it_shows_the_given_sitemap()
+    {
+        $this->withoutExceptionHandling();
+        $pages = Page::factory()->count(5)->create();
+
+        Page::factory()->create(['slug' => 'blog']);
+        Page::factory()->count(5)->create(['type' => 'article', 'parent' => 'blog']);
+
+        Page::factory()->create(['slug' => 'services-shop']);
+        Page::factory()->count(5)->create(['type' => 'service', 'parent' => 'services-shop']);
+
+        Page::factory()->create([
+            'title' => 'Sitemap',
+            'slug' => ReservedSlug::SITEMAP,
+            'layout' => 'sitemap_index',
+        ]);
+        $this->get('/sitemaps/sitemap_pages.xml')
+            ->assertOk()
+            ->assertHeader('Content-Type', 'text/xml; charset=UTF-8')
+            ->assertSee($pages->get(0)->slug)
+            ->assertSee($pages->get(1)->slug)
+            ->assertSee($pages->get(2)->slug)
+            ->assertSee($pages->get(3)->slug)
+            ->assertSee($pages->get(4)->slug);
     }
 }

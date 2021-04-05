@@ -336,6 +336,20 @@ class PageTest extends TestCase
 
         self::assertEquals('page', $page->fresh()->type);
     }
+
+    /** @test */
+    public function it_returns_the_available_types(): void
+    {
+        Page::factory()->count(5)->create();
+        Page::factory()->create(['type' => 'service']);
+        Page::factory()->create(['type' => 'blog']);
+
+        self::assertIsArray(Page::getAvailableTypes());
+        self::assertCount(3, Page::getAvailableTypes());
+        self::assertTrue(collect(Page::getAvailableTypes())->values()->containsStrict('blog'));
+        self::assertTrue(collect(Page::getAvailableTypes())->values()->containsStrict('service'));
+        self::assertTrue(collect(Page::getAvailableTypes())->values()->containsStrict('page'));
+    }
 }
 
 class TestPage extends Page

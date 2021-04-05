@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Lemaur\Cms\Models\Concerns\HasAuthor;
 use Lemaur\Cms\Models\Concerns\HasAvailableLayouts;
 use Lemaur\Cms\Models\Concerns\HasAvailableParents;
+use Lemaur\Cms\Models\Concerns\HasAvailableTypes;
 use Lemaur\Cms\Models\Concerns\HasParent;
 use Lemaur\Cms\Models\Concerns\HasSchemalessAttributes;
 use Lemaur\Cms\Models\Concerns\HasSlug;
@@ -29,6 +30,7 @@ class Page extends Model implements Sortable, HasMedia
     use HasAuthor;
     use HasAvailableLayouts;
     use HasAvailableParents;
+    use HasAvailableTypes;
     use HasExcerpt;
     use HasFactory;
     use HasMediaCollections;

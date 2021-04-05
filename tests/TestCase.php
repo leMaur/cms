@@ -10,6 +10,7 @@ use Lemaur\Cms\Tests\Feature\User;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\EloquentSortable\EloquentSortableServiceProvider;
 use Spatie\SchemalessAttributes\SchemalessAttributesServiceProvider;
+use Spatie\Sitemap\SitemapServiceProvider;
 use Spatie\Tags\TagsServiceProvider;
 
 class TestCase extends Orchestra
@@ -34,6 +35,7 @@ class TestCase extends Orchestra
             SchemalessAttributesServiceProvider::class,
             TagsServiceProvider::class,
             EloquentSortableServiceProvider::class,
+            SitemapServiceProvider::class,
         ];
     }
 

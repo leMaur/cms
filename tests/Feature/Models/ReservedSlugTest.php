@@ -36,9 +36,9 @@ class ReservedSlugTest extends TestCase
     public function it_returns_the_reserved_value_by_slug()
     {
         self::assertEquals('@home', ReservedSlug::find('/'));
-        self::assertEquals('@sitemap', ReservedSlug::find('/sitemap.xml'));
-        self::assertEquals('about', ReservedSlug::find('/about'));
-        self::assertEquals('first/second/third', ReservedSlug::find('/first/second/third'));
+        self::assertEquals('@sitemap', ReservedSlug::find('sitemap.xml'));
+        self::assertEquals('about', ReservedSlug::find('about'));
+        self::assertEquals('first/second/third', ReservedSlug::find('first/second/third'));
     }
 
     /** @test */
