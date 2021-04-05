@@ -15,64 +15,70 @@ class PageViewModel extends ViewModel
         $this->view = sprintf('cms::%s', $this->page->layout);
     }
 
-    public function meta(): array
-    {
-        // TODO
-        return [
-            'title' => $this->page->getExtraAttribute('title', $this->page->title),
-            'description' => $this->page->getExtraAttribute('description', Str::limit($this->page->excerpt ?? $this->page->content, 150, '')),
-            'opengraph' => [],
-            'twitter' => [],
-            'schema' => [],
-        ];
-    }
-
-    public function fullUrl(): string
-    {
-        $collection = collect([]);
-
-        return secure_url($collection->filter()->implode('/'));
-    }
-
-    public function excerptHtml(): string | null
-    {
-        return Str::markdown($this->page->excerpt, config('cms.markdown', []));
-    }
-
-    public function contentHtml(): string | null
+        public function content(): string | null
     {
         return Str::markdown($this->page->content, config('cms.markdown', []));
     }
 
-    public function articles(): EloquentCollection | null
-    {
-        // @TODO
-    }
+//    public function meta(): array
+//    {
+//        // TODO
+//        return [
+//            'title' => $this->page->getExtraAttribute('title', $this->page->title),
+//            'description' => $this->page->getExtraAttribute('description', Str::limit($this->page->excerpt ?? $this->page->content, 150, '')),
+//            'opengraph' => [],
+//            'twitter' => [],
+//            'schema' => [],
+//        ];
+//    }
 
-    public function category(): Model | null
-    {
-        // @TODO
-    }
+//    public function slug(): string
+//    {
+//        return (string) Str::of(vsprintf('%s/%s', [
+//            $this->page->parent,
+//            $this->page->slug,
+//        ]))->replace('//', '/');
+//    }
 
-    public function tags(): EloquentCollection | null
-    {
-        // @TODO
-    }
+//    public function url(): string
+//    {
+//        return secure_url($this->slug());
+//    }
 
-    public function topic(): Model | null
-    {
-        // @TODO
-    }
+//    public function excerpt(): string | null
+//    {
+//        return Str::markdown($this->page->excerpt, config('cms.markdown', []));
+//    }
 
-    public function media(): array | null
-    {
-        // @TODO
-        return [
-            [
-                'src' => '',
-                'alt' => '',
-                'caption' => '',
-            ],
-        ];
-    }
+//    public function children(): EloquentCollection | null
+//    {
+//        // @TODO
+//    }
+
+//    public function category(): Model | null
+//    {
+//        // @TODO
+//    }
+
+//    public function tags(): EloquentCollection | null
+//    {
+//        // @TODO
+//    }
+
+//    public function topic(): Model | null
+//    {
+//        // @TODO
+//    }
+
+//    public function media(): array | null
+//    {
+//        // @TODO
+//        return [
+//            'single' => [
+//                'src' => '',
+//                'alt' => '',
+//                'caption' => '',
+//            ],
+//        ];
+//    }
 }

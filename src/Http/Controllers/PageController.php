@@ -9,6 +9,6 @@ class PageController
 {
     public function __invoke(PageRepository $page, string $slug = null): PageViewModel
     {
-        return $page->find($slug);
+        return $page->find($slug)->toViewModel();
     }
 }

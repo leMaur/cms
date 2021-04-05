@@ -16,6 +16,7 @@ use Lemaur\Cms\Models\Concerns\HasLayout;
 use Lemaur\Cms\Models\Concerns\HasParent;
 use Lemaur\Cms\Models\Concerns\HasSchemalessAttributes;
 use Lemaur\Cms\Models\Concerns\HasSlug;
+use Lemaur\Cms\Models\ViewModels\PageViewModel;
 use Lemaur\Cms\Traits\HasExcerpt;
 use Lemaur\Cms\Traits\HasMediaCollections;
 use Lemaur\Cms\Traits\HasMetaDescription;
@@ -77,8 +78,8 @@ class Page extends Model implements Sortable, HasMedia
         return $query->where('type', $type);
     }
 
-    public function getFullSlugAttribute(): string
+    public function toViewModel(): PageViewModel
     {
-        return (string) Str::of(vsprintf('/%s/%s', [$this->parent, $this->slug]))->replace('//', '/');
+        return new PageViewModel($this);
     }
 }

@@ -282,10 +282,9 @@ class PageTest extends TestCase
     /** @test */
     public function it_returns_the_available_layouts()
     {
+        Page::factory()->count(5)->create();
         Page::factory()->create(['layout' => 'service']);
         Page::factory()->create(['layout' => 'blog']);
-        Page::factory()->count(5)->create(['layout' => 'basic']);
-        Page::factory()->create();
 
         $this->assertIsArray(Page::getAvailableLayouts());
         $this->assertCount(3, Page::getAvailableLayouts());
@@ -327,20 +326,6 @@ class PageTest extends TestCase
 
         $article = Page::withType('article')->first();
         $this->assertEquals($page2->id, $article->id);
-    }
-
-    /** @test */
-    public function it_generates_full_slug()
-    {
-        $first = Page::create(['title' => 'First']);
-        $second = Page::create(['title' => 'Second', 'parent' => $first->slug]);
-        $third = Page::create(['title' => 'Third', 'parent' => $second->slug]);
-        $fourth = Page::create(['title' => 'Fourth', 'parent' => $third->slug]);
-
-        $this->assertEquals('/first', $first->full_slug);
-        $this->assertEquals('/first/second', $second->full_slug);
-        $this->assertEquals('/first/second/third', $third->full_slug);
-        $this->assertEquals('/first/second/third/fourth', $fourth->full_slug);
     }
 }
 
