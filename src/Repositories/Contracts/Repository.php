@@ -2,9 +2,9 @@
 
 namespace Lemaur\Cms\Repositories\Contracts;
 
-use Lemaur\Cms\Models\Page;
+use Lemaur\Cms\Models\ViewModels\PageViewModel;
 
 interface Repository
 {
-    public function find(string | null $slug = null): Page;
+    public function find(string | null $slug = null): PageViewModel;
 }

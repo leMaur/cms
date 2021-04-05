@@ -2,18 +2,13 @@
 
 namespace Lemaur\Cms\Http\Controllers;
 
-use Illuminate\Contracts\View\View as ViewContract;
-use Illuminate\Support\Facades\View;
+use Lemaur\Cms\Models\ViewModels\PageViewModel;
 use Lemaur\Cms\Repositories\PageRepository;
 
 class PageController
 {
-    public function __invoke(PageRepository $page, string $slug = null): ViewContract
+    public function __invoke(PageRepository $page, string $slug = null): PageViewModel
     {
-        $data = $page->find($slug);
-
-        return View::make('cms::base', [
-            'content' => $data->content,
-        ]);
+        return $page->find($slug);
     }
 }

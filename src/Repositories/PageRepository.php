@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Lemaur\Cms\Models\Page as PageModel;
 use Lemaur\Cms\Models\ReservedSlug;
+use Lemaur\Cms\Models\ViewModels\PageViewModel;
 use Lemaur\Cms\Repositories\Contracts\Repository;
 
 class PageRepository implements Repository
@@ -18,7 +19,7 @@ class PageRepository implements Repository
         $this->page = $page;
     }
 
-    public function find(string | null $slug = null): PageModel
+    public function find(string | null $slug = null): PageViewModel
     {
         if (ReservedSlug::list()->keys()->contains($slug)) {
             abort(404);
@@ -28,7 +29,7 @@ class PageRepository implements Repository
             $slug = '/';
         }
 
-        return $this->findBySlug(ReservedSlug::find($slug));
+        return new PageViewModel($this->findBySlug(ReservedSlug::find($slug)));
     }
 
     private function findBySlug(string $slug): PageModel
