@@ -15,7 +15,7 @@ class PageViewModel extends ViewModel
         $this->view = sprintf('cms::%s', $this->page->layout);
     }
 
-        public function content(): string | null
+    public function content(): string | null
     {
         return Str::markdown($this->page->content, config('cms.markdown', []));
     }
