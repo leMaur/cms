@@ -218,16 +218,6 @@ class PageTest extends TestCase
     }
 
     /** @test */
-    public function it_may_has_layout()
-    {
-        $content = Page::factory()->raw(['layout' => 'basic']);
-
-        $page = TestPage::create($content);
-
-        $this->assertEquals('basic', $page->fresh()->layout);
-    }
-
-    /** @test */
     public function it_may_has_meta_title()
     {
         $content = Page::factory()->raw(['meta_title' => 'meta title']);
@@ -280,18 +270,21 @@ class PageTest extends TestCase
     }
 
     /** @test */
-    public function it_returns_the_available_layouts()
+    public function it_returns_the_available_layouts(): void
     {
         Page::factory()->count(5)->create();
         Page::factory()->create(['layout' => 'service']);
         Page::factory()->create(['layout' => 'blog']);
 
-        $this->assertIsArray(Page::getAvailableLayouts());
-        $this->assertCount(3, Page::getAvailableLayouts());
+        self::assertIsArray(Page::getAvailableLayouts());
+        self::assertCount(3, Page::getAvailableLayouts());
+        self::assertTrue(collect(Page::getAvailableLayouts())->values()->containsStrict('blog'));
+        self::assertTrue(collect(Page::getAvailableLayouts())->values()->containsStrict('service'));
+        self::assertTrue(collect(Page::getAvailableLayouts())->values()->containsStrict('basic'));
     }
 
     /** @test */
-    public function it_belogs_to_its_author()
+    public function it_belongs_to_its_author()
     {
         $user = User::create(['email' => 'john.doe@example.com']);
 
@@ -316,16 +309,32 @@ class PageTest extends TestCase
     }
 
     /** @test */
-    public function it_may_has_type()
+    public function it_may_has_type(): void
     {
         $page1 = Page::factory()->create();
         $page2 = Page::factory()->create(['type' => 'article']);
 
         $article = Page::withType(null)->first();
-        $this->assertEquals($page1->id, $article->id);
+        self::assertEquals($page1->id, $article->id);
 
         $article = Page::withType('article')->first();
-        $this->assertEquals($page2->id, $article->id);
+        self::assertEquals($page2->id, $article->id);
+    }
+
+    /** @test */
+    public function it_has_a_default_layout(): void
+    {
+        $page = Page::factory()->create();
+
+        self::assertEquals('basic', $page->fresh()->layout);
+    }
+
+    /** @test */
+    public function it_has_a_default_type(): void
+    {
+        $page = Page::factory()->create();
+
+        self::assertEquals('page', $page->fresh()->type);
     }
 }
 

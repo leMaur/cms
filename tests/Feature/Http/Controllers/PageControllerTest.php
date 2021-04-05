@@ -11,6 +11,7 @@ class PageControllerTest extends TestCase
     /** @test */
     public function it_shows_homepage()
     {
+        $this->withoutExceptionHandling();
         Page::factory()->create([
             'title' => 'Welcome',
             'slug' => ReservedSlug::HOMEPAGE,

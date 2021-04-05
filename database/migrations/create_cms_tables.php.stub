@@ -15,7 +15,8 @@ class CreateCmsTables extends Migration
             $table->string('slug')->unique();
             $table->string('title');
             $table->longText('content')->nullable();
-            $table->string('type')->default('page')->nullable();
+            $table->string('type')->default('page');
+            $table->string('layout')->default('basic');
             $table->schemalessAttributes('extra_attributes');
             $table->integer('order_column')->nullable();
             $table->timestampsTz();

@@ -6,7 +6,7 @@ trait HasAvailableParents
 {
     public static function getAvailableParents(): array
     {
-        return static::select(['id', 'slug'])
+        return static::select(['slug'])
             ->whereNull('parent')
             ->orderBy('slug', 'asc')
             ->get()

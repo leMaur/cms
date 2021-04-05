@@ -7,11 +7,10 @@ trait HasAvailableLayouts
     public static function getAvailableLayouts(): array
     {
         return static::distinct()
-            ->select('extra_attributes->layout')
-            ->whereNotNull('extra_attributes->layout')
-            ->orderBy('extra_attributes->layout', 'asc')
+            ->select('layout')
+            ->orderBy('layout', 'asc')
             ->get()
-            ->pluck('extra_attributes->layout')
+            ->pluck('layout')
             ->all();
     }
 }
