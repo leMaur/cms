@@ -68,7 +68,11 @@ HTML
     /** @test */
     public function it_shows_meta_information()
     {
-        self::markTestSkipped();
+        $page = Page::factory()->create()->toViewModel();
+
+        dd(
+            $page->meta()
+        );
     }
 
     /** @test */

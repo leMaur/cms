@@ -14,6 +14,8 @@ trait HasMetaDescription
 
     public function getMetaDescriptionAttribute(): string
     {
-        return (string) $this->extra_attributes->get('meta_description', Str::limit(strip_tags($this->content), Page::META_DESCRIPTION_LIMIT - 3));
+        $html = Str::of($this->content)->markdown(config('cms.markdown.options', []));
+
+        return (string) $this->extra_attributes->get('meta_description', Str::limit(strip_tags($html), Page::META_DESCRIPTION_LIMIT - 3));
     }
 }

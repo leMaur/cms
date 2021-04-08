@@ -16,6 +16,7 @@
     ],
     "require": {
         "php": "^8.0",
+        "artesaos/seotools": "^0.20.0",
         "illuminate/contracts": "^8.0",
         "lemaur/eloquent-publishing": "^1.0",
         "spatie/eloquent-sortable": "^3.11",

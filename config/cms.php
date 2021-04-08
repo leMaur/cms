@@ -4,6 +4,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | S.E.O.
+    |--------------------------------------------------------------------------
+    */
+
+    'seo' => [
+        'title' => [
+            'prefix' => env('CMS_SEO_TITLE_PREFIX', 'Biophilic & Sustainable Interior Design'),
+            'separator' => env('CMS_SEO_TITLE_SEPARATOR', '·'),
+        ],
+    ],
+
+
+    /*
+    |--------------------------------------------------------------------------
     | Define User Model and Migration
     |--------------------------------------------------------------------------
     |
@@ -13,7 +27,7 @@ return [
 
     'users' => [
         'table' => 'users',
-        'model' => 'App\Models\User',
+        'model' => \App\Models\User::class,
     ],
 
 
@@ -28,7 +42,7 @@ return [
 
     'pages' => [
         'table' => 'pages',
-        'model' => 'Lemaur\Cms\Models\Page',
+        'model' => \Lemaur\Cms\Models\Page::class,
     ],
 
 
@@ -43,7 +57,7 @@ return [
 
     'navigations' => [
         'table' => 'navigations',
-        'model' => 'Lemaur\Cms\Models\Navigation',
+        'model' => \Lemaur\Cms\Models\Navigation::class,
     ],
 
 

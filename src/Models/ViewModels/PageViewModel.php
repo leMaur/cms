@@ -2,6 +2,7 @@
 
 namespace Lemaur\Cms\Models\ViewModels;
 
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Str;
 use Lemaur\Cms\Models\Page;
@@ -93,23 +94,6 @@ class PageViewModel extends ViewModel
         return $sitemap;
     }
 
-    public function hasCoverImage(): bool
-    {
-        // @TODO: define me!
-        return false;
-    }
-
-    public function coverImage(): object
-    {
-        // @TODO: define me!
-        // @TODO: use DTO?
-        return (object) [
-            'src' => null,
-            'alt' => null,
-            'caption' => null,
-        ];
-    }
-
     public function content(): string | null
     {
         if (is_null($this->page?->content)) {
@@ -128,17 +112,58 @@ class PageViewModel extends ViewModel
         return Str::markdown($this->page->excerpt, config('cms.markdown.options', []));
     }
 
-//    public function meta(): object
-//    {
-//        // TODO
-//        return (object) [
-//            'title' => $this->page->getExtraAttribute('title', $this->page->title),
-//            'description' => $this->page->getExtraAttribute('description', Str::limit($this->page->excerpt ?? $this->page->content, 150, '')),
-//            'opengraph' => [],
-//            'twitter' => [],
-//            'schema' => [],
+    public function opengraphType(): string
+    {
+//        $types = [
+//            'page' => 'website',
+//            'article' => 'article',
+//            'service' => 'website',
+//            'shop' => 'product',
 //        ];
-//    }
+//
+//        return $types[$this->page->type] ?? 'website';
+        return 'website';
+    }
+
+    public function generateMetaTags(): void
+    {
+        $title = collect([
+            config('cms.seo.title.prefix', null),
+            $separator = config('cms.seo.title.separator', null),
+            $this->page->meta_title,
+            $separator,
+            config('app.name'),
+        ])->filter()->join(' ');
+
+        $description = $this->meta_description;
+
+        $type = $this->opengraphType();
+
+        SEOTools::setTitle($title);
+        SEOTools::setDescription($description);
+        SEOTools::opengraph()
+            ->addProperty('locale', app()->getLocale())
+            ->setType($type)
+//            ->setTitle($title)
+//            ->setDescription($description)
+            // images [630x1200:jpg]
+            // product
+        ;
+        SEOTools::twitter()
+//            ->setTitle($title)
+//            ->setDescription($description)
+            // images [600x1200:jpg]
+            // product
+        ;
+
+        [
+            'title' => $this->page->getExtraAttribute('title', $this->page->title),
+            'description' => $this->page->getExtraAttribute('description', Str::limit($this->page->excerpt ?? $this->page->content, 150, '')),
+            'opengraph' => [],
+            'twitter' => [],
+            'schema' => [], // spatie schema-org
+        ];
+    }
 
     public function slug(): string
     {
