@@ -10,39 +10,49 @@ class PageViewModelTest extends TestCase
     /** @test */
     public function it_shows_content_formatted_as_html(): void
     {
-        $markdown = <<<'MD'
-## Title
-this is a paragraph with **bold** text and _italic_.
-MD;
-
-        $page = Page::factory()->create(['content' => $markdown]);
-        $viewModel = $page->toViewModel();
+        $page = Page::factory()->create(['content' => <<<'MD'
+            ## Title
+            this is a paragraph with **bold** text and _italic_.
+            MD]);
 
         self::assertEquals(<<<'HTML'
-<h2>Title</h2>
-<p>this is a paragraph with <strong>bold</strong> text and <em>italic</em>.</p>
+            <h2>Title</h2>
+            <p>this is a paragraph with <strong>bold</strong> text and <em>italic</em>.</p>
 
-HTML
-        , $viewModel->content());
+            HTML
+        , $page->toViewModel()->content());
+    }
+
+    /** @test */
+    public function it_doesnt_show_content_formatted_as_html_when_is_null(): void
+    {
+        $page = Page::factory()->create(['content' => null]);
+
+        self::assertNull($page->toViewModel()->content());
     }
 
     /** @test */
     public function it_shows_excerpt_formatted_as_html(): void
     {
-        $markdown = <<<'MD'
-## Title
-this is a paragraph with **bold** text and _italic_.
-MD;
-
-        $page = Page::factory()->create(['excerpt' => $markdown]);
-        $viewModel = $page->toViewModel();
+        $page = Page::factory()->create(['excerpt' => <<<'MD'
+            ## Title
+            this is a paragraph with **bold** text and _italic_.
+            MD]);
 
         self::assertEquals(<<<'HTML'
-<h2>Title</h2>
-<p>this is a paragraph with <strong>bold</strong> text and <em>italic</em>.</p>
+            <h2>Title</h2>
+            <p>this is a paragraph with <strong>bold</strong> text and <em>italic</em>.</p>
 
-HTML
-        , $viewModel->excerpt());
+            HTML
+        , $page->toViewModel()->excerpt());
+    }
+
+    /** @test */
+    public function it_doesnt_show_excerpt_formatted_as_html_when_is_null(): void
+    {
+        $page = Page::factory()->create(['excerpt' => null]);
+
+        self::assertNull($page->toViewModel()->excerpt());
     }
 
     /** @test */
