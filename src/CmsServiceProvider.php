@@ -3,6 +3,7 @@
 namespace Lemaur\Cms;
 
 use Closure;
+use Illuminate\Support\Facades\Blade;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Spatie\MediaLibrary\MediaCollections\MediaCollection;

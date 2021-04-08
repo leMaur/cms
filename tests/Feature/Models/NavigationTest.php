@@ -42,4 +42,16 @@ class NavigationTest extends TestCase
 
         self::assertSame($image->name, $navigation->getMedia('navigation.image.single')->first()->file_name);
     }
+
+    /** @test */
+    public function it_scopes_query_by_type(): void
+    {
+        $primary = Navigation::create(['name' => 'Primary', 'type' => 'primary']);
+        $secondary = Navigation::create(['name' => 'Secondary', 'type' => 'secondary']);
+        $social = Navigation::create(['name' => 'Social', 'type' => 'social']);
+
+        self::assertEquals($primary->id, Navigation::withType('primary')->first()->id);
+        self::assertEquals($secondary->id, Navigation::withType('secondary')->first()->id);
+        self::assertEquals($social->id, Navigation::withType('social')->first()->id);
+    }
 }

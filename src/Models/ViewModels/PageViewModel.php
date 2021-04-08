@@ -103,8 +103,9 @@ class PageViewModel extends ViewModel
     public function coverImage(): object
     {
         // @TODO: define me!
+        // @TODO: use DTO?
         return (object) [
-            'url' => null,
+            'src' => null,
             'alt' => null,
             'caption' => null,
         ];
@@ -116,7 +117,7 @@ class PageViewModel extends ViewModel
             return null;
         }
 
-        return Str::markdown($this->page->content, config('cms.markdown', []));
+        return Str::markdown($this->page->content, config('cms.markdown.options', []));
     }
 
     public function excerpt(): string | null
@@ -125,7 +126,7 @@ class PageViewModel extends ViewModel
             return null;
         }
 
-        return Str::markdown($this->page->excerpt, config('cms.markdown', []));
+        return Str::markdown($this->page->excerpt, config('cms.markdown.options', []));
     }
 
 //    public function meta(): object

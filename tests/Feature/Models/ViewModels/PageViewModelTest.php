@@ -46,30 +46,6 @@ HTML
     }
 
     /** @test */
-    public function it_checks_if_has_cover_image()
-    {
-        self::markTestSkipped();
-    }
-
-    /** @test */
-    public function it_shows_cover_image()
-    {
-        self::markTestSkipped();
-    }
-
-    /** @test */
-    public function it_shows_media_library()
-    {
-        self::markTestSkipped();
-    }
-
-    /** @test */
-    public function it_shows_meta_information()
-    {
-        self::markTestSkipped();
-    }
-
-    /** @test */
     public function it_shows_slug()
     {
         $page = Page::factory()->create(['slug' => 'blog']);
@@ -87,6 +63,12 @@ HTML
 
         $page = Page::factory()->create(['parent' => 'blog', 'slug' => 'article']);
         self::assertEquals('https://localhost/blog/article', $page->toViewModel()->url());
+    }
+
+    /** @test */
+    public function it_shows_meta_information()
+    {
+        self::markTestSkipped();
     }
 
     /** @test */

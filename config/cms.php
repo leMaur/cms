@@ -69,7 +69,9 @@ return [
     */
 
     'markdown' => [
-        // @TODO
+        'options' => [
+            // @TODO
+        ],
     ],
 
 

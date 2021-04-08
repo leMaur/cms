@@ -309,16 +309,13 @@ class PageTest extends TestCase
     }
 
     /** @test */
-    public function it_may_has_type(): void
+    public function it_scopes_query_by_type(): void
     {
         $page1 = Page::factory()->create();
         $page2 = Page::factory()->create(['type' => 'article']);
 
-        $article = Page::withType(null)->first();
-        self::assertEquals($page1->id, $article->id);
-
-        $article = Page::withType('article')->first();
-        self::assertEquals($page2->id, $article->id);
+        self::assertEquals($page1->id, Page::withType(null)->first()->id);
+        self::assertEquals($page2->id, Page::withType('article')->first()->id);
     }
 
     /** @test */
