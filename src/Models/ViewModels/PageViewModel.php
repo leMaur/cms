@@ -112,19 +112,6 @@ class PageViewModel extends ViewModel
         return Str::markdown($this->page->excerpt, config('cms.markdown.options', []));
     }
 
-    public function opengraphType(): string
-    {
-//        $types = [
-//            'page' => 'website',
-//            'article' => 'article',
-//            'service' => 'website',
-//            'shop' => 'product',
-//        ];
-//
-//        return $types[$this->page->type] ?? 'website';
-        return 'website';
-    }
-
     public function pageTitle(): string
     {
         return collect([
@@ -136,38 +123,55 @@ class PageViewModel extends ViewModel
         ])->filter()->join(' ');
     }
 
-    public function generateMetaTags(): void
+    public function generateMeta(): void
     {
-        $title = $this->pageTitle();
+        SEOTools::setTitle($this->pageTitle());
+        SEOTools::setDescription($this->page->meta_description);
 
-        $description = $this->page->meta_description;
+        $this->generateOpengraphMetaTags();
 
-        $type = $this->opengraphType();
+        $this->generateTwitterMetaTags();
 
-        // Basic Meta Tags
-        SEOTools::setTitle($title);
-        SEOTools::setDescription($description);
+        $this->generateSchemaOrg();
+    }
 
-        // Open Graph Meta Tags
-        SEOTools::opengraph()
-            ->addProperty('locale', app()->getLocale())
-            ->setType($type)
-//            ->setTitle($title)
-//            ->setDescription($description)
-            // images [630x1200:jpg]
-            // product
-        ;
+    private function generateSchemaOrg(): void
+    {
+        // @TODO
+    }
 
-        // Twitter Meta Tags
+    private function generateTwitterMetaTags(): void
+    {
         SEOTools::twitter()
 //            ->setTitle($title)
 //            ->setDescription($description)
             // images [600x1200:jpg]
             // product
         ;
+    }
 
-        // Schema-org
-        // @TODO
+    private function generateOpengraphMetaTags(): void
+    {
+        SEOTools::opengraph()
+            ->addProperty('locale', app()->getLocale())
+            ->setType($this->opengraphType())
+//            ->setTitle($title)
+//            ->setDescription($description)
+            // images [630x1200:jpg]
+            // product
+        ;
+    }
+
+    private function opengraphType(): string
+    {
+        $types = [
+            'page' => 'website',
+            'service' => 'website',
+//            'shop' => 'product',
+//            'article' => 'article',
+        ];
+
+        return $types[$this->page->type] ?? 'website';
     }
 
     public function slug(): string

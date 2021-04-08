@@ -12,6 +12,6 @@
         <!-- Scripts -->
     </head>
     <body>
-        {{ $content }}
+    {!! $content !!}
     </body>
 </html>
