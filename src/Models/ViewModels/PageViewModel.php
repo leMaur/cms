@@ -3,7 +3,6 @@
 namespace Lemaur\Cms\Models\ViewModels;
 
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Models\ReservedSlug;
@@ -41,7 +40,7 @@ class PageViewModel extends ViewModel
 
     private function sitemapIndex(): SitemapIndex
     {
-        $sitemapIndex =  SitemapIndex::create();
+        $sitemapIndex = SitemapIndex::create();
 
         foreach (Page::getAvailableTypes() as $type) {
             $sitemapIndex->add(sprintf('sitemaps/sitemap-%s.xml', Str::plural($type)));

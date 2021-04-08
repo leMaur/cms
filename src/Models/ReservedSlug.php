@@ -24,6 +24,7 @@ class ReservedSlug
 
             $collection = collect(static::$lookup)->filter(function ($item) use ($shortenedSlug) {
                 $shortenedItem = Str::of($item)->explode('.')->first();
+
                 return (bool) preg_match(sprintf('|%s|', $shortenedItem), $shortenedSlug);
             });
 
