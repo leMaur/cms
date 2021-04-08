@@ -2,7 +2,6 @@
 
 namespace Lemaur\Cms\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,6 +14,7 @@ use Lemaur\Cms\Models\Concerns\HasAvailableTypes;
 use Lemaur\Cms\Models\Concerns\HasParent;
 use Lemaur\Cms\Models\Concerns\HasSchemalessAttributes;
 use Lemaur\Cms\Models\Concerns\HasSlug;
+use Lemaur\Cms\Models\Concerns\HasType;
 use Lemaur\Cms\Models\ViewModels\PageViewModel;
 use Lemaur\Cms\Traits\HasExcerpt;
 use Lemaur\Cms\Traits\HasMediaCollections;
@@ -39,6 +39,7 @@ class Page extends Model implements Sortable, HasMedia
     use HasParent;
     use HasSchemalessAttributes;
     use HasSlug;
+    use HasType;
     use Publishes;
     use SoftDeletes;
     use SortableTrait;
@@ -66,15 +67,6 @@ class Page extends Model implements Sortable, HasMedia
     public function navigations(): HasMany
     {
         return $this->hasMany((string) config('cms.navigations.model'), 'page_id');
-    }
-
-    public function scopeWithType(Builder $query, string $type = null): Builder
-    {
-        if (is_null($type)) {
-            return $query;
-        }
-
-        return $query->where('type', $type);
     }
 
     public function toViewModel(): PageViewModel

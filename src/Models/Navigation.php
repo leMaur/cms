@@ -2,11 +2,10 @@
 
 namespace Lemaur\Cms\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Lemaur\Cms\Models\Concerns\HasType;
 use Lemaur\Cms\Traits\HasSingleImage;
-use ReflectionClass;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
@@ -14,6 +13,7 @@ use Spatie\MediaLibrary\HasMedia;
 class Navigation extends Model implements Sortable, HasMedia
 {
     use HasSingleImage;
+    use HasType;
     use SortableTrait;
 
     public const PRIMARY = 'primary';
@@ -32,19 +32,5 @@ class Navigation extends Model implements Sortable, HasMedia
     public function page(): BelongsTo
     {
         return $this->belongsTo((string) config('cms.pages.model'), 'page_id');
-    }
-
-    public function scopeWithType(Builder $query, string $type = null): Builder
-    {
-        if (is_null($type)) {
-            return $query;
-        }
-
-        $reflector = new ReflectionClass(static::class);
-        if (! collect($reflector->getConstants())->values()->containsStrict($type)) {
-            return $query;
-        }
-
-        return $query->where('type', $type);
     }
 }

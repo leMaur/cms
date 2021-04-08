@@ -3,7 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        {!! SEOTools::generate() !!}
+        {!! app('seotools.metatags')->generate() !!}
+        {!! app('seotools.opengraph')->generate() !!}
+        {!! app('seotools.twitter')->generate() !!}
         <!-- Fonts -->
         <!-- Favicon -->
         <!-- Styles -->

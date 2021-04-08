@@ -34,6 +34,7 @@ Route::cms('/', 'cms');
 You can publish the config file with:
 ```bash
 php artisan vendor:publish --provider="Lemaur\Cms\CmsServiceProvider" --tag="cms-config"
+php artisan vendor:publish --provider="Artesaos\SEOTools\Providers\SEOToolsServiceProvider"
 ```
 
 This is the contents of the published config file:

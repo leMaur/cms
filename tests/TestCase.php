@@ -2,6 +2,7 @@
 
 namespace Lemaur\Cms\Tests;
 
+use Artesaos\SEOTools\Providers\SEOToolsServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
@@ -9,6 +10,8 @@ use Lemaur\Cms\CmsServiceProvider;
 use Lemaur\Cms\Tests\Feature\User;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\EloquentSortable\EloquentSortableServiceProvider;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\MediaLibrary\Support\PathGenerator\DefaultPathGenerator;
 use Spatie\SchemalessAttributes\SchemalessAttributesServiceProvider;
 use Spatie\Sitemap\SitemapServiceProvider;
 use Spatie\Tags\TagsServiceProvider;
@@ -36,15 +39,16 @@ class TestCase extends Orchestra
             TagsServiceProvider::class,
             EloquentSortableServiceProvider::class,
             SitemapServiceProvider::class,
+            SEOToolsServiceProvider::class,
         ];
     }
 
     public function getEnvironmentSetUp($app)
     {
+        $app['config']->set('app.key', 'base64:ygJ6fXnImxW2fktgrY06dCqkaVOuzxcSNI4jXWqB2E4=');
+
         $app['config']->set('cms', include __DIR__.'/../config/cms.php');
         $app['config']->set('cms.users.model', User::class);
-
-        $app['config']->set('app.key', 'base64:ygJ6fXnImxW2fktgrY06dCqkaVOuzxcSNI4jXWqB2E4=');
 
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite', [
@@ -55,8 +59,8 @@ class TestCase extends Orchestra
 
         $app['config']->set('media-library.disk_name', 'local');
         $app['config']->set('media-library.max_file_size', 1024 * 1024 * 10);
-        $app['config']->set('media-library.media_model', \Spatie\MediaLibrary\MediaCollections\Models\Media::class);
-        $app['config']->set('media-library.path_generator', \Spatie\MediaLibrary\Support\PathGenerator\DefaultPathGenerator::class);
+        $app['config']->set('media-library.media_model', Media::class);
+        $app['config']->set('media-library.path_generator', DefaultPathGenerator::class);
     }
 
     private function getDatabaseSetup($app)

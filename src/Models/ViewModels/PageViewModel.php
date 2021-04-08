@@ -80,13 +80,13 @@ class PageViewModel extends ViewModel
                     ->setChangeFrequency($frequency)
                     ->setPriority($priority);
 
-                if ($viewModel->hasCoverImage()) {
-                    $url->addImage(
-                        Image::create($viewModel->coverImage()->url)
-                            ->setTitle($viewModel->coverImage()->alt)
-                            ->setCaption($viewModel->coverImage()->caption)
-                    );
-                }
+//                if ($viewModel->hasCoverImage()) {
+//                    $url->addImage(
+//                        Image::create($viewModel->coverImage()->url)
+//                            ->setTitle($viewModel->coverImage()->alt)
+//                            ->setCaption($viewModel->coverImage()->caption)
+//                    );
+//                }
 
                 $sitemap->add($url);
             });
@@ -125,22 +125,30 @@ class PageViewModel extends ViewModel
         return 'website';
     }
 
-    public function generateMetaTags(): void
+    public function pageTitle(): string
     {
-        $title = collect([
+        return collect([
             config('cms.seo.title.prefix', null),
             $separator = config('cms.seo.title.separator', null),
             $this->page->meta_title,
             $separator,
             config('app.name'),
         ])->filter()->join(' ');
+    }
 
-        $description = $this->meta_description;
+    public function generateMetaTags(): void
+    {
+        $title = $this->pageTitle();
+
+        $description = $this->page->meta_description;
 
         $type = $this->opengraphType();
 
+        // Basic Meta Tags
         SEOTools::setTitle($title);
         SEOTools::setDescription($description);
+
+        // Open Graph Meta Tags
         SEOTools::opengraph()
             ->addProperty('locale', app()->getLocale())
             ->setType($type)
@@ -149,6 +157,8 @@ class PageViewModel extends ViewModel
             // images [630x1200:jpg]
             // product
         ;
+
+        // Twitter Meta Tags
         SEOTools::twitter()
 //            ->setTitle($title)
 //            ->setDescription($description)
@@ -156,13 +166,8 @@ class PageViewModel extends ViewModel
             // product
         ;
 
-        [
-            'title' => $this->page->getExtraAttribute('title', $this->page->title),
-            'description' => $this->page->getExtraAttribute('description', Str::limit($this->page->excerpt ?? $this->page->content, 150, '')),
-            'opengraph' => [],
-            'twitter' => [],
-            'schema' => [], // spatie schema-org
-        ];
+        // Schema-org
+        // @TODO
     }
 
     public function slug(): string
