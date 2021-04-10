@@ -70,8 +70,9 @@ class Page extends Model implements Sortable, HasMedia
         return $this->hasMany((string) config('cms.navigations.model'), 'page_id');
     }
 
-    #[Pure] public function toViewModel(): PageViewModel
-    {
-        return new PageViewModel($this);
-    }
+    #[Pure]
+ public function toViewModel(): PageViewModel
+ {
+     return new PageViewModel($this);
+ }
 }
