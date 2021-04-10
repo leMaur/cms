@@ -309,13 +309,33 @@ class PageTest extends TestCase
     }
 
     /** @test */
-    public function it_scopes_query_by_type(): void
+    public function it_scopes_query_with_type(): void
     {
         $page1 = Page::factory()->create();
         $page2 = Page::factory()->create(['type' => 'article']);
 
         self::assertEquals($page1->id, Page::withType(null)->first()->id);
         self::assertEquals($page2->id, Page::withType('article')->first()->id);
+    }
+
+    /** @test */
+    public function it_scopes_query_with_slug(): void
+    {
+        $page1 = Page::factory()->create(['slug' => 'blog']);
+        $page2 = Page::factory()->create(['slug' => 'article']);
+
+        self::assertEquals($page1->id, Page::withSlug('blog')->first()->id);
+        self::assertEquals($page2->id, Page::withSlug('article')->first()->id);
+    }
+
+    /** @test */
+    public function it_scopes_query_without_slug(): void
+    {
+        $page1 = Page::factory()->create(['slug' => 'blog']);
+        $page2 = Page::factory()->create(['slug' => 'article']);
+
+        self::assertEquals($page1->id, Page::withoutSlug('article')->first()->id);
+        self::assertEquals($page2->id, Page::withoutSlug('blog')->first()->id);
     }
 
     /** @test */

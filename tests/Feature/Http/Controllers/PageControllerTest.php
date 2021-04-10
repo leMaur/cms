@@ -87,7 +87,6 @@ class PageControllerTest extends TestCase
     /** @test */
     public function it_shows_the_given_sitemap()
     {
-        $this->withoutExceptionHandling();
         $pages = Page::factory()->count(5)->create();
 
         Page::factory()->create(['slug' => 'blog']);

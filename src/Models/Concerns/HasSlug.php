@@ -19,12 +19,13 @@ trait HasSlug
             ->doNotGenerateSlugsOnUpdate();
     }
 
-    public function scopeWithSlug(Builder $query, string $slug = null): Builder
+    public function scopeWithSlug(Builder $query, string $slug): Builder
     {
-        if (is_null($slug)) {
-            return $query;
-        }
+        return $query->where('slug', ReservedSlug::find($slug));
+    }
 
+    public function scopeWithoutSlug(Builder $query, string $slug): Builder
+    {
         return $query->where('slug', '!=', ReservedSlug::find($slug));
     }
 }

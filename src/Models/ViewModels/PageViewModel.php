@@ -65,7 +65,7 @@ class PageViewModel extends ViewModel
 
         // @TODO: cache it
         $pages = Page::withType($type)
-            ->withSlug($this->page->slug)
+            ->withoutSlug($this->page->slug)
             ->orderBy('id')
             ->get();
 
