@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use JetBrains\PhpStorm\Pure;
 use Lemaur\Cms\Models\Concerns\HasAuthor;
 use Lemaur\Cms\Models\Concerns\HasAvailableLayouts;
 use Lemaur\Cms\Models\Concerns\HasAvailableParents;
@@ -69,7 +70,7 @@ class Page extends Model implements Sortable, HasMedia
         return $this->hasMany((string) config('cms.navigations.model'), 'page_id');
     }
 
-    public function toViewModel(): PageViewModel
+    #[Pure] public function toViewModel(): PageViewModel
     {
         return new PageViewModel($this);
     }

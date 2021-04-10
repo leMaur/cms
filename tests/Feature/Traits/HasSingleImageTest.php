@@ -16,7 +16,7 @@ class HasSingleImageTest extends TestCase
         $mediaCollections = (new TestModel())->getRegisteredMediaCollections();
 
         self::assertCount(1, $mediaCollections);
-        self::assertEquals('testmodel.image.single', $mediaCollections->first()->name);
+        self::assertEquals('testmodel.cover', $mediaCollections->first()->name);
         self::assertEquals(data_get($config, 'only_keep_latest'), $mediaCollections->first()->collectionSizeLimit);
         self::assertTrue($mediaCollections->first()->singleFile);
         self::assertIsArray($mediaCollections->first()->acceptsMimeTypes);

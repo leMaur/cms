@@ -33,6 +33,7 @@
         "phpunit/phpunit": "^9.3",
         "roave/security-advisories": "dev-latest",
         "spatie/laravel-ray": "^1.9",
+        "spatie/phpunit-snapshot-assertions": "^4.2",
         "vimeo/psalm": "^4.4"
     },
     "autoload": {

@@ -78,7 +78,15 @@ class PageViewModelTest extends TestCase
     /** @test */
     public function it_shows_meta_information()
     {
-        self::markTestSkipped();
+        Page::factory()->published()->create([
+            'title' => 'My Title',
+            'slug' => 'my-title',
+            'content' => 'Something to say',
+        ]);
+
+        $this->assertMatchesHtmlSnapshot(
+            $this->get('/my-title')->content()
+        );
     }
 
     /** @test */

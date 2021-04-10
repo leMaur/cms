@@ -15,10 +15,13 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\Support\PathGenerator\DefaultPathGenerator;
 use Spatie\SchemalessAttributes\SchemalessAttributesServiceProvider;
 use Spatie\Sitemap\SitemapServiceProvider as SpatieSitemapServiceProvider;
+use Spatie\Snapshots\MatchesSnapshots;
 use Spatie\Tags\TagsServiceProvider;
 
 class TestCase extends Orchestra
 {
+    use MatchesSnapshots;
+
     public function setUp(): void
     {
         parent::setUp();
@@ -63,6 +66,14 @@ class TestCase extends Orchestra
         $app['config']->set('media-library.max_file_size', 1024 * 1024 * 10);
         $app['config']->set('media-library.media_model', Media::class);
         $app['config']->set('media-library.path_generator', DefaultPathGenerator::class);
+
+        $app['config']->set('seotools.meta.defaults.title', false);
+        $app['config']->set('seotools.meta.defaults.description', false);
+        $app['config']->set('seotools.meta.defaults.separator', ' ・ ');
+        $app['config']->set('seotools.opengraph.defaults.title', false);
+        $app['config']->set('seotools.opengraph.defaults.description', false);
+        $app['config']->set('seotools.twitter.defaults.card', 'summary');
+        $app['config']->set('seotools.twitter.defaults.site', '@dfordesignstyle');
     }
 
     private function getDatabaseSetup($app)

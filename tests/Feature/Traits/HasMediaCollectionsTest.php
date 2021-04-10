@@ -17,7 +17,7 @@ class HasMediaCollectionsTest extends TestCase
         $index = 0;
 
         self::assertCount(5, $mediaCollections);
-        self::assertEquals('testmediacollectionmodel.image.single', $mediaCollections->get($index)->name);
+        self::assertEquals('testmediacollectionmodel.cover', $mediaCollections->get($index)->name);
         self::assertEquals(data_get($config, 'only_keep_latest'), $mediaCollections->get($index)->collectionSizeLimit);
         self::assertTrue($mediaCollections->get($index)->singleFile);
         self::assertIsArray($mediaCollections->get($index)->acceptsMimeTypes);

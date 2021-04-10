@@ -20,9 +20,6 @@ return [
     |--------------------------------------------------------------------------
     | Define User Model and Migration
     |--------------------------------------------------------------------------
-    |
-    | xxx
-    |
     */
 
     'users' => [
@@ -35,9 +32,6 @@ return [
     |--------------------------------------------------------------------------
     | Define Page Model and Migration
     |--------------------------------------------------------------------------
-    |
-    | xxx
-    |
     */
 
     'pages' => [
@@ -50,9 +44,6 @@ return [
     |--------------------------------------------------------------------------
     | Define Navigation Model and Migration
     |--------------------------------------------------------------------------
-    |
-    | xxx
-    |
     */
 
     'navigations' => [
@@ -65,9 +56,6 @@ return [
     |--------------------------------------------------------------------------
     | Define a domain
     |--------------------------------------------------------------------------
-    |
-    | xxx
-    |
     */
 
     'domain' => env('CMS_DOMAIN', null),
@@ -100,7 +88,7 @@ return [
 
     'media' => [
         'single_image' => [
-            'name' => 'image.single',  // this will generate a media collection name like "{model}.image.single"
+            'name' => 'cover',  // this will generate a media collection name like "{model}.cover"
             'only_keep_latest' => 1,
             'accepts_mime_types' => [
                 'image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/webp', 'image/heic', 'image/heic-sequence', 'image/heif', 'image/heif-sequence', 'image/hej2k', 'image/hsj2', 'image/jp2',
