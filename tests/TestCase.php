@@ -8,12 +8,13 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
 use Lemaur\Cms\CmsServiceProvider;
 use Lemaur\Cms\Tests\Feature\User;
+use Lemaur\Sitemap\SitemapServiceProvider as LemaurSitemapServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\EloquentSortable\EloquentSortableServiceProvider;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\Support\PathGenerator\DefaultPathGenerator;
 use Spatie\SchemalessAttributes\SchemalessAttributesServiceProvider;
-use Spatie\Sitemap\SitemapServiceProvider;
+use Spatie\Sitemap\SitemapServiceProvider as SpatieSitemapServiceProvider;
 use Spatie\Tags\TagsServiceProvider;
 
 class TestCase extends Orchestra
@@ -38,7 +39,8 @@ class TestCase extends Orchestra
             SchemalessAttributesServiceProvider::class,
             TagsServiceProvider::class,
             EloquentSortableServiceProvider::class,
-            SitemapServiceProvider::class,
+            SpatieSitemapServiceProvider::class,
+            LemaurSitemapServiceProvider::class,
             SEOToolsServiceProvider::class,
         ];
     }
