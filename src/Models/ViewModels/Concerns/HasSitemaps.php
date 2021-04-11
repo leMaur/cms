@@ -9,7 +9,6 @@ use Lemaur\Sitemap\Tags\Image;
 use Lemaur\Sitemap\Tags\Url;
 use Spatie\Sitemap\SitemapIndex;
 use Symfony\Component\HttpFoundation\Response;
-use function PHPUnit\Framework\isNull;
 
 trait HasSitemaps
 {
