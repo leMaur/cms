@@ -8,7 +8,6 @@ use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Models\ReservedSlug;
 use Lemaur\Cms\Models\ViewModels\Concerns\HasMetaTags;
 use Lemaur\Cms\Models\ViewModels\Concerns\HasSitemaps;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\ViewModels\ViewModel;
 use Symfony\Component\HttpFoundation\Response;
 
