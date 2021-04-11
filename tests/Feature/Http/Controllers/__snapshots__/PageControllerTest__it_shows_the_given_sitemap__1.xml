@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://localhost/blog/article-1</loc>
     <lastmod>2016-01-01T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.1</priority>
+    <image:image>
+      <image:loc>http://localhost/storage/1/photo1.jpg</image:loc>
+      <image:caption>caption text</image:caption>
+      <image:title>alternative text</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://localhost/blog/article-2</loc>
     <lastmod>2016-01-01T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.1</priority>
+    <image:image>
+      <image:loc>http://localhost/storage/2/photo1.jpg</image:loc>
+      <image:caption>caption text</image:caption>
+      <image:title>alternative text</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://localhost/blog/article-3</loc>
     <lastmod>2016-01-01T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.1</priority>
+    <image:image>
+      <image:loc>http://localhost/storage/3/photo1.jpg</image:loc>
+      <image:caption>caption text</image:caption>
+      <image:title>alternative text</image:title>
+    </image:image>
   </url>
 </urlset>

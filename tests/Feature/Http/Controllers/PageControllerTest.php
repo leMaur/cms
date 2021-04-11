@@ -2,6 +2,8 @@
 
 namespace Lemaur\Cms\Tests\Feature\Http\Controllers;
 
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Models\ReservedSlug;
 use Lemaur\Cms\Tests\TestCase;
@@ -76,7 +78,7 @@ class PageControllerTest extends TestCase
     /** @test */
     public function it_shows_sitemap_index()
     {
-        $pages = collect([
+        collect([
             ['title' => 'Welcome', 'slug' => ReservedSlug::HOMEPAGE],
 
             ['title' => 'Blog'],
@@ -100,9 +102,8 @@ class PageControllerTest extends TestCase
             ['title' => 'Terms of Service'],
 
             ['title' => 'Sitemap', 'slug' => ReservedSlug::SITEMAP, 'layout' => 'sitemap_index'],
-        ]);
 
-        $pages->each(fn ($page) => Page::create(collect($page)->merge(['published_at' => now()])->toArray()));
+        ])->each(fn ($page) => Page::create(collect($page)->merge(['published_at' => now()])->toArray()));
 
         $this->assertMatchesXmlSnapshot(
             $this->get('/sitemap.xml')->content()
@@ -112,7 +113,9 @@ class PageControllerTest extends TestCase
     /** @test */
     public function it_shows_the_given_sitemap()
     {
-        $pages = collect([
+        Storage::fake('local');
+
+        collect([
             ['title' => 'Welcome', 'slug' => ReservedSlug::HOMEPAGE],
 
             ['title' => 'Blog'],
@@ -136,9 +139,17 @@ class PageControllerTest extends TestCase
             ['title' => 'Terms of Service'],
 
             ['title' => 'Sitemap', 'slug' => ReservedSlug::SITEMAP, 'layout' => 'sitemap_index'],
-        ]);
 
-        $pages->each(fn ($page) => Page::create(collect($page)->merge(['published_at' => now()])->toArray()));
+        ])->each(fn ($page) => Page::create(collect($page)->merge(['published_at' => now()])->toArray()));
+
+        Page::where('layout', 'article')->orderBy('id')->get()->each(static function (Page $page): void {
+            $page->addMedia(UploadedFile::fake()->image('photo1.jpg'))
+                ->withCustomProperties([
+                    'alt_text' => 'alternative text',
+                    'caption' => 'caption text',
+                ])
+                ->toMediaCollection('page.cover', 'local');
+        });
 
         $this->travel(3)->years();
 
