@@ -2,7 +2,6 @@
 
 namespace Lemaur\Cms\Models\ViewModels;
 
-use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Str;
 use Lemaur\Cms\Markdown;
 use Lemaur\Cms\Models\Page;
