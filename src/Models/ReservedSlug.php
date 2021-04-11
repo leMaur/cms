@@ -11,18 +11,18 @@ class ReservedSlug
     public const HOMEPAGE = '@home';
     public const SITEMAP = '@sitemap';
 
-    private static array $lookup = [
+    private static array $slugs = [
         self::HOMEPAGE => '/',
         self::SITEMAP => 'sitemap.xml',
     ];
 
-    public static function find(string $slug): string
+    public static function toReserved(string $slug): string
     {
         if (strlen($slug) > 1) {
             $shortenedSlug = Str::of($slug)->explode('/')->last();
             $shortenedSlug = Str::of($shortenedSlug)->explode('.')->first();
 
-            $collection = collect(static::$lookup)->filter(function ($item) use ($shortenedSlug) {
+            $collection = collect(static::$slugs)->filter(function ($item) use ($shortenedSlug) {
                 $shortenedItem = Str::of($item)->explode('.')->first();
 
                 return (bool) preg_match(sprintf('|%s|', $shortenedItem), $shortenedSlug);
@@ -33,9 +33,20 @@ class ReservedSlug
             }
         }
 
-        $flippedLookup = collect(static::$lookup)->flip();
+        $flippedLookup = collect(static::$slugs)->flip();
         if ($flippedLookup->keys()->contains($slug)) {
             return $flippedLookup->get($slug);
+        }
+
+        return $slug;
+    }
+
+    public static function toSlug(string $slug): string
+    {
+        $reflector = new ReflectionClass(static::class);
+
+        if (collect($reflector->getConstants())->values()->containsStrict($slug)) {
+            return static::$slugs[$slug];
         }
 
         return $slug;
@@ -50,19 +61,8 @@ class ReservedSlug
             ->toBase();
     }
 
-    public static function toSlug(string $slug): string
-    {
-        $reflector = new ReflectionClass(static::class);
-
-        if (collect($reflector->getConstants())->values()->containsStrict($slug)) {
-            return static::$lookup[$slug];
-        }
-
-        return $slug;
-    }
-
     public static function isReserved(string $slug): bool
     {
-        return collect(static::$lookup)->keys()->containsStrict($slug);
+        return collect(static::$slugs)->keys()->containsStrict($slug);
     }
 }

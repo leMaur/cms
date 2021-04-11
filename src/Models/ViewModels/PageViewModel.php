@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Lemaur\Cms\Markdown;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Models\ReservedSlug;
+use Lemaur\Cms\Models\ViewModels\Concerns\HasMetaTags;
 use Lemaur\Sitemap\Sitemap;
 use Lemaur\Sitemap\Tags\Url;
 use Spatie\Sitemap\SitemapIndex;
@@ -15,6 +16,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PageViewModel extends ViewModel
 {
+    use HasMetaTags;
+
     public function __construct(private Page $page)
     {
         $this->view = sprintf('cms::%s', $this->page->layout);
@@ -110,70 +113,6 @@ class PageViewModel extends ViewModel
         return Markdown::convert($this->page->excerpt, config('cms.markdown.options', []));
     }
 
-    public function pageTitle(): string
-    {
-        $separator = config('cms.seo.title.separator', null);
-
-        return collect([
-            config('cms.seo.title.prefix', null),
-            $separator,
-            $this->page->meta_title,
-            $separator,
-            config('app.name'),
-        ])->filter()->join(' ');
-    }
-
-    public function generateMeta(): void
-    {
-        SEOTools::setTitle($this->pageTitle());
-        SEOTools::setDescription($this->page->meta_description);
-
-        $this->generateOpengraphMetaTags();
-
-        $this->generateTwitterMetaTags();
-
-        $this->generateSchemaOrg();
-    }
-
-    private function generateSchemaOrg(): void
-    {
-        // @TODO: generate schema org
-    }
-
-    private function generateTwitterMetaTags(): void
-    {
-        SEOTools::twitter()
-//            ->setTitle($title)
-//            ->setDescription($description)
-            // images [600x1200:jpg]
-            // product
-        ;
-    }
-
-    private function generateOpengraphMetaTags(): void
-    {
-        SEOTools::opengraph()
-            ->addProperty('locale', app()->getLocale())
-            ->setType($this->opengraphType())
-//            ->setTitle($title)
-//            ->setDescription($description)
-            // images [630x1200:jpg]
-            // product
-        ;
-    }
-
-    private function opengraphType(): string
-    {
-        $types = [
-            'page' => 'website',
-            'service' => 'website',
-//            'shop' => 'product',
-//            'article' => 'article',
-        ];
-
-        return $types[$this->page->type] ?? 'website';
-    }
-
     public function slug(): string
     {
         return (string) Str::of(vsprintf('%s/%s', [
@@ -189,10 +128,10 @@ class PageViewModel extends ViewModel
         return secure_url($this->slug());
     }
 
-//    public function children(): EloquentCollection | null
-//    {
-//        // @TODO: get children pages
-//    }
+    public function children()
+    {
+        // @TODO: get children pages
+    }
 
     public function media()
     {

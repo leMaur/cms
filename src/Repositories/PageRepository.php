@@ -28,7 +28,7 @@ class PageRepository implements Repository
             $slug = '/';
         }
 
-        return $this->findBySlug(ReservedSlug::find($slug));
+        return $this->findBySlug(ReservedSlug::toReserved($slug));
     }
 
     private function findBySlug(string $slug): PageModel

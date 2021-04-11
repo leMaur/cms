@@ -21,11 +21,11 @@ trait HasSlug
 
     public function scopeWithSlug(Builder $query, string $slug): Builder
     {
-        return $query->where('slug', ReservedSlug::find($slug));
+        return $query->where('slug', ReservedSlug::toReserved($slug));
     }
 
     public function scopeWithoutSlug(Builder $query, string $slug): Builder
     {
-        return $query->where('slug', '!=', ReservedSlug::find($slug));
+        return $query->where('slug', '!=', ReservedSlug::toReserved($slug));
     }
 }
