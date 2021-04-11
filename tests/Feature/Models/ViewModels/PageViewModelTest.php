@@ -2,8 +2,12 @@
 
 namespace Lemaur\Cms\Tests\Feature\Models\ViewModels;
 
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Models\ReservedSlug;
+use Lemaur\Cms\Models\ViewModels\ImageViewModel;
 use Lemaur\Cms\Tests\TestCase;
 
 class PageViewModelTest extends TestCase
@@ -56,41 +60,77 @@ class PageViewModelTest extends TestCase
         self::assertNull($page->toViewModel()->excerpt());
     }
 
-    /** @test */
-    public function it_shows_slug(): void
+    /**
+     * @return array [['parent', 'slug', 'expected'], ...]
+     */
+    public function slugs(): array
     {
-        $page = Page::factory()->create(['slug' => ReservedSlug::HOMEPAGE]);
-        self::assertEmpty($page->toViewModel()->slug());
+        return [
+            [null, ReservedSlug::HOMEPAGE, null],
+            [null, ReservedSlug::SITEMAP, 'sitemap.xml'],
+            [null, 'blog', 'blog'],
+            ['blog', 'article', 'blog/article'],
+            [null, 'services-shop', 'services-shop'],
+            ['services-shop', 'ebook', 'services-shop/ebook'],
+            ['services-shop/ebook', 'biophilia', 'services-shop/ebook/biophilia'],
+        ];
+    }
 
-        $page = Page::factory()->create(['slug' => 'blog']);
-        self::assertEquals('blog', $page->toViewModel()->slug());
+    /**
+     * @test
+     * @dataProvider slugs
+     */
+    public function it_shows_slug($parent, $slug, $expected): void
+    {
+        $page = Page::factory()->create(['parent' => $parent, 'slug' => $slug]);
+        self::assertEquals($expected, $page->toViewModel()->slug());
+    }
 
-        $page = Page::factory()->create(['parent' => 'blog', 'slug' => 'article']);
-        self::assertEquals('blog/article', $page->toViewModel()->slug());
+    /**
+     * @test
+     * * @dataProvider slugs
+     */
+    public function it_shows_url($parent, $slug, $expected): void
+    {
+        $page = Page::factory()->create(['parent' => $parent, 'slug' => $slug]);
+        self::assertEquals(trim('https://localhost/'.$expected, '/'), $page->toViewModel()->url());
     }
 
     /** @test */
-    public function it_shows_url()
+    public function it_may_has_children(): void
     {
-        $page = Page::factory()->create(['slug' => ReservedSlug::HOMEPAGE]);
-        self::assertEquals('https://localhost', $page->toViewModel()->url());
+        $parent = Page::factory()->create(['slug' => 'blog']);
+        self::assertNull($parent->toViewModel()->children());
 
-        $page = Page::factory()->create(['slug' => 'blog']);
-        self::assertEquals('https://localhost/blog', $page->toViewModel()->url());
+        $children = Page::factory(5)->create(['parent' => 'blog']);
 
-        $page = Page::factory()->create(['parent' => 'blog', 'slug' => 'article']);
-        self::assertEquals('https://localhost/blog/article', $page->toViewModel()->url());
+        self::assertInstanceOf(Collection::class, $parent->toViewModel()->children());
+        self::assertCount(5, $parent->toViewModel()->children());
+        self::assertNotContains($parent, $children);
     }
 
     /** @test */
-    public function it_checks_if_has_children_pages()
+    public function it_may_has_a_cover_image(): void
     {
-        self::markTestSkipped();
-    }
+        Storage::fake('local');
+        $image = UploadedFile::fake()->image('photo1.jpg');
 
-    /** @test */
-    public function it_shows_children_pages()
-    {
-        self::markTestSkipped();
+        $page = Page::factory()->create();
+        self::assertNull($page->toViewModel()->coverImage());
+
+        $page->addMedia($image)
+            ->withCustomProperties([
+                'alt_text' => 'alternative text',
+                'caption' => 'caption text',
+            ])
+            ->toMediaCollection('page.cover', 'local');
+
+        $coverImage = $page->fresh()->toViewModel()->coverImage();
+
+        self::assertInstanceOf(ImageViewModel::class, $coverImage);
+
+        self::assertEquals('http://localhost/storage/1/photo1.jpg', $coverImage->url());
+        self::assertEquals('alternative text', $coverImage->alt());
+        self::assertEquals('caption text', $coverImage->caption());
     }
 }

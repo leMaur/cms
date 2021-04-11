@@ -3,9 +3,9 @@
 namespace Lemaur\Cms\Tests;
 
 use Artesaos\SEOTools\Providers\SEOToolsServiceProvider;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 use Lemaur\Cms\CmsServiceProvider;
 use Lemaur\Cms\Tests\Feature\User;
@@ -14,6 +14,7 @@ use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\EloquentSortable\EloquentSortableServiceProvider;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\Support\PathGenerator\DefaultPathGenerator;
+use Spatie\MediaLibrary\Support\UrlGenerator\DefaultUrlGenerator;
 use Spatie\SchemalessAttributes\SchemalessAttributesServiceProvider;
 use Spatie\Sitemap\SitemapServiceProvider as SpatieSitemapServiceProvider;
 use Spatie\Snapshots\MatchesSnapshots;
@@ -73,6 +74,7 @@ class TestCase extends Orchestra
         $app['config']->set('media-library.max_file_size', 1024 * 1024 * 10);
         $app['config']->set('media-library.media_model', Media::class);
         $app['config']->set('media-library.path_generator', DefaultPathGenerator::class);
+        $app['config']->set('media-library.url_generator', DefaultUrlGenerator::class);
 
         $app['config']->set('seotools.meta.defaults.title', false);
         $app['config']->set('seotools.meta.defaults.description', false);
