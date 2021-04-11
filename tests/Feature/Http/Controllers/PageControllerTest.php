@@ -3,6 +3,7 @@
 namespace Lemaur\Cms\Tests\Feature\Http\Controllers;
 
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Models\ReservedSlug;
@@ -151,7 +152,7 @@ class PageControllerTest extends TestCase
                 ->toMediaCollection('page.cover', 'local');
         });
 
-        $this->travel(3)->years();
+        Carbon::setTestNow($this->now->addYears(3));
 
         $this->assertMatchesXmlSnapshot(
             $this->get('/sitemaps/sitemap-articles.xml')->content()

@@ -3,6 +3,7 @@
 namespace Lemaur\Cms\Traits;
 
 use Illuminate\Support\Str;
+use Lemaur\Cms\Markdown;
 use Lemaur\Cms\Models\Page;
 
 trait HasMetaDescription
@@ -14,7 +15,7 @@ trait HasMetaDescription
 
     public function getMetaDescriptionAttribute(): string
     {
-        $html = Str::of($this->content)->markdown(config('cms.markdown.options', []));
+        $html = Markdown::convert($this->content, config('cms.markdown.options', []));
 
         return (string) $this->extra_attributes->get('meta_description', Str::limit(strip_tags($html), Page::META_DESCRIPTION_LIMIT - 3));
     }
