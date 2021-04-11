@@ -4,6 +4,7 @@ namespace Lemaur\Cms\Models\ViewModels;
 
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Str;
+use Lemaur\Cms\Markdown;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Models\ReservedSlug;
 use Lemaur\Sitemap\Sitemap;
@@ -63,20 +64,19 @@ class PageViewModel extends ViewModel
 
         $sitemap = Sitemap::create();
 
-        // @TODO: cache it
+        // @TODO: cache it (make cache decorator)
         $pages = Page::withType($type)
             ->withoutSlug($this->page->slug)
             ->orderBy('id')
             ->get();
 
         $pages->each(function ($page) use ($sitemap) {
-            $viewModel = $page->toViewModel();
-            $diffInDays = $page->updated_at->floatDiffInDays();
-
-            $url = Url::create($viewModel->url())
+            $url = Url::create($page->toViewModel()->url())
                 ->setLastModificationDate($page->updated_at->toDate())
-                ->setChangeFrequency($this->getSitemapFrequency($diffInDays))
-                ->setPriority($this->getSitemapPriority($diffInDays));
+                // @TODO: improve sitemap change frequency
+                ->setChangeFrequency($this->getSitemapFrequency($page))
+                // @TODO: improve sitemap priority
+                ->setPriority($this->getSitemapPriority($page));
 
 //            if ($viewModel->hasCoverImage()) {
 //                $url->addImage(
@@ -98,7 +98,7 @@ class PageViewModel extends ViewModel
             return null;
         }
 
-        return Str::markdown($this->page->content, config('cms.markdown.options', []));
+        return Markdown::convert($this->page->content, config('cms.markdown.options', []));
     }
 
     public function excerpt(): string | null
@@ -107,7 +107,7 @@ class PageViewModel extends ViewModel
             return null;
         }
 
-        return Str::markdown($this->page->excerpt, config('cms.markdown.options', []));
+        return Markdown::convert($this->page->excerpt, config('cms.markdown.options', []));
     }
 
     public function pageTitle(): string
@@ -137,7 +137,7 @@ class PageViewModel extends ViewModel
 
     private function generateSchemaOrg(): void
     {
-        // @TODO
+        // @TODO: generate schema org
     }
 
     private function generateTwitterMetaTags(): void
@@ -178,7 +178,7 @@ class PageViewModel extends ViewModel
     {
         return (string) Str::of(vsprintf('%s/%s', [
                 $this->page->parent,
-                ReservedSlug::find($this->page->slug),
+                ReservedSlug::toSlug($this->page->slug),
             ]))
             ->replace('//', '/')
             ->trim('/');
@@ -191,12 +191,12 @@ class PageViewModel extends ViewModel
 
 //    public function children(): EloquentCollection | null
 //    {
-//        // @TODO
+//        // @TODO: get children pages
 //    }
 
     public function media()
     {
-        // @TODO
+        // @TODO: get page media
         return $this->page->getMedia();
 //        return (object) [
 //            'single' => [
@@ -214,14 +214,17 @@ class PageViewModel extends ViewModel
             ->singular();
     }
 
-    private function getSitemapFrequency(mixed $diffInDays): string
+    private function getSitemapFrequency(Page $page): string
     {
-        // @TODO: improve
+        $diffInDays = $page->updated_at->floatDiffInDays();
+
         return $diffInDays < 30 ? Url::CHANGE_FREQUENCY_WEEKLY : Url::CHANGE_FREQUENCY_MONTHLY;
     }
 
-    private function getSitemapPriority(mixed $diffInDays): mixed
+    private function getSitemapPriority(Page $page): mixed
     {
+        $diffInDays = $page->updated_at->floatDiffInDays();
+
         return max(0.1, min(1.0, round(10 / $diffInDays, 1)));
     }
 }

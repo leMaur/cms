@@ -3,6 +3,7 @@
 namespace Lemaur\Cms\Tests\Feature\Models\ViewModels;
 
 use Lemaur\Cms\Models\Page;
+use Lemaur\Cms\Models\ReservedSlug;
 use Lemaur\Cms\Tests\TestCase;
 
 class PageViewModelTest extends TestCase
@@ -58,6 +59,9 @@ class PageViewModelTest extends TestCase
     /** @test */
     public function it_shows_slug(): void
     {
+        $page = Page::factory()->create(['slug' => ReservedSlug::HOMEPAGE]);
+        self::assertEmpty($page->toViewModel()->slug());
+
         $page = Page::factory()->create(['slug' => 'blog']);
         self::assertEquals('blog', $page->toViewModel()->slug());
 
@@ -68,25 +72,14 @@ class PageViewModelTest extends TestCase
     /** @test */
     public function it_shows_url()
     {
+        $page = Page::factory()->create(['slug' => ReservedSlug::HOMEPAGE]);
+        self::assertEquals('https://localhost', $page->toViewModel()->url());
+
         $page = Page::factory()->create(['slug' => 'blog']);
         self::assertEquals('https://localhost/blog', $page->toViewModel()->url());
 
         $page = Page::factory()->create(['parent' => 'blog', 'slug' => 'article']);
         self::assertEquals('https://localhost/blog/article', $page->toViewModel()->url());
-    }
-
-    /** @test */
-    public function it_shows_meta_information()
-    {
-        Page::factory()->published()->create([
-            'title' => 'My Title',
-            'slug' => 'my-title',
-            'content' => 'Something to say',
-        ]);
-
-        $this->assertMatchesHtmlSnapshot(
-            $this->get('/my-title')->content()
-        );
     }
 
     /** @test */

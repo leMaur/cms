@@ -3,6 +3,7 @@
 namespace Lemaur\Cms\Tests;
 
 use Artesaos\SEOTools\Providers\SEOToolsServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
@@ -22,9 +23,15 @@ class TestCase extends Orchestra
 {
     use MatchesSnapshots;
 
+    protected Carbon $now;
+
     public function setUp(): void
     {
         parent::setUp();
+
+        $this->now = Carbon::create('2016', '1', '1', '0', '0', '0');
+
+        Carbon::setTestNow($this->now);
 
         $this->getDatabaseSetup($this->app);
 

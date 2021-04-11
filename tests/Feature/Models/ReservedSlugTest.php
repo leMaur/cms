@@ -19,7 +19,7 @@ class ReservedSlugTest extends TestCase
     /** @test */
     public function it_gets_the_slug_associated_with_the_reserved_slug()
     {
-        $slug = ReservedSlug::handle('@home');
+        $slug = ReservedSlug::toSlug('@home');
 
         self::assertEquals('/', $slug);
     }
@@ -27,7 +27,7 @@ class ReservedSlugTest extends TestCase
     /** @test */
     public function it_returns_the_slug_itself_if_the_reserved_slug_is_not_found()
     {
-        $slug = ReservedSlug::handle('about');
+        $slug = ReservedSlug::toSlug('about');
 
         self::assertEquals('about', $slug);
     }

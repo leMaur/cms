@@ -72,7 +72,7 @@ return [
 
     'markdown' => [
         'options' => [
-            // @TODO
+            // @TODO: markdown options
         ],
     ],
 

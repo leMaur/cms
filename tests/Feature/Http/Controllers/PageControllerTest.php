@@ -60,53 +60,98 @@ class PageControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_shows_sitemap_index()
+    public function it_shows_meta_information()
     {
-        Page::factory()->count(5)->create();
-
-        Page::factory()->create(['slug' => 'blog']);
-        Page::factory()->count(5)->create(['type' => 'article', 'parent' => 'blog']);
-
-        Page::factory()->create(['slug' => 'services-shop']);
-        Page::factory()->count(5)->create(['type' => 'service', 'parent' => 'services-shop']);
-
-        Page::factory()->create([
-            'title' => 'Sitemap',
-            'slug' => ReservedSlug::SITEMAP,
-            'layout' => 'sitemap_index',
+        Page::factory()->published()->create([
+            'title' => 'My Title',
+            'slug' => 'my-title',
+            'content' => 'Something to say',
         ]);
 
-        $this->get('/sitemap.xml')
-            ->assertOk()
-            ->assertHeader('Content-Type', 'text/xml; charset=UTF-8')
-            ->assertSee('http://localhost/sitemaps/sitemap-articles.xml')
-            ->assertSee('http://localhost/sitemaps/sitemap-pages.xml')
-            ->assertSee('http://localhost/sitemaps/sitemap-services.xml');
+        $this->assertMatchesHtmlSnapshot(
+            $this->get('/my-title')->content()
+        );
+    }
+
+    /** @test */
+    public function it_shows_sitemap_index()
+    {
+        $pages = collect([
+            ['title' => 'Welcome', 'slug' => ReservedSlug::HOMEPAGE],
+
+            ['title' => 'Blog'],
+            ['title' => 'Article 1', 'layout' => 'article', 'type' => 'article', 'parent' => 'blog'],
+            ['title' => 'Article 2', 'layout' => 'article', 'type' => 'article', 'parent' => 'blog'],
+            ['title' => 'Article 3', 'layout' => 'article', 'type' => 'article', 'parent' => 'blog'],
+
+            ['title' => 'Services Shop'],
+            ['title' => 'Project', 'layout' => 'service', 'type' => 'service', 'parent' => 'services-shop'],
+            ['title' => 'Videocall', 'layout' => 'service', 'type' => 'service', 'parent' => 'services-shop'],
+            ['title' => 'Editorial', 'layout' => 'service', 'type' => 'service', 'parent' => 'services-shop'],
+            ['title' => 'Planner 2021 Printable', 'layout' => 'shop', 'type' => 'service', 'parent' => 'services-shop'],
+
+            ['title' => 'About'],
+            ['title' => 'Contact'],
+            ['title' => 'Biophilic Design Guide'],
+            ['title' => 'Ethical Manifesto'],
+            ['title' => 'Press'],
+            ['title' => 'Privacy Policy'],
+            ['title' => 'Cookie Policy'],
+            ['title' => 'Terms of Service'],
+
+            ['title' => 'Sitemap', 'slug' => ReservedSlug::SITEMAP, 'layout' => 'sitemap_index'],
+        ]);
+
+        $pages->each(fn ($page) => Page::create(collect($page)->merge(['published_at' => now()])->toArray()));
+
+        $this->assertMatchesXmlSnapshot(
+            $this->get('/sitemap.xml')->content()
+        );
     }
 
     /** @test */
     public function it_shows_the_given_sitemap()
     {
-        $pages = Page::factory()->count(5)->create();
+        $pages = collect([
+            ['title' => 'Welcome', 'slug' => ReservedSlug::HOMEPAGE],
 
-        Page::factory()->create(['slug' => 'blog']);
-        Page::factory()->count(5)->create(['type' => 'article', 'parent' => 'blog']);
+            ['title' => 'Blog'],
+            ['title' => 'Article 1', 'layout' => 'article', 'type' => 'article', 'parent' => 'blog'],
+            ['title' => 'Article 2', 'layout' => 'article', 'type' => 'article', 'parent' => 'blog'],
+            ['title' => 'Article 3', 'layout' => 'article', 'type' => 'article', 'parent' => 'blog'],
 
-        Page::factory()->create(['slug' => 'services-shop']);
-        Page::factory()->count(5)->create(['type' => 'service', 'parent' => 'services-shop']);
+            ['title' => 'Services Shop'],
+            ['title' => 'Project', 'layout' => 'service', 'type' => 'service', 'parent' => 'services-shop'],
+            ['title' => 'Videocall', 'layout' => 'service', 'type' => 'service', 'parent' => 'services-shop'],
+            ['title' => 'Editorial', 'layout' => 'service', 'type' => 'service', 'parent' => 'services-shop'],
+            ['title' => 'Planner 2021 Printable', 'layout' => 'shop', 'type' => 'service', 'parent' => 'services-shop'],
 
-        Page::factory()->create([
-            'title' => 'Sitemap',
-            'slug' => ReservedSlug::SITEMAP,
-            'layout' => 'sitemap_index',
+            ['title' => 'About'],
+            ['title' => 'Contact'],
+            ['title' => 'Biophilic Design Guide'],
+            ['title' => 'Ethical Manifesto'],
+            ['title' => 'Press'],
+            ['title' => 'Privacy Policy'],
+            ['title' => 'Cookie Policy'],
+            ['title' => 'Terms of Service'],
+
+            ['title' => 'Sitemap', 'slug' => ReservedSlug::SITEMAP, 'layout' => 'sitemap_index'],
         ]);
-        $this->get('/sitemaps/sitemap_pages.xml')
-            ->assertOk()
-            ->assertHeader('Content-Type', 'text/xml; charset=UTF-8')
-            ->assertSee($pages->get(0)->slug)
-            ->assertSee($pages->get(1)->slug)
-            ->assertSee($pages->get(2)->slug)
-            ->assertSee($pages->get(3)->slug)
-            ->assertSee($pages->get(4)->slug);
+
+        $pages->each(fn ($page) => Page::create(collect($page)->merge(['published_at' => now()])->toArray()));
+
+        $this->travel(3)->years();
+
+        $this->assertMatchesXmlSnapshot(
+            $this->get('/sitemaps/sitemap-articles.xml')->content()
+        );
+
+        $this->assertMatchesXmlSnapshot(
+            $this->get('/sitemaps/sitemap-pages.xml')->content()
+        );
+
+        $this->assertMatchesXmlSnapshot(
+            $this->get('/sitemaps/sitemap-services.xml')->content()
+        );
     }
 }

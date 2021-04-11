@@ -50,7 +50,7 @@ class ReservedSlug
             ->toBase();
     }
 
-    public static function handle(string $slug): string
+    public static function toSlug(string $slug): string
     {
         $reflector = new ReflectionClass(static::class);
 
