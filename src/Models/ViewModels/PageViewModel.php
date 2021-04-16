@@ -23,19 +23,11 @@ class PageViewModel extends ViewModel
 
     public function content(): string | null
     {
-        if (is_null($this->page?->content)) {
-            return null;
-        }
-
         return Markdown::convert($this->page->content, config('cms.markdown.options', []));
     }
 
     public function excerpt(): string | null
     {
-        if (is_null($this->page?->excerpt)) {
-            return null;
-        }
-
         return Markdown::convert($this->page->excerpt, config('cms.markdown.options', []));
     }
 
