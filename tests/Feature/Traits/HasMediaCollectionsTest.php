@@ -11,7 +11,7 @@ use Spatie\MediaLibrary\HasMedia;
 class HasMediaCollectionsTest extends TestCase
 {
     /** @test */
-    public function it_thronw_an_exception_if_property_is_not_set(): void
+    public function it_thrown_an_exception_if_property_media_configuration_is_not_set(): void
     {
         $this->expectException(InvalidArgumentException::class);
 

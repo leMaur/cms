@@ -14,8 +14,8 @@ return [
             'separator' => env('CMS_SEO_TITLE_SEPARATOR', '·'),
         ],
         'twitter' => [
-            'card' => 'summary',
-            'site' => '@dfordesignstyle',
+            'card' => env('CMS_SEO_TWITTER_CARD', 'summary'),
+            'site' => env('CMS_SEO_TWITTER_SITE', null),
         ],
     ],
 
@@ -89,6 +89,21 @@ return [
     | https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
     |
     */
+
+    'media_conversions' => [
+        'meta' => [
+            'width' => 1200,
+            'height' => 600,
+        ],
+
+        '3:4' => [
+            'aspect_ratio' => '3:4',
+        ],
+
+        '4:3' => [
+            'aspect_ratio' => '4:3',
+        ],
+    ],
 
     'media' => [
         'single_image' => [

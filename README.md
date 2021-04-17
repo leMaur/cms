@@ -34,21 +34,7 @@ Route::cms('/', 'cms');
 You can publish the config file with:
 ```bash
 php artisan vendor:publish --provider="Lemaur\Cms\CmsServiceProvider" --tag="cms-config"
-php artisan vendor:publish --provider="Artesaos\SEOTools\Providers\SEOToolsServiceProvider"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
-## Usage
-
-```php
-$laravel-cms = new Lemaur\Cms();
-echo $laravel-cms->echoPhrase('Hello, Lemaur!');
+php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="config"
 ```
 
 ## Testing
@@ -85,8 +71,13 @@ If you use it in production, then I ask that you [**buy the world a tree**](http
 Read more about [Treeware](https://treeware.earth).
 
 ## Battery Included
-- https://github.com/leMaur/eloquent-publishing
-- https://github.com/spatie/laravel-tags
+- https://github.com/artesaos/seotools
+- https://github.com/league/commonmark
+- https://github.com/lemaur/eloquent-publishing
+- https://github.com/lemaur/laravel-image-sitemap
 - https://github.com/spatie/eloquent-sortable
-- https://github.com/michaeldyrynda/laravel-efficient-uuid
-- https://github.com/michaeldyrynda/laravel-model-uuid
+- https://github.com/spatie/laravel-medialibrary
+- https://github.com/spatie/laravel-schemaless-attributes
+- https://github.com/spatie/laravel-sluggable
+- https://github.com/spatie/laravel-tags
+- https://github.com/spatie/laravel-view-models

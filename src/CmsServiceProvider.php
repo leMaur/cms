@@ -5,6 +5,7 @@ namespace Lemaur\Cms;
 use Closure;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Spatie\MediaLibrary\Conversions\Conversion;
 use Spatie\MediaLibrary\MediaCollections\MediaCollection;
 
 class CmsServiceProvider extends PackageServiceProvider

@@ -56,6 +56,10 @@ class Page extends Model implements Sortable, HasMedia
         'cover' => 'single_image',
     ];
 
+    protected array $mediaConversionConfiguration = [
+        'cover' => ['meta'],
+    ];
+
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);

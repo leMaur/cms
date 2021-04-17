@@ -74,7 +74,9 @@ trait HasSitemaps
     {
         $diffInDays = $page->updated_at->floatDiffInDays();
 
-        return $diffInDays < 30 ? Url::CHANGE_FREQUENCY_WEEKLY : Url::CHANGE_FREQUENCY_MONTHLY;
+        return $diffInDays < 30
+            ? Url::CHANGE_FREQUENCY_WEEKLY
+            : Url::CHANGE_FREQUENCY_MONTHLY;
     }
 
     private function getSitemapPriority(Page $page): mixed

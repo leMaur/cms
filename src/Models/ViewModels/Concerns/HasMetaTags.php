@@ -63,7 +63,7 @@ trait HasMetaTags
 
     private function metaImage(): string
     {
-        return $this->coverImage()?->url() ?? ''; // @TODO: get twitter image with correct size
+        return $this->coverImage()?->urlForMeta() ?? '';
     }
 
     public function pageTitle(): string

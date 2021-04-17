@@ -61,6 +61,7 @@ class TestCase extends Orchestra
         $app['config']->set('app.key', 'base64:ygJ6fXnImxW2fktgrY06dCqkaVOuzxcSNI4jXWqB2E4=');
 
         $app['config']->set('cms', include __DIR__.'/../config/cms.php');
+        $app['config']->set('cms.seo.twitter.site', '@dfordesignstyle');
         $app['config']->set('cms.users.model', User::class);
 
         $app['config']->set('database.default', 'sqlite');
@@ -75,6 +76,35 @@ class TestCase extends Orchestra
         $app['config']->set('media-library.media_model', Media::class);
         $app['config']->set('media-library.path_generator', DefaultPathGenerator::class);
         $app['config']->set('media-library.url_generator', DefaultUrlGenerator::class);
+        $app['config']->set('media-library.file_namer', \Spatie\MediaLibrary\Support\FileNamer\DefaultFileNamer::class);
+        $app['config']->set('media-library.image_optimizers', [
+            \Spatie\ImageOptimizer\Optimizers\Jpegoptim::class => [
+                '-m85', // set maximum quality to 85%
+                '--strip-all', // this strips out all text information such as comments and EXIF data
+                '--all-progressive', // this will make sure the resulting image is a progressive one
+            ],
+            \Spatie\ImageOptimizer\Optimizers\Pngquant::class => [
+                '--force', // required parameter for this package
+            ],
+            \Spatie\ImageOptimizer\Optimizers\Optipng::class => [
+                '-i0', // this will result in a non-interlaced, progressive scanned image
+                '-o2', // this set the optimization level to two (multiple IDAT compression trials)
+                '-quiet', // required parameter for this package
+            ],
+            \Spatie\ImageOptimizer\Optimizers\Svgo::class => [
+                '--disable=cleanupIDs', // disabling because it is known to cause troubles
+            ],
+            \Spatie\ImageOptimizer\Optimizers\Gifsicle::class => [
+                '-b', // required parameter for this package
+                '-O3', // this produces the slowest but best results
+            ],
+            \Spatie\ImageOptimizer\Optimizers\Cwebp::class => [
+                    '-m 6', // for the slowest compression method in order to get the best compression.
+                    '-pass 10', // for maximizing the amount of analysis pass.
+                    '-mt', // multithreading for some speed improvements.
+                    '-q 90', //quality factor that brings the least noticeable changes.
+            ],
+        ]);
     }
 
     private function getDatabaseSetup($app)
