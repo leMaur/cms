@@ -11,7 +11,7 @@ class ImageViewModel extends ViewModel
     {
     }
 
-    public function urlForMeta(): string|null
+    public function urlForMeta(): string | null
     {
         return $this->media->getFullUrl('meta');
     }

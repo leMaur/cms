@@ -19,7 +19,7 @@ trait HasMediaCollections
             $config = config('cms.media_conversions', []);
 
             foreach ($this->mediaConversionConfiguration ?? [] as $name => $key) {
-                foreach(Arr::wrap($key) as $configKey) {
+                foreach (Arr::wrap($key) as $configKey) {
                     $mediaConfig = data_get($config, $configKey, []);
 
                     $this
