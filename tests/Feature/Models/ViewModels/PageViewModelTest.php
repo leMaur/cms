@@ -134,7 +134,7 @@ class PageViewModelTest extends TestCase
             'slug' => 'about',
             'content' => "## About me\nparagraph with some **bold** and _italic_ text",
         ]), static function ($page) {
-           $page->addMedia(UploadedFile::fake()->image('photo1.jpg'))
+            $page->addMedia(UploadedFile::fake()->image('photo1.jpg'))
                 ->withCustomProperties([
                     'alt' => 'alternative text',
                     'caption' => 'caption text',
