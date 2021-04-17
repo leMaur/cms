@@ -23,7 +23,7 @@ class Navigation extends Model implements Sortable, HasMedia
     protected $guarded = [];
 
     protected array $mediaConfiguration = [
-        'image' => 'single_image'
+        'image' => 'single_image',
     ];
 
     public function __construct(array $attributes = [])
