@@ -22,7 +22,9 @@ class ImageViewModelTest extends TestCase
 
         Storage::fake($this->disk);
 
-        $page = tap(Page::factory()->create(), function ($page): void {
+        $content = Page::factory()->raw();
+
+        $page = tap(Page::create($content), function ($page): void {
             $page->addMedia(UploadedFile::fake()->image($this->imageName))
                 ->toMediaCollection($this->mediaCollection, $this->disk);
         });
@@ -44,7 +46,7 @@ class ImageViewModelTest extends TestCase
         $viewModel = new ImageViewModel($this->media);
         self::assertNull($viewModel->alt());
 
-        $this->media->setCustomProperty('alt_text', 'alternative text');
+        $this->media->setCustomProperty('alt', 'alternative text');
 
         $viewModel = new ImageViewModel($this->media);
         self::assertEquals('alternative text', $viewModel->alt());

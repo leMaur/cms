@@ -8,8 +8,7 @@ use Spatie\ViewModels\ViewModel;
 class ImageViewModel extends ViewModel
 {
     public function __construct(private Media $media)
-    {
-    }
+    {}
 
     public function url(): string
     {
@@ -18,7 +17,7 @@ class ImageViewModel extends ViewModel
 
     public function alt(): string | null
     {
-        return $this->media->getCustomProperty('alt_text', null);
+        return $this->media->getCustomProperty('alt', null);
     }
 
     public function caption(): string | null

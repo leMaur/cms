@@ -61,7 +61,6 @@ class PageViewModel extends ViewModel
     {
         $mediaCollectionName = $this->page
             ->getRegisteredMediaCollections()
-            ->unique('name')
             ->pluck('name')
             ->filter(fn ($item) => str_contains($item, "cover"))
             ->first();

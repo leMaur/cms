@@ -120,7 +120,7 @@ class PageViewModelTest extends TestCase
 
         $page->addMedia($image)
             ->withCustomProperties([
-                'alt_text' => 'alternative text',
+                'alt' => 'alternative text',
                 'caption' => 'caption text',
             ])
             ->toMediaCollection('page.cover', 'local');

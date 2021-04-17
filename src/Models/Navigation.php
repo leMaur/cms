@@ -5,14 +5,14 @@ namespace Lemaur\Cms\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Lemaur\Cms\Models\Concerns\HasType;
-use Lemaur\Cms\Traits\HasSingleImage;
+use Lemaur\Cms\Traits\HasMediaCollections;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
 
 class Navigation extends Model implements Sortable, HasMedia
 {
-    use HasSingleImage;
+    use HasMediaCollections;
     use HasType;
     use SortableTrait;
 
@@ -21,6 +21,10 @@ class Navigation extends Model implements Sortable, HasMedia
     public const SOCIAL = 'social';
 
     protected $guarded = [];
+
+    protected array $mediaConfiguration = [
+        'image' => 'single_image'
+    ];
 
     public function __construct(array $attributes = [])
     {

@@ -146,7 +146,7 @@ class PageControllerTest extends TestCase
         Page::where('layout', 'article')->orderBy('id')->get()->each(static function (Page $page): void {
             $page->addMedia(UploadedFile::fake()->image('photo1.jpg'))
                 ->withCustomProperties([
-                    'alt_text' => 'alternative text',
+                    'alt' => 'alternative text',
                     'caption' => 'caption text',
                 ])
                 ->toMediaCollection('page.cover', 'local');
