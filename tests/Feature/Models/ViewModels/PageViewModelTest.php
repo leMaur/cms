@@ -20,16 +20,11 @@ class PageViewModelTest extends TestCase
             this is a paragraph with **bold** text and _italic_.
             MD]);
 
-        self::assertEquals(<<<'HTML'
-            <h2>Title</h2>
-            <p>this is a paragraph with <strong>bold</strong> text and <em>italic</em>.</p>
-
-            HTML
-        , $page->toViewModel()->content());
+        $this->assertMatchesHtmlSnapshot($page->toViewModel()->content());
     }
 
     /** @test */
-    public function it_doesnt_show_content_formatted_as_html_when_is_null(): void
+    public function it_does_not_show_content_formatted_as_html_when_is_null(): void
     {
         $page = Page::factory()->create(['content' => null]);
 
@@ -44,16 +39,11 @@ class PageViewModelTest extends TestCase
             this is a paragraph with **bold** text and _italic_.
             MD]);
 
-        self::assertEquals(<<<'HTML'
-            <h2>Title</h2>
-            <p>this is a paragraph with <strong>bold</strong> text and <em>italic</em>.</p>
-
-            HTML
-        , $page->toViewModel()->excerpt());
+        $this->assertMatchesHtmlSnapshot($page->toViewModel()->excerpt());
     }
 
     /** @test */
-    public function it_doesnt_show_excerpt_formatted_as_html_when_is_null(): void
+    public function it_does_not_show_excerpt_formatted_as_html_when_is_null(): void
     {
         $page = Page::factory()->create(['excerpt' => null]);
 
@@ -132,5 +122,28 @@ class PageViewModelTest extends TestCase
         self::assertEquals('http://localhost/storage/1/photo1.jpg', $coverImage->url());
         self::assertEquals('alternative text', $coverImage->alt());
         self::assertEquals('caption text', $coverImage->caption());
+    }
+
+    /** @test */
+    public function it_has_meta_tags(): void
+    {
+        Storage::fake('local');
+
+        tap(Page::factory()->published()->create([
+            'title' => 'About',
+            'slug' => 'about',
+            'content' => "## About me\nparagraph with some **bold** and _italic_ text",
+        ]), static function ($page) {
+           $page->addMedia(UploadedFile::fake()->image('photo1.jpg'))
+                ->withCustomProperties([
+                    'alt' => 'alternative text',
+                    'caption' => 'caption text',
+                ])
+                ->toMediaCollection('page.cover', 'local');
+        });
+
+        $html = $this->get('/about')->content();
+
+        $this->assertMatchesHtmlSnapshot($html);
     }
 }

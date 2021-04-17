@@ -65,11 +65,20 @@ class PageControllerTest extends TestCase
     /** @test */
     public function it_shows_meta_information()
     {
-        Page::factory()->published()->create([
+        Storage::fake('local');
+
+        $page = Page::factory()->published()->create([
             'title' => 'My Title',
             'slug' => 'my-title',
             'content' => 'Something to say',
         ]);
+
+        $page->addMedia(UploadedFile::fake()->image('photo1.jpg'))
+            ->withCustomProperties([
+                'alt' => 'alternative text',
+                'caption' => 'caption text',
+            ])
+            ->toMediaCollection('page.cover', 'local');
 
         $this->assertMatchesHtmlSnapshot(
             $this->get('/my-title')->content()

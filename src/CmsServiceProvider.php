@@ -20,7 +20,7 @@ class CmsServiceProvider extends PackageServiceProvider
         ;
     }
 
-    public function bootingPackage()
+    public function bootingPackage(): void
     {
         parent::bootingPackage();
 
@@ -31,5 +31,13 @@ class CmsServiceProvider extends PackageServiceProvider
 
             return $this;
         });
+
+        $this->app['config']->set('seotools.meta.defaults.title', false);
+        $this->app['config']->set('seotools.meta.defaults.description', false);
+        $this->app['config']->set('seotools.meta.defaults.separator', $this->app['config']->get('cms.seo.title.separator'));
+        $this->app['config']->set('seotools.opengraph.defaults.title', false);
+        $this->app['config']->set('seotools.opengraph.defaults.description', false);
+        $this->app['config']->set('seotools.twitter.defaults.card', $this->app['config']->get('cms.seo.twitter.card'));
+        $this->app['config']->set('seotools.twitter.defaults.site', $this->app['config']->get('cms.seo.twitter.site'));
     }
 }

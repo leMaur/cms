@@ -29,9 +29,7 @@ trait HasMetaTags
         SEOTools::opengraph()
             ->addProperty('locale', app()->getLocale())
             ->setType($this->opengraphType())
-//            ->setTitle($title)
-//            ->setDescription($description)
-            // images [630x1200:jpg]
+            ->addImage($this->metaImage(), ['height' => '600', 'width' => '1200'])
             // product
         ;
     }
@@ -40,9 +38,7 @@ trait HasMetaTags
     {
         // @TODO: check twitter metatags generator
         SEOTools::twitter()
-//            ->setTitle($title)
-//            ->setDescription($description)
-            // images [600x1200:jpg]
+            ->addImage($this->metaImage())
             // product
         ;
     }
@@ -63,6 +59,11 @@ trait HasMetaTags
         ];
 
         return $types[$this->page->type] ?? 'website';
+    }
+
+    private function metaImage(): string
+    {
+        return $this->coverImage()?->url() ?? ''; // @TODO: get twitter image with correct size
     }
 
     public function pageTitle(): string

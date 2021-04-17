@@ -17,6 +17,11 @@ trait HasMetaDescription
     {
         $html = Markdown::convert($this->content, config('cms.markdown.options', []));
 
-        return (string) $this->extra_attributes->get('meta_description', Str::limit(strip_tags($html), Page::META_DESCRIPTION_LIMIT - 3));
+        $metaDescription = (string) Str::of(strip_tags($html))
+            ->replace("\n", ' ')
+            ->trim()
+            ->limit(Page::META_DESCRIPTION_LIMIT - 3);
+
+        return (string) $this->extra_attributes->get('meta_description', $metaDescription);
     }
 }

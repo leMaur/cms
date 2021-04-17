@@ -14,31 +14,29 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PageRepositoryTest extends TestCase
 {
     /** @test */
-    public function it_returns_the_homepage_if_slug_is_not_passed()
+    public function it_returns_the_homepage_if_slug_is_not_passed(): void
     {
         // Homepage will be always visible, guests or authenticated users.
         Page::factory()->create(['slug' => ReservedSlug::HOMEPAGE]);
 
         $page = (new PageRepository(new Page()))->find();
 
-        $this->assertInstanceOf(Page::class, $page);
-        $this->assertEquals(ReservedSlug::HOMEPAGE, $page->slug);
+        self::assertInstanceOf(Page::class, $page);
+        self::assertEquals(ReservedSlug::HOMEPAGE, $page->slug);
     }
 
     /** @test */
-    public function it_returns_the_page_with_the_given_slug()
+    public function it_returns_the_page_with_the_given_slug(): void
     {
         $slug = 'blog';
         Page::factory()->published()->create(['slug' => $slug]);
 
         $page = (new PageRepository(new Page()))->find($slug);
-
-        $this->assertInstanceOf(Page::class, $page);
-        $this->assertEquals($slug, $page->slug);
+        self::assertEquals($slug, $page->slug);
     }
 
     /** @test */
-    public function it_gets_404_page_for_reserved_slug()
+    public function it_gets_404_page_for_reserved_slug(): void
     {
         $this->expectException(NotFoundHttpException::class);
 
@@ -46,7 +44,7 @@ class PageRepositoryTest extends TestCase
     }
 
     /** @test */
-    public function it_gets_404_page_if_slug_is_not_found()
+    public function it_gets_404_page_if_slug_is_not_found(): void
     {
         $this->expectException(ModelNotFoundException::class);
 
@@ -54,7 +52,7 @@ class PageRepositoryTest extends TestCase
     }
 
     /** @test */
-    public function it_returns_only_the_published_pages_for_guest_users()
+    public function it_returns_only_the_published_pages_for_guest_users(): void
     {
         Page::factory()->published()->create(['slug' => ReservedSlug::HOMEPAGE]);
         $page = (new PageRepository(new Page()))->find();
@@ -66,7 +64,7 @@ class PageRepositoryTest extends TestCase
     }
 
     /** @test */
-    public function it_returns_all_pages_for_authenticated_users()
+    public function it_returns_all_pages_for_authenticated_users(): void
     {
         Page::factory()->published()->create(['slug' => ReservedSlug::HOMEPAGE]);
 

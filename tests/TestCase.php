@@ -75,14 +75,6 @@ class TestCase extends Orchestra
         $app['config']->set('media-library.media_model', Media::class);
         $app['config']->set('media-library.path_generator', DefaultPathGenerator::class);
         $app['config']->set('media-library.url_generator', DefaultUrlGenerator::class);
-
-        $app['config']->set('seotools.meta.defaults.title', false);
-        $app['config']->set('seotools.meta.defaults.description', false);
-        $app['config']->set('seotools.meta.defaults.separator', ' ・ ');
-        $app['config']->set('seotools.opengraph.defaults.title', false);
-        $app['config']->set('seotools.opengraph.defaults.description', false);
-        $app['config']->set('seotools.twitter.defaults.card', 'summary');
-        $app['config']->set('seotools.twitter.defaults.site', '@dfordesignstyle');
     }
 
     private function getDatabaseSetup($app)

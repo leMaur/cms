@@ -13,6 +13,10 @@ return [
             'prefix' => env('CMS_SEO_TITLE_PREFIX', 'Cms'),
             'separator' => env('CMS_SEO_TITLE_SEPARATOR', '·'),
         ],
+        'twitter' => [
+            'card' => 'summary',
+            'site' => '@dfordesignstyle',
+        ],
     ],
 
 
