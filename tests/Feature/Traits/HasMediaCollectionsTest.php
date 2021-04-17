@@ -2,8 +2,8 @@
 
 namespace Lemaur\Cms\Tests\Feature\Traits;
 
-use InvalidArgumentException;
 use Illuminate\Database\Eloquent\Model;
+use InvalidArgumentException;
 use Lemaur\Cms\Tests\TestCase;
 use Lemaur\Cms\Traits\HasMediaCollections;
 use Spatie\MediaLibrary\HasMedia;
