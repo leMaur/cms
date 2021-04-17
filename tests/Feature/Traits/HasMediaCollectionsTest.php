@@ -3,7 +3,10 @@
 namespace Lemaur\Cms\Tests\Feature\Traits;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use InvalidArgumentException;
+use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Tests\TestCase;
 use Lemaur\Cms\Traits\HasMediaCollections;
 use Spatie\MediaLibrary\HasMedia;
@@ -11,7 +14,7 @@ use Spatie\MediaLibrary\HasMedia;
 class HasMediaCollectionsTest extends TestCase
 {
     /** @test */
-    public function it_thrown_an_exception_if_property_media_configuration_is_not_set(): void
+    public function it_thrown_an_exception_if_property_is_not_set(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
@@ -92,6 +95,32 @@ class HasMediaCollectionsTest extends TestCase
         self::assertIsArray($mediaCollections->get($index)->acceptsMimeTypes);
         self::assertSame(data_get($config, 'accepts_mime_types'), $mediaCollections->get($index)->acceptsMimeTypes);
     }
+
+    /** @test */
+    public function it_has_conversions(): void
+    {
+        $this->markTestSkipped();
+
+        Storage::fake('local');
+
+        $page = Page::factory()->published()->create([
+            'title' => 'My Title',
+            'slug' => 'my-title',
+            'content' => 'Something to say',
+        ]);
+
+        $page->addMedia(UploadedFile::fake()->image('photo1.jpg'))
+            ->withCustomProperties([
+                'alt' => 'alternative text',
+                'caption' => 'caption text',
+            ])
+            ->toMediaCollection('page.cover', 'local');
+
+//        $config = config('cms.media_conversions.meta');
+        $mediaConversions = $page->mediaConversions;
+
+        dd($page);
+    }
 }
 
 class TestMediaModel extends Model implements HasMedia
@@ -104,6 +133,10 @@ class TestMediaModel extends Model implements HasMedia
         'videos' => 'multiple_videos',
         'documents' => 'multiple_documents',
         'archives' => 'multiple_archives',
+    ];
+
+    protected array $mediaConversionConfiguration = [
+        'cover' => ['meta'],
     ];
 }
 

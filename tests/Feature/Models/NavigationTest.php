@@ -38,9 +38,9 @@ class NavigationTest extends TestCase
         $navigation->save();
 
         $image = UploadedFile::fake()->image('image.png');
-        $navigation->addMedia($image)->toMediaCollection('navigation.image.single');
+        $navigation->addMedia($image)->toMediaCollection('navigation.image');
 
-        self::assertSame($image->name, $navigation->getMedia('navigation.image.single')->first()->file_name);
+        self::assertSame($image->name, $navigation->getMedia('navigation.image')->first()->file_name);
     }
 
     /** @test */
