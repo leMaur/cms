@@ -17,7 +17,6 @@
     "require": {
         "php": "^8.0",
         "artesaos/seotools": "^0.20.0",
-        "ext-http": "*",
         "illuminate/contracts": "^8.0",
         "league/commonmark": "^1.5",
         "lemaur/eloquent-publishing": "^1.0",
