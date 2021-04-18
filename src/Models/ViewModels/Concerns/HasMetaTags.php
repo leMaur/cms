@@ -28,19 +28,22 @@ trait HasMetaTags
         // @TODO: check opengraph metatags generator
         SEOTools::opengraph()
             ->addProperty('locale', app()->getLocale())
-            ->setType($this->opengraphType())
-            ->addImage($this->metaImage(), ['height' => '600', 'width' => '1200'])
-            // product
-        ;
+            ->setType($this->opengraphType());
+
+        if ((bool) $this->metaImage()) {
+            SEOTools::opengraph()->addImage($this->metaImage(), ['height' => '600', 'width' => '1200']);
+        }
+
+        // @TODO: meta tags opengraph product
     }
 
     private function generateTwitterMetaTags(): void
     {
-        // @TODO: check twitter metatags generator
-        SEOTools::twitter()
-            ->addImage($this->metaImage())
-            // product
-        ;
+        if ((bool) $this->metaImage()) {
+            SEOTools::twitter()->addImage($this->metaImage());
+        }
+
+        // @TODO: meta tags twitter product
     }
 
     private function generateSchemaOrg(): void
@@ -61,9 +64,9 @@ trait HasMetaTags
         return $types[$this->page->type] ?? 'website';
     }
 
-    private function metaImage(): string
+    private function metaImage(): string|null
     {
-        return $this->coverImage()?->urlForMeta() ?? '';
+        return $this->coverImage()?->url('meta');
     }
 
     public function pageTitle(): string
