@@ -103,7 +103,7 @@ class HasMediaCollectionsTest extends TestCase
         Storage::fake('local');
 
         $page = tap(TestMediaModel::create(Page::factory()->raw()), static function ($page) {
-           $page->addMedia(UploadedFile::fake()->image('photo1.jpg', 1200, 1200))
+            $page->addMedia(UploadedFile::fake()->image('photo1.jpg', 1200, 1200))
                ->toMediaCollection('testmediamodel.cover', 'local');
         });
 
