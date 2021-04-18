@@ -25,6 +25,8 @@ class CmsServiceProvider extends PackageServiceProvider
     {
         parent::bootingPackage();
 
+        $this->bootingMigrations();
+
         $this->bootingMacros();
 
         $this->bootingConfigurationOverride();
