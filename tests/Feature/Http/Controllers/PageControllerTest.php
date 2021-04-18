@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Models\ReservedSlug;
 use Lemaur\Cms\Tests\TestCase;
+use Spatie\Sitemap\Tags\Url;
 
 class PageControllerTest extends TestCase
 {
@@ -128,25 +129,25 @@ class PageControllerTest extends TestCase
         collect([
             ['title' => 'Welcome', 'slug' => ReservedSlug::HOMEPAGE],
 
-            ['title' => 'Blog'],
-            ['title' => 'Article 1', 'layout' => 'article', 'type' => 'article', 'parent' => 'blog'],
-            ['title' => 'Article 2', 'layout' => 'article', 'type' => 'article', 'parent' => 'blog'],
-            ['title' => 'Article 3', 'layout' => 'article', 'type' => 'article', 'parent' => 'blog'],
+            ['title' => 'Blog', 'sitemap_frequency' => Url::CHANGE_FREQUENCY_WEEKLY, 'sitemap_priority' => 0.9],
+            ['title' => 'Article 1', 'layout' => 'article', 'type' => 'article', 'parent' => 'blog', 'sitemap_priority' => 0.9],
+            ['title' => 'Article 2', 'layout' => 'article', 'type' => 'article', 'parent' => 'blog', 'sitemap_priority' => 0.9],
+            ['title' => 'Article 3', 'layout' => 'article', 'type' => 'article', 'parent' => 'blog', 'sitemap_priority' => 0.9],
 
-            ['title' => 'Services Shop'],
-            ['title' => 'Project', 'layout' => 'service', 'type' => 'service', 'parent' => 'services-shop'],
-            ['title' => 'Videocall', 'layout' => 'service', 'type' => 'service', 'parent' => 'services-shop'],
-            ['title' => 'Editorial', 'layout' => 'service', 'type' => 'service', 'parent' => 'services-shop'],
-            ['title' => 'Planner 2021 Printable', 'layout' => 'shop', 'type' => 'service', 'parent' => 'services-shop'],
+            ['title' => 'Services Shop', 'sitemap_priority' => 1.0],
+            ['title' => 'Project', 'layout' => 'service', 'type' => 'service', 'parent' => 'services-shop', 'sitemap_priority' => 1.0],
+            ['title' => 'Videocall', 'layout' => 'service', 'type' => 'service', 'parent' => 'services-shop', 'sitemap_priority' => 1.0],
+            ['title' => 'Editorial', 'layout' => 'service', 'type' => 'service', 'parent' => 'services-shop', 'sitemap_priority' => 1.0],
+            ['title' => 'Planner 2021 Printable', 'layout' => 'shop', 'type' => 'service', 'parent' => 'services-shop', 'sitemap_priority' => 1.0],
 
-            ['title' => 'About'],
+            ['title' => 'About', 'sitemap_frequency' => 'not-existent-frequency-fallback-to-yearly'],
             ['title' => 'Contact'],
-            ['title' => 'Biophilic Design Guide'],
-            ['title' => 'Ethical Manifesto'],
-            ['title' => 'Press'],
-            ['title' => 'Privacy Policy'],
-            ['title' => 'Cookie Policy'],
-            ['title' => 'Terms of Service'],
+            ['title' => 'Biophilic Design Guide', 'sitemap_priority' => 1.0],
+            ['title' => 'Ethical Manifesto', 'sitemap_priority' => 0.8],
+            ['title' => 'Press', 'sitemap_priority' => 0.8],
+            ['title' => 'Privacy Policy', 'sitemap_priority' => 0.2],
+            ['title' => 'Cookie Policy', 'sitemap_priority' => 0.2],
+            ['title' => 'Terms of Service', 'sitemap_priority' => 0.2],
 
             ['title' => 'Sitemap', 'slug' => ReservedSlug::SITEMAP, 'layout' => 'sitemap_index'],
 

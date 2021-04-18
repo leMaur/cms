@@ -1,4 +1,4 @@
-    # A simple CMS backend functionality for Laravel
+# A simple CMS backend functionality for Laravel
 
 [![Latest Stable Version](https://poser.pugx.org/lemaur/laravel-cms/v)](//packagist.org/packages/lemaur/laravel-cms)
 [![Total Downloads](https://poser.pugx.org/lemaur/laravel-cms/downloads)](//packagist.org/packages/lemaur/laravel-cms)
@@ -6,7 +6,6 @@
 ![Tests](https://github.com/leMaur/laravel-cms/workflows/Tests/badge.svg)
 [![Treeware](https://img.shields.io/badge/dynamic/json?color=brightgreen&label=Treeware&query=%24.total&url=https%3A%2F%2Fpublic.offset.earth%2Fusers%2Ftreeware%2Ftrees)](https://treeware.earth)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
 ## Installation
 
@@ -16,7 +15,7 @@ You can install the package via composer:
 composer require lemaur/laravel-cms
 ```
 
-You can publish and run the migrations with:
+Then you have to publish and run the migrations with:
 
 ```bash
 php artisan vendor:publish --provider="Lemaur\Cms\CmsServiceProvider" --tag="cms-migrations"
@@ -71,13 +70,13 @@ If you use it in production, then I ask that you [**buy the world a tree**](http
 Read more about [Treeware](https://treeware.earth).
 
 ## Battery Included
-- https://github.com/artesaos/seotools
-- https://github.com/league/commonmark
-- https://github.com/lemaur/eloquent-publishing
-- https://github.com/lemaur/laravel-image-sitemap
-- https://github.com/spatie/eloquent-sortable
-- https://github.com/spatie/laravel-medialibrary
-- https://github.com/spatie/laravel-schemaless-attributes
-- https://github.com/spatie/laravel-sluggable
-- https://github.com/spatie/laravel-tags
-- https://github.com/spatie/laravel-view-models
+- [Seo Tools by Artesaos](https://github.com/artesaos/seotools)
+- [Common Mark by League](https://github.com/league/commonmark)
+- [Eloquent Publishing by Lemaur (it's me :sunglasses:)](https://github.com/lemaur/eloquent-publishing)
+- [Laravel Image Sitemap by Lemaur (it's me :sunglasses:)](https://github.com/lemaur/laravel-image-sitemap)
+- [Eloquent Sortable by Spatie](https://github.com/spatie/eloquent-sortable)
+- [Laravel Media Library by Spatie](https://github.com/spatie/laravel-medialibrary)
+- [Laravel Schemaless Attributes by Spatie](https://github.com/spatie/laravel-schemaless-attributes)
+- [Laravel Sluggable by Spatie](https://github.com/spatie/laravel-sluggable)
+- [Laravel Tags by Spatie](https://github.com/spatie/laravel-tags)
+- [Laravel View Models by Spatie](https://github.com/spatie/laravel-view-models)

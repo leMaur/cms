@@ -3,8 +3,8 @@
   <url>
     <loc>https://localhost/blog/article-1</loc>
     <lastmod>2016-01-01T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.1</priority>
+    <changefreq>yearly</changefreq>
+    <priority>0.9</priority>
     <image:image>
       <image:loc>http://localhost/storage/1/photo1.jpg</image:loc>
       <image:caption>caption text</image:caption>
@@ -14,8 +14,8 @@
   <url>
     <loc>https://localhost/blog/article-2</loc>
     <lastmod>2016-01-01T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.1</priority>
+    <changefreq>yearly</changefreq>
+    <priority>0.9</priority>
     <image:image>
       <image:loc>http://localhost/storage/2/photo1.jpg</image:loc>
       <image:caption>caption text</image:caption>
@@ -25,8 +25,8 @@
   <url>
     <loc>https://localhost/blog/article-3</loc>
     <lastmod>2016-01-01T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.1</priority>
+    <changefreq>yearly</changefreq>
+    <priority>0.9</priority>
     <image:image>
       <image:loc>http://localhost/storage/3/photo1.jpg</image:loc>
       <image:caption>caption text</image:caption>

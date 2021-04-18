@@ -31,10 +31,8 @@ trait HasSitemaps
         $pages->each(function ($page) use ($sitemap) {
             $url = Url::create($page->toViewModel()->url())
                 ->setLastModificationDate($page->updated_at->toDate())
-                // @TODO: improve sitemap change frequency
-                ->setChangeFrequency($this->getSitemapFrequency($page))
-                // @TODO: improve sitemap priority
-                ->setPriority($this->getSitemapPriority($page));
+                ->setChangeFrequency($page->sitemap_frequency)
+                ->setPriority($page->sitemap_priority);
 
             $coverImage = $page->toViewModel()->coverImage();
 
@@ -68,22 +66,6 @@ trait HasSitemaps
         return (string) Str::of($request->segment(2))
             ->replace(['sitemap', '.xml', '-', '_'], ['', '', '', ''])
             ->singular();
-    }
-
-    private function getSitemapFrequency(Page $page): string
-    {
-        $diffInDays = $page->updated_at->floatDiffInDays();
-
-        return $diffInDays < 30
-            ? Url::CHANGE_FREQUENCY_WEEKLY
-            : Url::CHANGE_FREQUENCY_MONTHLY;
-    }
-
-    private function getSitemapPriority(Page $page): mixed
-    {
-        $diffInDays = $page->updated_at->floatDiffInDays();
-
-        return max(0.1, min(1.0, round(10 / $diffInDays, 1)));
     }
 
     private function isSitemapIndex(): bool

@@ -3,6 +3,7 @@
 namespace Lemaur\Cms\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
+use InvalidArgumentException;
 
 trait HasTagOfType
 {

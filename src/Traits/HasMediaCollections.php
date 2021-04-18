@@ -83,7 +83,7 @@ trait HasMediaCollections
     {
         $width = ImageFactory::load($media->getPath())->getWidth();
 
-        return [$width, ($denominator * $width) / $numerator];
+        return [$width, ($numerator * $width) / $denominator];
     }
 
     private function getMediaCollectionName(string $name): string

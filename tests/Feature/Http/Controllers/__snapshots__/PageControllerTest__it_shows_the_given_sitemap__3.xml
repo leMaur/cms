@@ -3,25 +3,25 @@
   <url>
     <loc>https://localhost/services-shop/project</loc>
     <lastmod>2016-01-01T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.1</priority>
+    <changefreq>yearly</changefreq>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://localhost/services-shop/videocall</loc>
     <lastmod>2016-01-01T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.1</priority>
+    <changefreq>yearly</changefreq>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://localhost/services-shop/editorial</loc>
     <lastmod>2016-01-01T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.1</priority>
+    <changefreq>yearly</changefreq>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://localhost/services-shop/planner-2021-printable</loc>
     <lastmod>2016-01-01T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.1</priority>
+    <changefreq>yearly</changefreq>
+    <priority>1.0</priority>
   </url>
 </urlset>

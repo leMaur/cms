@@ -102,28 +102,36 @@ class HasMediaCollectionsTest extends TestCase
     {
         Storage::fake('local');
 
-        $page = tap(Page::factory()->published()->create(), static function ($page) {
+        $page = tap(TestMediaModel::create(Page::factory()->raw()), static function ($page) {
            $page->addMedia(UploadedFile::fake()->image('photo1.jpg', 1200, 1200))
-               ->toMediaCollection('page.cover', 'local');
+               ->toMediaCollection('testmediamodel.cover', 'local');
         });
 
-        $image = ImageFactory::load($page->getFirstMedia('page.cover')->getPath());
+        $image = ImageFactory::load($page->getFirstMedia('testmediamodel.cover')->getPath());
         self::assertEquals(1200, $image->getWidth());
         self::assertEquals(1200, $image->getHeight());
 
-        $image = ImageFactory::load($page->getFirstMedia('page.cover')->getPath('meta'));
+        $image = ImageFactory::load($page->getFirstMedia('testmediamodel.cover')->getPath('meta'));
         self::assertEquals(1200, $image->getWidth());
         self::assertEquals(600, $image->getHeight());
 
-        $image = ImageFactory::load($page->getFirstMedia('page.cover')->getPath('3:4'));
+        $image = ImageFactory::load($page->getFirstMedia('testmediamodel.cover')->getPath('3:4'));
         self::assertEquals(900, $image->getWidth());
         self::assertEquals(1200, $image->getHeight());
+
+        $image = ImageFactory::load($page->getFirstMedia('testmediamodel.cover')->getPath('4:3'));
+        self::assertEquals(1200, $image->getWidth());
+        self::assertEquals(900, $image->getHeight());
     }
 }
 
 class TestMediaModel extends Model implements HasMedia
 {
     use HasMediaCollections;
+
+    protected $table = 'pages';
+
+    protected $guarded = [];
 
     protected array $mediaConfiguration = [
         'cover' => 'single_image',
@@ -134,7 +142,7 @@ class TestMediaModel extends Model implements HasMedia
     ];
 
     protected array $mediaConversionConfiguration = [
-        'cover' => ['meta'],
+        'cover' => ['meta', '3:4', '4:3'],
     ];
 }
 

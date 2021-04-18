@@ -13,6 +13,7 @@ use Lemaur\Cms\Models\Concerns\HasAvailableParents;
 use Lemaur\Cms\Models\Concerns\HasAvailableTypes;
 use Lemaur\Cms\Models\Concerns\HasParent;
 use Lemaur\Cms\Models\Concerns\HasSchemalessAttributes;
+use Lemaur\Cms\Models\Concerns\HasSitemapHelpers;
 use Lemaur\Cms\Models\Concerns\HasSlug;
 use Lemaur\Cms\Models\Concerns\HasType;
 use Lemaur\Cms\Models\ViewModels\PageViewModel;
@@ -38,6 +39,7 @@ class Page extends Model implements Sortable, HasMedia
     use HasMetaTitle;
     use HasParent;
     use HasSchemalessAttributes;
+    use HasSitemapHelpers;
     use HasSlug;
     use HasType;
     use Publishes;
@@ -57,7 +59,7 @@ class Page extends Model implements Sortable, HasMedia
     ];
 
     protected array $mediaConversionConfiguration = [
-        'cover' => ['meta', '3:4'],
+        'cover' => ['meta'],
     ];
 
     public function __construct(array $attributes = [])
