@@ -10,6 +10,7 @@ use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Tests\TestCase;
 use Lemaur\Cms\Traits\HasMediaCollections;
 use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\Support\ImageFactory;
 
 class HasMediaCollectionsTest extends TestCase
 {
@@ -99,27 +100,24 @@ class HasMediaCollectionsTest extends TestCase
     /** @test */
     public function it_has_conversions(): void
     {
-        $this->markTestSkipped();
-
         Storage::fake('local');
 
-        $page = Page::factory()->published()->create([
-            'title' => 'My Title',
-            'slug' => 'my-title',
-            'content' => 'Something to say',
-        ]);
+        $page = tap(Page::factory()->published()->create(), static function ($page) {
+           $page->addMedia(UploadedFile::fake()->image('photo1.jpg', 1200, 1200))
+               ->toMediaCollection('page.cover', 'local');
+        });
 
-        $page->addMedia(UploadedFile::fake()->image('photo1.jpg'))
-            ->withCustomProperties([
-                'alt' => 'alternative text',
-                'caption' => 'caption text',
-            ])
-            ->toMediaCollection('page.cover', 'local');
+        $image = ImageFactory::load($page->getFirstMedia('page.cover')->getPath());
+        self::assertEquals(1200, $image->getWidth());
+        self::assertEquals(1200, $image->getHeight());
 
-//        $config = config('cms.media_conversions.meta');
-        $mediaConversions = $page->mediaConversions;
+        $image = ImageFactory::load($page->getFirstMedia('page.cover')->getPath('meta'));
+        self::assertEquals(1200, $image->getWidth());
+        self::assertEquals(600, $image->getHeight());
 
-        dd($page);
+        $image = ImageFactory::load($page->getFirstMedia('page.cover')->getPath('3:4'));
+        self::assertEquals(900, $image->getWidth());
+        self::assertEquals(1200, $image->getHeight());
     }
 }
 

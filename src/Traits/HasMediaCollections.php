@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\InteractsWithMedia as SpatieInteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\MediaLibrary\Support\ImageFactory;
 
 trait HasMediaCollections
 {
@@ -22,9 +23,17 @@ trait HasMediaCollections
                 foreach (Arr::wrap($key) as $configKey) {
                     $mediaConfig = data_get($config, $configKey, []);
 
+                    $width = (int) data_get($mediaConfig, 'width');
+                    $height = (int) data_get($mediaConfig, 'height');
+
+                    if (! is_null($media) && data_get($mediaConfig, 'aspect_ratio', false)) {
+                        $ratio = (string) data_get($mediaConfig, 'aspect_ratio');
+                        [$width, $height] = $this->getDimensionsFromAspectRatio($ratio, $media);
+                    }
+
                     $this
                         ->addMediaConversion($configKey)
-                        ->fit(Manipulations::FIT_CROP, (int) data_get($mediaConfig, 'width'), (int) data_get($mediaConfig, 'height'))
+                        ->fit(Manipulations::FIT_CROP, $width, $height)
                         ->performOnCollections($this->getMediaCollectionName($name));
                 }
             }
@@ -54,12 +63,28 @@ trait HasMediaCollections
         }
     }
 
-//    private function getHeightFromRatioAndWidth(string $ratio, int $width): int
-//    {
-//        [$denominator, $numerator] = explode(':', $ratio, 2);
-//
-//        return ((int) $numerator * $width) / (int) $denominator;
-//    }
+    private function getDimensionsFromAspectRatio(string $ratio, Media $media): array
+    {
+        [$denominator, $numerator] = explode(':', $ratio, 2);
+
+        $method = $denominator > $numerator ? 'getHeightFromAspectRatio' : 'getWidthFromAspectRatio';
+
+        return $this->{$method}($denominator, $numerator, $media);
+    }
+
+    private function getWidthFromAspectRatio(int $denominator, int $numerator, Media $media): array
+    {
+        $height = ImageFactory::load($media->getPath())->getHeight();
+
+        return [($denominator * $height) / $numerator, $height];
+    }
+
+    private function getHeightFromAspectRatio(int $denominator, int $numerator, Media $media): array
+    {
+        $width = ImageFactory::load($media->getPath())->getWidth();
+
+        return [$width, ($denominator * $width) / $numerator];
+    }
 
     private function getMediaCollectionName(string $name): string
     {

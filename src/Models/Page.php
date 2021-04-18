@@ -57,7 +57,7 @@ class Page extends Model implements Sortable, HasMedia
     ];
 
     protected array $mediaConversionConfiguration = [
-        'cover' => ['meta'],
+        'cover' => ['meta', '3:4'],
     ];
 
     public function __construct(array $attributes = [])
