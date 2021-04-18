@@ -17,7 +17,7 @@ class CmsServiceProvider extends PackageServiceProvider
             ->name('laravel-cms')
             ->hasConfigFile()
             ->hasViews()
-            ->hasRoute('cms')
+            ->hasRoutes('cms')
         ;
     }
 

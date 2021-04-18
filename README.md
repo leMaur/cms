@@ -34,6 +34,39 @@ php artisan vendor:publish --provider="Lemaur\Cms\CmsServiceProvider" --tag="cms
 php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="config"
 ```
 
+### Apply a sensible default:
+
+Add `domain` to your "config/app.php". I advise you to append it after `asset_url`. 
+```
+    /*
+    |--------------------------------------------------------------------------
+    | Application URL
+    |--------------------------------------------------------------------------
+    |
+    | This URL is used by the console to properly generate URLs when using
+    | the Artisan command line tool. You should set this to the root of
+    | your application so that it is used when running Artisan tasks.
+    |
+    */
+
+    'url' => env('APP_URL', 'http://localhost'),
+
+    'asset_url' => env('ASSET_URL', null),
+
+    'domain' => env('APP_DOMAIN', 'localhost'),
+```
+
+Change your `.env` file like:
+```
+APP_DOMAIN=your-website.com
+APP_URL=https://${APP_DOMAIN}
+
+CMS_DOMAIN=${APP_DOMAIN}
+#NOVA_DOMAIN_NAME=nova.${APP_DOMAIN} # <- this is optional. You can uncomment if you use Laravel Nova.
+
+SESSION_DOMAIN=.${APP_DOMAIN}
+```
+
 ## Testing
 
 ```bash

@@ -46,9 +46,9 @@ class NavigationTest extends TestCase
     /** @test */
     public function it_scopes_query_by_type(): void
     {
-        $primary = Navigation::create(['name' => 'Primary', 'type' => 'primary']);
-        $secondary = Navigation::create(['name' => 'Secondary', 'type' => 'secondary']);
-        $social = Navigation::create(['name' => 'Social', 'type' => 'social']);
+        $primary = Navigation::create(['name' => 'Primary', 'type' => Navigation::PRIMARY]);
+        $secondary = Navigation::create(['name' => 'Secondary', 'type' => Navigation::SECONDARY]);
+        $social = Navigation::create(['name' => 'Social', 'type' => Navigation::SOCIAL]);
 
         self::assertEquals($primary->id, Navigation::withType('primary')->first()->id);
         self::assertEquals($secondary->id, Navigation::withType('secondary')->first()->id);
