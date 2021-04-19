@@ -2,6 +2,7 @@
 
 namespace Lemaur\Cms\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Lemaur\Cms\Models\Concerns\HasType;
@@ -13,6 +14,7 @@ use Spatie\MediaLibrary\HasMedia;
 class Navigation extends Model implements Sortable, HasMedia
 {
     use HasMediaCollections;
+    use HasFactory;
     use HasType;
     use SortableTrait;
 

@@ -29,6 +29,7 @@ class TestCase extends Orchestra
             fn (string $modelName) => 'Lemaur\\Cms\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
 
+        Route::social('social');
         Route::cms('/', 'cms');
     }
 
@@ -48,6 +49,7 @@ class TestCase extends Orchestra
     public function getEnvironmentSetUp($app)
     {
         $app['config']->set('app.key', 'base64:ygJ6fXnImxW2fktgrY06dCqkaVOuzxcSNI4jXWqB2E4=');
+        $app['config']->set('app.domain', 'localhost');
 
         $app['config']->set('cms', include __DIR__.'/../config/cms.php');
         $app['config']->set('cms.seo.twitter.site', '@dfordesignstyle');
