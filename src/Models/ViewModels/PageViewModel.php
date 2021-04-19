@@ -3,6 +3,7 @@
 namespace Lemaur\Cms\Models\ViewModels;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\View;
 use Lemaur\Cms\Markdown;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Models\ReservedSlug;
@@ -18,7 +19,13 @@ class PageViewModel extends ViewModel
 
     public function __construct(private Page $page)
     {
-        $this->view = sprintf('cms::%s', $this->page->layout);
+        $viewName = sprintf('cms::%s', $this->page->layout);
+
+        if (! View::exists($viewName)) {
+            $viewName = 'cms::basic';
+        }
+
+        $this->view = $viewName;
     }
 
     public function content(): string | null
@@ -43,12 +50,12 @@ class PageViewModel extends ViewModel
         return secure_url($this->slug());
     }
 
-    public function children(): Collection | null
+    public function children(int $page = 1, int $perPage = 15): Collection | null
     {
         // @TODO: cache it
         $pages = Page::where('parent', $this->page->slug)
             ->latestPublished()
-            ->get();
+            ->paginate($page, $perPage);
 
         if (is_null($pages) || $pages->count() === 0) {
             return null;

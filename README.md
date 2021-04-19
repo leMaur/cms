@@ -34,6 +34,11 @@ php artisan vendor:publish --provider="Lemaur\Cms\CmsServiceProvider" --tag="cms
 php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="config"
 ```
 
+You can publish views with:
+```bash
+php artisan vendor:publish --provider="Lemaur\Cms\CmsServiceProvider" --tag="cms-views"
+```
+
 ### Apply a sensible default:
 
 Add `domain` to your "config/app.php". I advise you to append it after `asset_url`. 
@@ -62,7 +67,7 @@ APP_DOMAIN=your-website.com
 APP_URL=https://${APP_DOMAIN}
 
 CMS_DOMAIN=${APP_DOMAIN}
-#NOVA_DOMAIN_NAME=nova.${APP_DOMAIN} # <- this is optional. You can uncomment if you use Laravel Nova.
+#NOVA_DOMAIN_NAME=nova.${APP_DOMAIN} # <- this is optional. Uncomment if you use Laravel Nova and use the prefix you like.
 
 SESSION_DOMAIN=.${APP_DOMAIN}
 ```

@@ -19,6 +19,7 @@ class PageFactory extends Factory
             'slug' => Str::slug($title),
             'title' => $title,
             'content' => $this->faker->paragraphs(10, true),
+            'layout' => 'basic',
         ];
     }
 

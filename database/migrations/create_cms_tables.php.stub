@@ -12,7 +12,7 @@ class CreateCmsTables extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained((string) config('cms.users.table'))->cascadeOnDelete();
             $table->string('parent')->nullable();
-            $table->string('slug')->unique();
+            $table->string('slug');
             $table->string('title');
             $table->longText('content')->nullable();
             $table->string('type')->default('page');
@@ -22,6 +22,9 @@ class CreateCmsTables extends Migration
             $table->timestampsTz();
             $table->timestampTz('published_at')->nullable();
             $table->softDeletesTz();
+
+            $table->unique('slug');
+            $table->index(['published_at', 'deleted_at']);
         });
 
         Schema::create((string) config('cms.navigations.table'), function (Blueprint $table) {
