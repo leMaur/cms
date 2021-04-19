@@ -64,7 +64,7 @@ trait HasMetaTags
         return $types[$this->page->type] ?? 'website';
     }
 
-    private function metaImage(): string|null
+    private function metaImage(): string | null
     {
         return $this->coverImage()?->url('meta');
     }
