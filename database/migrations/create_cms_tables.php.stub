@@ -10,21 +10,18 @@ class CreateCmsTables extends Migration
     {
         Schema::create((string) config('cms.pages.table'), function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained((string) config('cms.users.table'))->cascadeOnDelete();
-            $table->string('parent')->nullable();
-            $table->string('slug');
+            $table->foreignId('user_id')->nullable()->constrained((string) config('cms.users.table'))->cascadeOnDelete(); // 1
+            $table->string('parent')->nullable()->index(); // 2
+            $table->string('slug')->unique(); // 3
             $table->string('title');
             $table->longText('content')->nullable();
-            $table->string('type')->default('page');
-            $table->string('layout')->default('basic');
+            $table->string('type')->default('page')->index(); // 4
+            $table->string('layout')->default('basic')->index(); // 5
             $table->schemalessAttributes('extra_attributes');
-            $table->integer('order_column')->nullable();
+            $table->integer('order_column')->nullable()->index(); // 6
             $table->timestampsTz();
-            $table->timestampTz('published_at')->nullable();
-            $table->softDeletesTz();
-
-            $table->unique('slug');
-            $table->index(['published_at', 'deleted_at']);
+            $table->timestampTz('published_at')->nullable()->index(); // 7
+            $table->softDeletesTz()->index(); // 8
         });
 
         Schema::create((string) config('cms.navigations.table'), function (Blueprint $table) {
