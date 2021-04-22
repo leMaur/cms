@@ -2,31 +2,31 @@
 
 namespace Lemaur\Cms\Tests\Feature\Traits;
 
+use Lemaur\Cms\Models\Tag;
 use Lemaur\Cms\Tests\TestCase;
-use Lemaur\Cms\Traits\HasTagOfType;
-use Spatie\Tags\Tag;
+use Lemaur\Cms\Traits\HasGlobalScopeType;
 
 class HasTagOfTypeTest extends TestCase
 {
     /** @test */
-    public function it_add_a_global_scope()
+    public function it_add_a_global_scope(): void
     {
         $topic = Topic::create(['name' => 'Biophilic Travels']);
         $category = Category::create(['name' => 'Tableware']);
 
-        $this->assertCount(1, Topic::get());
-        $this->assertEquals($topic->name, Topic::first()->name);
-        $this->assertEquals($topic->type, Topic::first()->type);
+        self::assertCount(1, Topic::get());
+        self::assertEquals($topic->name, Topic::first()->name);
+        self::assertEquals($topic->type, Topic::first()->type);
 
-        $this->assertCount(1, Category::get());
-        $this->assertEquals($category->name, Category::first()->name);
-        $this->assertEquals($category->type, Category::first()->type);
+        self::assertCount(1, Category::get());
+        self::assertEquals($category->name, Category::first()->name);
+        self::assertEquals($category->type, Category::first()->type);
     }
 }
 
 class Topic extends Tag
 {
-    use HasTagOfType;
+    use HasGlobalScopeType;
 
     public const TYPE = 'topic';
 
@@ -35,7 +35,7 @@ class Topic extends Tag
 
 class Category extends Tag
 {
-    use HasTagOfType;
+    use HasGlobalScopeType;
 
     public const TYPE = 'category';
 

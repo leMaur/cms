@@ -6,6 +6,7 @@ trait HasAvailableLayouts
 {
     public static function getAvailableLayouts(): array
     {
+        // @TODO: cache it
         return static::distinct()
             ->select('layout')
             ->orderBy('layout', 'asc')

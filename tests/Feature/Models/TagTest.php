@@ -2,33 +2,48 @@
 
 namespace Lemaur\Cms\Tests\Feature\Models;
 
+use Illuminate\Http\UploadedFile;
 use Lemaur\Cms\Models\Tag;
 use Lemaur\Cms\Tests\TestCase;
 
 class TagTest extends TestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->tag = Tag::create(['name' => 'New Tag']);
+    }
+
     /** @test */
     public function it_may_has_extra_attributes(): void
     {
-        $tag = Tag::create(['name' => 'New Tag']);
-
         // Set extra attribute
-        $tag->setExtraAttribute('excerpt', 'something to say');
+        $this->tag->setExtraAttribute('excerpt', 'something to say');
 
         // Get extra attributes
-        self::assertEquals('something to say', $tag->getExtraAttribute('excerpt'));
+        self::assertEquals('something to say', $this->tag->getExtraAttribute('excerpt'));
 
         // Has extra attribute
-        self::assertTrue($tag->hasExtraAttribute('excerpt'));
+        self::assertTrue($this->tag->hasExtraAttribute('excerpt'));
 
         // Forget extra attribute
-        $tag->forgetExtraAttribute('excerpt');
+        $this->tag->forgetExtraAttribute('excerpt');
 
-        self::assertFalse($tag->hasExtraAttribute('excerpt'));
+        self::assertFalse($this->tag->hasExtraAttribute('excerpt'));
 
         // Fill extra attributes
-        $tag->fillExtraAttributes(['excerpt' => 'something to say']);
+        $this->tag->fillExtraAttributes(['excerpt' => 'something to say']);
 
-        self::assertEquals('something to say', $tag->getExtraAttribute('excerpt'));
+        self::assertEquals('something to say', $this->tag->getExtraAttribute('excerpt'));
+    }
+
+    /** @test */
+    public function it_may_has_a_single_image(): void
+    {
+        $image = UploadedFile::fake()->image('image.png');
+        $this->tag->addMedia($image)->toMediaCollection('tag.image');
+
+        self::assertSame($image->name, $this->tag->getMedia('tag.image')->first()->file_name);
     }
 }

@@ -4,9 +4,9 @@ namespace Lemaur\Cms\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 
-trait HasTagOfType
+trait HasGlobalScopeType
 {
-    public static function bootHasTagOfType(): void
+    public static function bootHasGlobalScopeType(): void
     {
         static::addGlobalScope(self::TYPE, function (Builder $builder): void {
             $builder->withType(self::TYPE)->reorder()->ordered();
