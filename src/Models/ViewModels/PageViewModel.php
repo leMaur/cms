@@ -3,8 +3,6 @@
 namespace Lemaur\Cms\Models\ViewModels;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\View;
 use Lemaur\Cms\Markdown;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Models\ReservedSlug;
