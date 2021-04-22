@@ -1,11 +1,11 @@
 <?php
 
-namespace Lemaur\Cms\Tests\Feature\Models\ViewModels;
+namespace Lemaur\Cms\Tests\Feature\ViewModels;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Lemaur\Cms\Models\Page;
-use Lemaur\Cms\Models\ViewModels\ImageViewModel;
+use Lemaur\Cms\ViewModels\ImageViewModel;
 use Lemaur\Cms\Tests\TestCase;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 

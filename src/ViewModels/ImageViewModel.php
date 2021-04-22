@@ -1,6 +1,6 @@
 <?php
 
-namespace Lemaur\Cms\Models\ViewModels;
+namespace Lemaur\Cms\ViewModels;
 
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\ViewModels\ViewModel;

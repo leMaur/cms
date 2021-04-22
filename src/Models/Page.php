@@ -16,7 +16,7 @@ use Lemaur\Cms\Models\Concerns\HasSchemalessAttributes;
 use Lemaur\Cms\Models\Concerns\HasSitemapHelpers;
 use Lemaur\Cms\Models\Concerns\HasSlug;
 use Lemaur\Cms\Models\Concerns\HasType;
-use Lemaur\Cms\Models\ViewModels\PageViewModel;
+use Lemaur\Cms\ViewModels\PageViewModel;
 use Lemaur\Cms\Traits\HasExcerpt;
 use Lemaur\Cms\Traits\HasMediaCollections;
 use Lemaur\Cms\Traits\HasMetaDescription;

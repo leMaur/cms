@@ -1,6 +1,6 @@
 <?php
 
-namespace Lemaur\Cms\Models\ViewModels\Concerns;
+namespace Lemaur\Cms\ViewModels\Concerns;
 
 use Artesaos\SEOTools\Facades\SEOTools;
 

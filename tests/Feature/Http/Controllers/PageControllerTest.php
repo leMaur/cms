@@ -13,8 +13,9 @@ use Spatie\Sitemap\Tags\Url;
 class PageControllerTest extends TestCase
 {
     /** @test */
-    public function it_shows_homepage()
+    public function it_shows_homepage(): void
     {
+        $this->withoutExceptionHandling();
         Page::factory()->create([
             'title' => 'Welcome',
             'slug' => ReservedSlug::HOMEPAGE,

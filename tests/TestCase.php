@@ -74,13 +74,13 @@ class TestCase extends Orchestra
             $table->softDeletes();
         });
 
-        include_once __DIR__.'/../database/migrations/create_cms_tables.php.stub';
-        (new \CreateCmsTables())->up();
-
         include_once __DIR__.'/../vendor/spatie/laravel-medialibrary/database/migrations/create_media_table.php.stub';
         (new \CreateMediaTable())->up();
 
         include_once __DIR__.'/../vendor/spatie/laravel-tags/database/migrations/create_tag_tables.php.stub';
         (new \CreateTagTables())->up();
+
+        include_once __DIR__.'/../database/migrations/create_cms_tables.php.stub';
+        (new \CreateCmsTables())->up();
     }
 }

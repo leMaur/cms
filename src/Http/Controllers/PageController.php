@@ -2,7 +2,7 @@
 
 namespace Lemaur\Cms\Http\Controllers;
 
-use Lemaur\Cms\Models\ViewModels\PageViewModel;
+use Lemaur\Cms\ViewModels\PageViewModel;
 use Lemaur\Cms\Repositories\PageRepository;
 
 class PageController

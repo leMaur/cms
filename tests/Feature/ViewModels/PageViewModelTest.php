@@ -1,13 +1,13 @@
 <?php
 
-namespace Lemaur\Cms\Tests\Feature\Models\ViewModels;
+namespace Lemaur\Cms\Tests\Feature\ViewModels;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Storage;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Models\ReservedSlug;
-use Lemaur\Cms\Models\ViewModels\ImageViewModel;
+use Lemaur\Cms\ViewModels\ImageViewModel;
 use Lemaur\Cms\Tests\TestCase;
 
 class PageViewModelTest extends TestCase
