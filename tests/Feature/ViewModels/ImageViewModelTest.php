@@ -5,8 +5,8 @@ namespace Lemaur\Cms\Tests\Feature\ViewModels;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Lemaur\Cms\Models\Page;
-use Lemaur\Cms\ViewModels\ImageViewModel;
 use Lemaur\Cms\Tests\TestCase;
+use Lemaur\Cms\ViewModels\ImageViewModel;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ImageViewModelTest extends TestCase
