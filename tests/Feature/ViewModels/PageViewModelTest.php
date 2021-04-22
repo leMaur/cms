@@ -7,8 +7,8 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Storage;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Models\ReservedSlug;
-use Lemaur\Cms\ViewModels\ImageViewModel;
 use Lemaur\Cms\Tests\TestCase;
+use Lemaur\Cms\ViewModels\ImageViewModel;
 
 class PageViewModelTest extends TestCase
 {
