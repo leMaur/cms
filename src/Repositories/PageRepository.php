@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Lemaur\Cms\Models\Page as PageModel;
 use Lemaur\Cms\Models\ReservedSlug;
-use Lemaur\Cms\Repositories\Contracts\Repository;
+use Lemaur\Cms\Repositories\Contracts\Findable;
 
-class PageRepository implements Repository
+class PageRepository implements Findable
 {
     private PageModel $page;
 

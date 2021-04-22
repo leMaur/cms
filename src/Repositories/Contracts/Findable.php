@@ -4,7 +4,7 @@ namespace Lemaur\Cms\Repositories\Contracts;
 
 use Lemaur\Cms\Models\Page;
 
-interface Repository
+interface Findable
 {
     public function find(string | null $slug = null): Page;
 }
