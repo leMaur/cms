@@ -2,6 +2,7 @@
 
 namespace Lemaur\Cms\Models\ViewModels;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\View;
 use Lemaur\Cms\Markdown;
@@ -19,13 +20,7 @@ class PageViewModel extends ViewModel
 
     public function __construct(private Page $page)
     {
-        $viewName = sprintf('cms::%s', $this->page->layout);
-
-        if (! View::exists($viewName)) {
-            $viewName = 'cms::basic';
-        }
-
-        $this->view = $viewName;
+        $this->view = sprintf('cms::%s', $this->page->layout);
     }
 
     public function content(): string | null
@@ -50,7 +45,7 @@ class PageViewModel extends ViewModel
         return secure_url($this->slug());
     }
 
-    public function children(int $page = 1, int $perPage = 15): Collection | null
+    public function children(int $page = 1, int $perPage = 15): LengthAwarePaginator | null
     {
         // @TODO: cache it
         $pages = Page::where('parent', $this->page->slug)

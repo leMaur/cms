@@ -8,8 +8,7 @@ use Spatie\ViewModels\ViewModel;
 class ImageViewModel extends ViewModel
 {
     public function __construct(private Media $media)
-    {
-    }
+    {}
 
     public function url(string $conversion = ''): string
     {

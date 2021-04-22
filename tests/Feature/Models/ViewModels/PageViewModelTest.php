@@ -2,8 +2,8 @@
 
 namespace Lemaur\Cms\Tests\Feature\Models\ViewModels;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Storage;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Models\ReservedSlug;
@@ -94,8 +94,8 @@ class PageViewModelTest extends TestCase
 
         $children = Page::factory(5)->create(['parent' => 'blog']);
 
-        self::assertInstanceOf(Collection::class, $parent->toViewModel()->children());
-        self::assertCount(5, $parent->toViewModel()->children());
+        self::assertInstanceOf(LengthAwarePaginator::class, $parent->toViewModel()->children());
+        self::assertEquals(5, $parent->toViewModel()->children()->total());
         self::assertNotContains($parent, $children);
     }
 
