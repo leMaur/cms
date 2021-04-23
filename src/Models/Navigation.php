@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Lemaur\Cms\Models\Concerns\HasType;
 use Lemaur\Cms\Traits\HasMediaCollections;
+use Lemaur\Cms\ViewModels\NavigationViewModel;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
@@ -38,5 +39,10 @@ class Navigation extends Model implements Sortable, HasMedia
     public function page(): BelongsTo
     {
         return $this->belongsTo((string) config('cms.pages.model'), 'page_id');
+    }
+
+    public function toViewModel(): NavigationViewModel
+    {
+        return new NavigationViewModel($this);
     }
 }

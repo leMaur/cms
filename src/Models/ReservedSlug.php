@@ -18,6 +18,7 @@ class ReservedSlug
 
     public static function toReserved(string $slug): string
     {
+        // @TODO: cache it?
         if (strlen($slug) > 1) {
             $shortenedSlug = Str::of($slug)->explode('/')->last();
             $shortenedSlug = Str::of($shortenedSlug)->explode('.')->first();
@@ -43,6 +44,7 @@ class ReservedSlug
 
     public static function toSlug(string $slug): string
     {
+        // @TODO: cache it?
         $reflector = new ReflectionClass(static::class);
 
         if (collect($reflector->getConstants())->values()->containsStrict($slug)) {
@@ -54,6 +56,7 @@ class ReservedSlug
 
     public static function list(): Collection
     {
+        // @TODO: cache it?
         $reflector = new ReflectionClass(static::class);
 
         return collect($reflector->getConstants())
@@ -63,6 +66,7 @@ class ReservedSlug
 
     public static function isReserved(string $slug): bool
     {
+        // @TODO: cache it?
         return collect(static::$slugs)->keys()->containsStrict($slug);
     }
 }

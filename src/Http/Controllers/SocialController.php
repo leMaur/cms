@@ -11,7 +11,7 @@ class SocialController
 {
     public function __invoke(string $social): RedirectResponse
     {
-        // @TODO: extract to SocialRepository
+        // @TODO: extract to SocialRepository and cache it
         $url = Navigation::withType(Navigation::SOCIAL)
             ->where(DB::raw('LOWER(name)'), '=', $social)
             ->firstOrFail()

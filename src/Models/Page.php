@@ -13,7 +13,7 @@ use Lemaur\Cms\Models\Concerns\HasAvailableParents;
 use Lemaur\Cms\Models\Concerns\HasAvailableTypes;
 use Lemaur\Cms\Models\Concerns\HasParent;
 use Lemaur\Cms\Models\Concerns\HasSchemalessAttributes;
-use Lemaur\Cms\Models\Concerns\HasSitemapHelpers;
+use Lemaur\Cms\Models\Concerns\HasSitemapExtraAttributes;
 use Lemaur\Cms\Models\Concerns\HasSlug;
 use Lemaur\Cms\Models\Concerns\HasType;
 use Lemaur\Cms\Traits\HasExcerpt;
@@ -39,14 +39,14 @@ class Page extends Model implements Sortable, HasMedia
     use HasMetaTitle;
     use HasParent;
     use HasSchemalessAttributes;
-    use HasSitemapHelpers;
+    use HasSitemapExtraAttributes;
     use HasSlug;
     use HasType;
     use Publishes;
     use SoftDeletes;
     use SortableTrait;
 
-    public const META_DESCRIPTION_LIMIT = 150;
+    public const META_DESCRIPTION_LIMIT = 150; // @TODO: export to separate class
 
     protected $guarded = [];
 

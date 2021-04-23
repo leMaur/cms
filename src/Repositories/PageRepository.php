@@ -11,12 +11,8 @@ use Lemaur\Cms\Repositories\Contracts\Findable;
 
 class PageRepository implements Findable
 {
-    private PageModel $page;
-
-    public function __construct(PageModel $page)
-    {
-        $this->page = $page;
-    }
+    public function __construct(private PageModel $page)
+    {}
 
     public function find(string | null $slug = null): PageModel
     {
@@ -42,6 +38,7 @@ class PageRepository implements Findable
         $page = $slugs->pop();
         $parent = $slugs->count() === 0 ? null : $slugs->join('/');
 
+        // @TODO: cache it
         return $this->page
             ->where('slug', $page)
             ->when($parent, function (Builder $query) use ($parent) {

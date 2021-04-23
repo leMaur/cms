@@ -4,7 +4,7 @@ namespace Lemaur\Cms\Models\Concerns;
 
 use Spatie\Sitemap\Tags\Url;
 
-trait HasSitemapHelpers
+trait HasSitemapExtraAttributes
 {
     public function setSitemapFrequencyAttribute(string $value): void
     {
@@ -33,7 +33,7 @@ trait HasSitemapHelpers
 
     public function setSitemapPriorityAttribute(float $value): void
     {
-        $value = max(0.1, min(1.0, $value));
+        $value = (float) max(0.1, min(1.0, $value));
 
         $this->extra_attributes->set('sitemap_priority', $value);
     }

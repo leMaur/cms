@@ -19,4 +19,10 @@ class Tag extends SpatieTag implements HasMedia
     protected array $mediaConfiguration = [
         'image' => 'single_image',
     ];
+
+//    // @TODO: create TagViewModel
+//    public function toViewModel(): TagViewModel
+//    {
+//        return new TagViewModel($this);
+//    }
 }
