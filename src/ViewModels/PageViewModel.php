@@ -21,6 +21,11 @@ class PageViewModel extends ViewModel
         $this->view = sprintf('cms::%s', $this->page->layout);
     }
 
+    public function title(): string
+    {
+        return $this->page->title;
+    }
+
     public function content(): string | null
     {
         return Markdown::convert($this->page->content, config('cms.markdown.options', []));
@@ -40,7 +45,7 @@ class PageViewModel extends ViewModel
 
     public function url(): string
     {
-        return secure_url($this->slug());
+        return url($this->slug());
     }
 
     public function children(int $page = 1, int $perPage = 15): LengthAwarePaginator | null

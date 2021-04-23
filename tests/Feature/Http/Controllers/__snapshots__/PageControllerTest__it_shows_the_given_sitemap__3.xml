@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://localhost/services-shop/project</loc>
+    <loc>http://localhost/services-shop/project</loc>
     <lastmod>2016-01-01T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://localhost/services-shop/videocall</loc>
+    <loc>http://localhost/services-shop/videocall</loc>
     <lastmod>2016-01-01T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://localhost/services-shop/editorial</loc>
+    <loc>http://localhost/services-shop/editorial</loc>
     <lastmod>2016-01-01T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://localhost/services-shop/planner-2021-printable</loc>
+    <loc>http://localhost/services-shop/planner-2021-printable</loc>
     <lastmod>2016-01-01T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>1.0</priority>

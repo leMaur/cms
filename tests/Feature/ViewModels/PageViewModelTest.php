@@ -83,7 +83,7 @@ class PageViewModelTest extends TestCase
     public function it_shows_url($parent, $slug, $expected): void
     {
         $page = Page::factory()->create(['parent' => $parent, 'slug' => $slug]);
-        self::assertEquals(trim('https://localhost/'.$expected, '/'), $page->toViewModel()->url());
+        self::assertEquals(trim('http://localhost/'.$expected, '/'), $page->toViewModel()->url());
     }
 
     /** @test */
