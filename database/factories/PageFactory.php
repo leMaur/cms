@@ -20,6 +20,7 @@ class PageFactory extends Factory
             'title' => $title,
             'content' => $this->faker->paragraphs(10, true),
             'layout' => 'basic',
+            'type' => 'page',
         ];
     }
 

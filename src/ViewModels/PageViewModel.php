@@ -26,6 +26,21 @@ class PageViewModel extends ViewModel
         return $this->page->title;
     }
 
+    public function parent(): string | null
+    {
+        return $this->page->parent;
+    }
+
+    public function type(): string
+    {
+        return $this->page->type;
+    }
+
+    public function layout(): string
+    {
+        return $this->page->layout;
+    }
+
     public function content(): string | null
     {
         return Markdown::convert($this->page->content, config('cms.markdown.options', []));

@@ -146,4 +146,46 @@ class PageViewModelTest extends TestCase
 
         $this->assertMatchesHtmlSnapshot($html);
     }
+
+    /**
+     * @test
+     */
+    public function it_has_title(): void
+    {
+        $page = Page::factory()->create();
+
+        self::assertEquals($page->title, $page->toViewModel()->title());
+    }
+
+    /**
+     * @test
+     */
+    public function it_has_parent(): void
+    {
+        $parent = Page::factory()->create(['slug' => 'blog']);
+        self::assertNull($parent->toViewModel()->parent());
+
+        $page = Page::factory()->create(['parent' => 'blog']);
+        self::assertEquals($parent->slug, $page->toViewModel()->parent());
+    }
+
+    /**
+     * @test
+     */
+    public function it_has_type(): void
+    {
+        $page = Page::factory()->create();
+
+        self::assertEquals($page->type, $page->toViewModel()->type());
+    }
+
+    /**
+     * @test
+     */
+    public function it_has_layout(): void
+    {
+        $page = Page::factory()->create();
+
+        self::assertEquals($page->layout, $page->toViewModel()->layout());
+    }
 }
