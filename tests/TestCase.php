@@ -30,7 +30,7 @@ class TestCase extends Orchestra
         );
 
         Route::social('social');
-        Route::cms('/', 'cms');
+        Route::cms('cms', '/');
     }
 
     protected function getPackageProviders($app)

@@ -8,21 +8,21 @@ use Lemaur\Cms\Tests\TestCase;
 class RouteTest extends TestCase
 {
     /** @test */
-    public function it_as_routes_defined(): void
+    public function it_as_cms_route_defined(): void
     {
         self::assertEquals('http://localhost', route('cms'));
     }
 
     /** @test */
-    public function it_has_personalised_routes(): void
+    public function it_has_personalised_cms_route(): void
     {
-        Route::cms('/cms', 'custom-cms');
+        Route::cms('custom-cms', '/cms');
 
         self::assertEquals('http://localhost/cms', route('custom-cms'));
     }
 
     /** @test */
-    public function it_may_as_social_routes(): void
+    public function it_may_as_social_route(): void
     {
         Route::social('social');
 
@@ -30,7 +30,7 @@ class RouteTest extends TestCase
     }
 
     /** @test */
-    public function it_may_as_personalized_social_routes(): void
+    public function it_may_as_personalized_social_route(): void
     {
         Route::social('custom-social');
 
