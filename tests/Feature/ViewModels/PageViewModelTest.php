@@ -9,6 +9,7 @@ use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Models\ReservedSlug;
 use Lemaur\Cms\Tests\TestCase;
 use Lemaur\Cms\ViewModels\ImageViewModel;
+use Lemaur\Cms\ViewModels\PageViewModel;
 
 class PageViewModelTest extends TestCase
 {
@@ -166,7 +167,8 @@ class PageViewModelTest extends TestCase
         self::assertNull($parent->toViewModel()->parent());
 
         $page = Page::factory()->create(['parent' => 'blog']);
-        self::assertEquals($parent->slug, $page->toViewModel()->parent());
+        self::assertInstanceOf(PageViewModel::class, $page->toViewModel()->parent());
+        self::assertEquals($parent->title, $page->toViewModel()->parent()->title());
     }
 
     /**

@@ -26,9 +26,16 @@ class PageViewModel extends ViewModel
         return $this->page->title;
     }
 
-    public function parent(): string | null
+    public function parent(): PageViewModel | null
     {
-        return $this->page->parent;
+        // @TODO: cache it
+        $parent = Page::whereSlug($this->page->parent)->first();
+
+        if (is_null($parent)) {
+            return null;
+        }
+
+        return new PageViewModel($parent);
     }
 
     public function type(): string
@@ -43,16 +50,19 @@ class PageViewModel extends ViewModel
 
     public function content(): string | null
     {
+        // @TODO: cache it
         return Markdown::convert($this->page->content, config('cms.markdown.options', []));
     }
 
     public function excerpt(): string | null
     {
+        // @TODO: cache it
         return Markdown::convert($this->page->excerpt, config('cms.markdown.options', []));
     }
 
     public function slug(): string
     {
+        // @TODO: cache it
         $string = collect([$this->page->parent, ReservedSlug::toSlug($this->page->slug)])->join('/');
 
         return trim($string, '/');
@@ -79,6 +89,7 @@ class PageViewModel extends ViewModel
 
     public function coverImage(): ImageViewModel | null
     {
+        // @TODO: cache it
         $mediaCollectionName = $this->page
             ->getRegisteredMediaCollections()
             ->pluck('name')
