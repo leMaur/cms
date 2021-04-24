@@ -12,7 +12,8 @@ use Lemaur\Cms\Repositories\Contracts\Findable;
 class PageRepository implements Findable
 {
     public function __construct(private Page $page)
-    {}
+    {
+    }
 
     public function find(?string $slug = null): Page
     {
