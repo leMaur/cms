@@ -17,7 +17,7 @@ class ReservedSlugTest extends TestCase
     }
 
     /** @test */
-    public function it_gets_the_slug_associated_with_the_reserved_slug()
+    public function it_gets_the_slug_associated_with_the_reserved_slug(): void
     {
         $slug = ReservedSlug::toSlug('@home');
 
@@ -25,7 +25,7 @@ class ReservedSlugTest extends TestCase
     }
 
     /** @test */
-    public function it_returns_the_slug_itself_if_the_reserved_slug_is_not_found()
+    public function it_returns_the_slug_itself_if_the_reserved_slug_is_not_found(): void
     {
         $slug = ReservedSlug::toSlug('about');
 
@@ -33,7 +33,7 @@ class ReservedSlugTest extends TestCase
     }
 
     /** @test */
-    public function it_returns_the_reserved_value_by_slug()
+    public function it_returns_the_reserved_value_by_slug(): void
     {
         self::assertEquals('@home', ReservedSlug::toReserved('/'));
         self::assertEquals('@sitemap', ReservedSlug::toReserved('sitemap.xml'));

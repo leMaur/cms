@@ -46,8 +46,6 @@ class Page extends Model implements Sortable, HasMedia
     use SoftDeletes;
     use SortableTrait;
 
-    public const META_DESCRIPTION_LIMIT = 150; // @TODO: export to separate class
-
     protected $guarded = [];
 
     protected $casts = [

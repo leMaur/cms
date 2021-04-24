@@ -20,7 +20,7 @@ trait HasMetaDescription
         $metaDescription = (string) Str::of(strip_tags($html))
             ->replace("\n", ' ')
             ->trim()
-            ->limit(Page::META_DESCRIPTION_LIMIT - 3);
+            ->limit((int) config('cms.seo.meta_description_limit', 150) - 3);
 
         return (string) $this->extra_attributes->get('meta_description', $metaDescription);
     }

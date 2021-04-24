@@ -28,7 +28,7 @@ class PageControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_shows_nested_page()
+    public function it_shows_nested_page(): void
     {
         Page::factory()->published()->create(['slug' => 'blog']);
         Page::factory()->published()->create(['parent' => 'blog', 'slug' => 'article', 'content' => 'Once upon a time...']);
@@ -39,7 +39,7 @@ class PageControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_shows_a_third_level_nested_page()
+    public function it_shows_a_third_level_nested_page(): void
     {
         Page::factory()->published()->create(['slug' => 'first']);
         Page::factory()->published()->create(['parent' => 'first', 'slug' => 'second']);
@@ -51,7 +51,7 @@ class PageControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_shows_404_if_page_not_found()
+    public function it_shows_404_if_page_not_found(): void
     {
         $this->get('/page-not-found')->assertNotFound();
 
@@ -65,7 +65,7 @@ class PageControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_shows_meta_information()
+    public function it_shows_meta_information(): void
     {
         Storage::fake('local');
 
@@ -88,7 +88,7 @@ class PageControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_shows_sitemap_index()
+    public function it_shows_sitemap_index(): void
     {
         collect([
             ['title' => 'Welcome', 'slug' => ReservedSlug::HOMEPAGE],
@@ -123,7 +123,7 @@ class PageControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_shows_the_given_sitemap()
+    public function it_shows_the_given_sitemap(): void
     {
         Storage::fake('local');
 

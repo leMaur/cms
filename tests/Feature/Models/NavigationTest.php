@@ -11,7 +11,7 @@ use Lemaur\Cms\Tests\TestCase;
 class NavigationTest extends TestCase
 {
     /** @test */
-    public function it_may_belongs_to_a_page()
+    public function it_may_belongs_to_a_page(): void
     {
         $page = Page::factory()->create();
 
@@ -20,15 +20,15 @@ class NavigationTest extends TestCase
         $navigation->type = Navigation::PRIMARY;
         $navigation->save();
 
-        $this->assertInstanceOf(BelongsTo::class, $navigation->page());
-        $this->assertInstanceOf(Page::class, $navigation->page);
+        self::assertInstanceOf(BelongsTo::class, $navigation->page());
+        self::assertInstanceOf(Page::class, $navigation->page);
         $this->assertDatabaseHas('navigations', [
             'page_id' => $page->id, 'type' => Navigation::PRIMARY,
         ]);
     }
 
     /** @test */
-    public function it_may_has_a_single_image()
+    public function it_may_has_a_single_image(): void
     {
         $page = Page::factory()->create();
 

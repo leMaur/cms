@@ -11,18 +11,18 @@ use Lemaur\Cms\Tests\TestCase;
 class UserTest extends TestCase
 {
     /** @test */
-    public function it_may_has_pages()
+    public function it_may_has_pages(): void
     {
         $user = User::create(['email' => 'maurizio@example.com']);
         $user->pages()->create(['title' => 'My PageRepository']);
 
-        $this->assertInstanceOf(HasMany::class, $user->pages());
-        $this->assertInstanceOf(Collection::class, $user->pages);
-        $this->assertCount(1, $user->pages);
+        self::assertInstanceOf(HasMany::class, $user->pages());
+        self::assertInstanceOf(Collection::class, $user->pages);
+        self::assertCount(1, $user->pages);
 
         $user->pages()->create(['title' => 'Another PageRepository Too']);
 
-        $this->assertCount(2, $user->fresh()->pages);
-        $this->assertInstanceOf(Page::class, $user->pages->first());
+        self::assertCount(2, $user->fresh()->pages);
+        self::assertInstanceOf(Page::class, $user->pages->first());
     }
 }

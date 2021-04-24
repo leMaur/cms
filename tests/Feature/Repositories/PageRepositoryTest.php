@@ -56,7 +56,7 @@ class PageRepositoryTest extends TestCase
     {
         Page::factory()->published()->create(['slug' => ReservedSlug::HOMEPAGE]);
         $page = (new PageRepository(new Page()))->find();
-        $this->assertEquals(ReservedSlug::HOMEPAGE, $page->slug);
+        self::assertEquals(ReservedSlug::HOMEPAGE, $page->slug);
 
         $this->expectException(ModelNotFoundException::class);
         Page::factory()->create(['slug' => 'blog']);
