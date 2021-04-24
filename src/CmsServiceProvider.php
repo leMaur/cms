@@ -14,7 +14,7 @@ class CmsServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('laravel-cms')
+            ->name('cms')
             ->hasConfigFile()
             ->hasViews()
             ->hasRoutes('cms', 'social')

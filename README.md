@@ -12,7 +12,7 @@
 You can install the package via composer:
 
 ```bash
-composer require lemaur/laravel-cms
+composer require lemaur/cms
 ```
 
 Then you have to publish and run the migrations with:
