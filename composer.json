@@ -1,11 +1,11 @@
 {
-    "name": "lemaur/laravel-cms",
-    "description": "laravel-cms",
+    "name": "lemaur/cms",
+    "description": "cms",
     "keywords": [
         "lemaur",
-        "laravel-cms"
+        "cms"
     ],
-    "homepage": "https://github.com/lemaur/laravel-cms",
+    "homepage": "https://github.com/lemaur/cms",
     "license": "MIT",
     "authors": [
         {
