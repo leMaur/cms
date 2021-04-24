@@ -4,7 +4,6 @@ namespace Lemaur\Cms\Traits;
 
 use Illuminate\Support\Str;
 use Lemaur\Cms\Markdown;
-use Lemaur\Cms\Models\Page;
 
 trait HasMetaDescription
 {
