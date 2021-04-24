@@ -8,7 +8,8 @@ use Spatie\ViewModels\ViewModel;
 class TagViewModel extends ViewModel
 {
     public function __construct(private Tag $tag)
-    {}
+    {
+    }
 
     public function name(): string
     {
