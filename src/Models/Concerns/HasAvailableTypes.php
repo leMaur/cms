@@ -8,7 +8,7 @@ trait HasAvailableTypes
     {
         // @TODO: cache it
         return static::distinct()
-            ->select(['type'])
+            ->select('type')
             ->orderBy('type', 'asc')
             ->get()
             ->pluck('type')

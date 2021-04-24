@@ -16,12 +16,12 @@ class ImageViewModel extends ViewModel
         return $this->media->getFullUrl($conversion);
     }
 
-    public function alt(): string | null
+    public function alt(): ?string
     {
         return $this->media->getCustomProperty('alt', null);
     }
 
-    public function caption(): string | null
+    public function caption(): ?string
     {
         return $this->media->getCustomProperty('caption', null);
     }

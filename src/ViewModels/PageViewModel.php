@@ -48,13 +48,13 @@ class PageViewModel extends ViewModel
         return $this->page->layout;
     }
 
-    public function content(): string | null
+    public function content(): ?string
     {
         // @TODO: cache it
         return Markdown::convert($this->page->content, config('cms.markdown.options', []));
     }
 
-    public function excerpt(): string | null
+    public function excerpt(): ?string
     {
         // @TODO: cache it
         return Markdown::convert($this->page->excerpt, config('cms.markdown.options', []));

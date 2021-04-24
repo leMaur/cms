@@ -26,9 +26,7 @@ class NavigationViewModelTest extends TestCase
     /** @test */
     public function it_has_name(): void
     {
-        $viewModel = new NavigationViewModel($this->navi);
-
-        self::assertEquals('About', $viewModel->name());
+        self::assertEquals('About', $this->navi->toViewModel()->name());
     }
 
     /** @test */
@@ -36,17 +34,13 @@ class NavigationViewModelTest extends TestCase
     {
         $navi = Navigation::factory()->forPage(['title' => 'About'])->create();
 
-        $viewModel = new NavigationViewModel($navi);
-
-        self::assertEquals('About', $viewModel->name());
+        self::assertEquals('About', $navi->toViewModel()->name());
     }
 
     /** @test */
     public function it_has_url(): void
     {
-        $viewModel = new NavigationViewModel($this->navi);
-
-        self::assertEquals('http://localhost/about', $viewModel->url());
+        self::assertEquals('http://localhost/about', $this->navi->toViewModel()->url());
     }
 
     /** @test */
@@ -54,9 +48,7 @@ class NavigationViewModelTest extends TestCase
     {
         $navi = Navigation::factory()->forPage(['slug' => 'about'])->create();
 
-        $viewModel = new NavigationViewModel($navi);
-
-        self::assertEquals('http://localhost/about', $viewModel->url());
+        self::assertEquals('http://localhost/about', $navi->toViewModel()->url());
     }
 
     /** @test */
@@ -64,9 +56,7 @@ class NavigationViewModelTest extends TestCase
     {
         Storage::fake('local');
 
-        $viewModel = new NavigationViewModel($this->navi);
-
-        self::assertNull($viewModel->image());
+        self::assertNull($this->navi->toViewModel()->image());
 
         $this->navi
             ->addMedia(UploadedFile::fake()->image('photo1.jpg'))

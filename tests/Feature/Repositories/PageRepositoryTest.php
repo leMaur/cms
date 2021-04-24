@@ -16,7 +16,7 @@ class PageRepositoryTest extends TestCase
     /** @test */
     public function it_returns_the_homepage_if_slug_is_not_passed(): void
     {
-        // Homepage will be always visible, guests or authenticated users.
+        // Homepage will be always visible. For guests or authenticated users.
         Page::factory()->create(['slug' => ReservedSlug::HOMEPAGE]);
 
         $page = (new PageRepository(new Page()))->find();
@@ -69,13 +69,13 @@ class PageRepositoryTest extends TestCase
         Page::factory()->published()->create(['slug' => ReservedSlug::HOMEPAGE]);
 
         $page = (new PageRepository(new Page()))->find();
-        $this->assertEquals(ReservedSlug::HOMEPAGE, $page->slug);
+        self::assertEquals(ReservedSlug::HOMEPAGE, $page->slug);
 
         Auth::login(User::create(['email' => 'me@example.com']));
 
         Page::factory()->create(['slug' => 'blog']);
 
         $page = (new PageRepository(new Page()))->find('blog');
-        $this->assertEquals('blog', $page->slug);
+        self::assertEquals('blog', $page->slug);
     }
 }

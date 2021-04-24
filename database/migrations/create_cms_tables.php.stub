@@ -11,12 +11,12 @@ class CreateCmsTables extends Migration
         Schema::create((string) config('cms.pages.table'), function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained((string) config('cms.users.table'))->cascadeOnDelete(); // index
-            $table->string('parent')->nullable(); // index?
-            $table->string('slug')->unique(); // index?
+            $table->string('parent')->nullable()->index(); // index
+            $table->string('slug')->unique(); // index
             $table->string('title');
             $table->longText('content')->nullable();
             $table->string('type')->default('page')->index(); // index
-            $table->string('layout')->default('basic'); // index?
+            $table->string('layout')->default('basic')->index(); // index
             $table->schemalessAttributes('extra_attributes');
             $table->integer('order_column')->nullable()->index(); // index
             $table->timestampsTz();
@@ -27,7 +27,7 @@ class CreateCmsTables extends Migration
         Schema::create((string) config('cms.navigations.table'), function (Blueprint $table) {
             $table->id();
             $table->foreignId('page_id')->nullable()->constrained((string) config('cms.pages.table'))->cascadeOnDelete();
-            $table->string('name')->nullable();
+            $table->string('name')->nullable()->index(); // index
             $table->string('url')->nullable();
             $table->string('type')->nullable()->index(); // index
             $table->integer('order_column')->nullable()->index(); // index
