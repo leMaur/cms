@@ -9,7 +9,8 @@ use Lemaur\Cms\Repositories\Contracts\Findable;
 class SocialRepository implements Findable
 {
     public function __construct(private Navigation $navigation)
-    {}
+    {
+    }
 
     public function find(?string $slug = null): Navigation
     {
