@@ -3,6 +3,8 @@
 namespace Lemaur\Cms\ViewModels;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use Lemaur\Cms\Markdown;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Models\ReservedSlug;
@@ -29,11 +31,11 @@ class PageViewModel extends ViewModel
     public function parent(): ?PageViewModel
     {
         // @TODO: cache it
-        $parent = Page::whereSlug($this->page->parent)->first();
-
-        if (is_null($parent)) {
+        if (is_null($this->page->parent)) {
             return null;
         }
+
+        $parent = Page::where('slug', $this->page->parent)->first();
 
         return new PageViewModel($parent);
     }
@@ -77,7 +79,12 @@ class PageViewModel extends ViewModel
     {
         // @TODO: cache it
         $pages = Page::where('parent', $this->page->slug)
-            ->latestPublished()
+            ->when(Auth::guest(), function (Builder $query) {
+                $query
+                    ->onlyPublished()
+                    ->latestPublished();
+            })
+            ->latest('updated_at')
             ->paginate($page, $perPage);
 
         if (is_null($pages) || $pages->count() === 0) {
