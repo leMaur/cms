@@ -20,6 +20,7 @@ class PublishCommand extends Command
         $this->copyFiles($filesystem, [
             __DIR__.'/../Console/stubs/database/seeders/PageSeeder.php.stub' => base_path('database/seeders/PageSeeder.php'),
             __DIR__.'/../Console/stubs/database/seeders/NavigationSeeder.php.stub' => base_path('database/seeders/NavigationSeeder.php'),
+            __DIR__.'/../Console/stubs/database/seeders/DatabaseSeeder.php.stub' => base_path('database/seeders/DatabaseSeeder.php'),
         ]);
 
         return 0;
