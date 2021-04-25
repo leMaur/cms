@@ -15,9 +15,16 @@ return [
             'separator' => env('CMS_SEO_TITLE_SEPARATOR', '·'),
             'limit' => env('CMS_SEO_TITLE_LIMIT', 80),
         ],
+        'opengraph' => [
+            'enable' => env('CMS_SEO_OPENGRAPH_ENABLE', true),
+        ],
         'twitter' => [
+            'enable' => env('CMS_SEO_TWITTER_ENABLE', true),
             'card' => env('CMS_SEO_TWITTER_CARD', 'summary'),
             'site' => env('CMS_SEO_TWITTER_SITE', null),
+        ],
+        'schema_org' => [
+            'enable' => env('CMS_SEO_SCHEMA_ORG_ENABLE', true),
         ],
         'sitemap' => [
             'frequency' => \Spatie\Sitemap\Tags\Url::CHANGE_FREQUENCY_YEARLY,

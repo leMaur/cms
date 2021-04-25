@@ -4,8 +4,19 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {!! app('seotools.metatags')->generate() !!}
-        {!! app('seotools.opengraph')->generate() !!}
-        {!! app('seotools.twitter')->generate() !!}
+
+        @if((bool) config('cms.seo.opengraph.enable'))
+            {!! app('seotools.opengraph')->generate() !!}
+        @endif
+
+        @if((bool) config('cms.seo.twitter.enable'))
+            {!! app('seotools.twitter')->generate() !!}
+        @endif
+
+        @if((bool) config('cms.seo.schema_org.enable'))
+            {{-- @TODO: add schema org --}}
+        @endif
+
         <!-- Fonts -->
         <!-- Favicon -->
         <!-- Styles -->
