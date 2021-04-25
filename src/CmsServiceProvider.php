@@ -37,9 +37,9 @@ class CmsServiceProvider extends PackageServiceProvider
         $now = Carbon::now();
 
         $migrationFileNames = [
-            'create_cms_tables' => '/../database/migrations/create_cms_tables.php.stub',
-            'create_tag_tables' => '/../vendor/spatie/laravel-tags/database/migrations/create_tag_tables.php.stub',
             'create_media_table' => '/../vendor/spatie/laravel-medialibrary/database/migrations/create_media_table.php.stub',
+            'create_tag_tables' => '/../vendor/spatie/laravel-tags/database/migrations/create_tag_tables.php.stub',
+            'create_cms_tables' => '/../database/migrations/create_cms_tables.php.stub',
         ];
 
         foreach ($migrationFileNames as $migrationFileName => $migrationFilePath) {
