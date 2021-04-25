@@ -15,7 +15,7 @@ You can install the package via composer:
 composer require lemaur/cms
 ```
 
-Then you have to publish and run the migrations with:
+You can publish and run the migrations with:
 
 ```bash
 php artisan vendor:publish --provider="Lemaur\Cms\CmsServiceProvider" --tag="cms-migrations"
@@ -39,7 +39,7 @@ You can publish views with:
 php artisan vendor:publish --provider="Lemaur\Cms\CmsServiceProvider" --tag="cms-views"
 ```
 
-### Apply a sensible default:
+### Apply a sensible default
 
 Add `domain` to your "config/app.php". I advise you to append it after `asset_url`. 
 ```
@@ -69,7 +69,20 @@ APP_URL=https://${APP_DOMAIN}
 CMS_DOMAIN=${APP_DOMAIN}
 #NOVA_DOMAIN_NAME=nova.${APP_DOMAIN} # <- this is optional. Uncomment if you use Laravel Nova and use the prefix you like.
 
+...
+
 SESSION_DOMAIN=.${APP_DOMAIN}
+```
+
+### Increase security
+
+Change values of `encrypt` and `same_site` in your config/session.php
+```bash
+'encrypt' => true, // <= automatically encrypt your cookies
+
+...
+
+'same_site' => 'strict', // <= the cookie will not be sent along with requests initiated by third party websites
 ```
 
 ## Testing
