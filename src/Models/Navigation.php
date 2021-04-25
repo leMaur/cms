@@ -31,6 +31,8 @@ class Navigation extends Model implements Sortable, HasMedia
         'image' => 'single_image',
     ];
 
+    protected string $slugFrom = 'name';
+
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);

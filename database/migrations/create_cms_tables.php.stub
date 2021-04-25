@@ -28,7 +28,7 @@ class CreateCmsTables extends Migration
             $table->id();
             $table->foreignId('page_id')->nullable()->constrained((string) config('cms.pages.table'))->cascadeOnDelete();
             $table->string('name')->nullable();
-            $table->string('slug')->unique(); // index
+            $table->string('slug')->nullable()->unique(); // index
             $table->string('url')->nullable();
             $table->string('type')->nullable()->index(); // index
             $table->integer('order_column')->nullable()->index(); // index

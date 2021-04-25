@@ -60,6 +60,8 @@ class Page extends Model implements Sortable, HasMedia
         'cover' => ['meta'],
     ];
 
+    protected string $slugFrom = 'title';
+
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
