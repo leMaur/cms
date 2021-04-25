@@ -5,6 +5,7 @@ namespace Lemaur\Cms;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Str;
+use Lemaur\Cms\Console\PublishCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Spatie\MediaLibrary\MediaCollections\MediaCollection;
@@ -18,7 +19,7 @@ class CmsServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasViews()
             ->hasRoutes('cms', 'social')
-        ;
+            ->hasCommand(PublishCommand::class);
     }
 
     public function bootingPackage(): void
