@@ -3,6 +3,7 @@
 namespace Lemaur\Cms\Models\Concerns;
 
 use Spatie\Sitemap\Tags\Url;
+use function GuzzleHttp\Psr7\str;
 
 trait HasSitemapExtraAttributes
 {
@@ -27,7 +28,7 @@ trait HasSitemapExtraAttributes
 
     public function getSitemapFrequencyAttribute(): ?string
     {
-        return $this->extra_attributes->get('sitemap_frequency', Url::CHANGE_FREQUENCY_YEARLY);
+        return $this->extra_attributes->get('sitemap_frequency', (string) config('cms.seo.sitemap.frequency'));
     }
 
     public function setSitemapPriorityAttribute(float $value): void
@@ -39,6 +40,6 @@ trait HasSitemapExtraAttributes
 
     public function getSitemapPriorityAttribute(): ?float
     {
-        return $this->extra_attributes->get('sitemap_priority', 0.8);
+        return $this->extra_attributes->get('sitemap_priority', (float) config('cms.seo.sitemap.priority'));
     }
 }

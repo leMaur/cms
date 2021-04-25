@@ -24,8 +24,10 @@ php artisan migrate
 
 You can use the route with:
 
+Open `routes/web.php` and replace the content with:
 ```blade
-Route::cms('/', 'cms');
+Route::social('social');
+Route::cms('cms', '/');
 ```
 
 You can publish the config file with:

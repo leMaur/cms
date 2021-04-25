@@ -11,13 +11,17 @@ return [
     'seo' => [
         'meta_description_limit' => env('CMS_SEO_META_DESCRIPTION_LIMIT', 150),
         'title' => [
-            'prefix' => env('CMS_SEO_TITLE_PREFIX', 'Cms'),
+            'prefix' => env('CMS_SEO_TITLE_PREFIX', null),
             'separator' => env('CMS_SEO_TITLE_SEPARATOR', '·'),
             'limit' => env('CMS_SEO_TITLE_LIMIT', 80),
         ],
         'twitter' => [
             'card' => env('CMS_SEO_TWITTER_CARD', 'summary'),
             'site' => env('CMS_SEO_TWITTER_SITE', null),
+        ],
+        'sitemap' => [
+            'frequency' => \Spatie\Sitemap\Tags\Url::CHANGE_FREQUENCY_YEARLY,
+            'priority' => 0.5,
         ],
     ],
 
@@ -77,7 +81,7 @@ return [
     */
 
     'reserved_domain_prefixes' => [
-        'nova',
+//        'nova',
 //        'backend',
 //        'dashboard',
     ],
