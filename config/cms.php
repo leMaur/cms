@@ -12,7 +12,7 @@ return [
         'meta_description_limit' => env('CMS_SEO_META_DESCRIPTION_LIMIT', 150),
         'title' => [
             'prefix' => env('CMS_SEO_TITLE_PREFIX', null),
-            'separator' => env('CMS_SEO_TITLE_SEPARATOR', '·'),
+            'separator' => env('CMS_SEO_TITLE_SEPARATOR', ' · '),
             'limit' => env('CMS_SEO_TITLE_LIMIT', 80),
         ],
         'opengraph' => [

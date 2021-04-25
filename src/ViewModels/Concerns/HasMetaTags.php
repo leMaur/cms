@@ -71,14 +71,12 @@ trait HasMetaTags
 
     public function pageTitle(): string
     {
-        $separator = config('cms.seo.title.separator', null);
-
         return collect([
-            config('cms.seo.title.prefix', null),
-            $separator,
-            $this->page->meta_title,
-            $separator,
-            config('app.name'),
-        ])->filter()->join(' ');
+                config('cms.seo.title.prefix', null),
+                $this->page->meta_title,
+                config('app.name'),
+            ])
+            ->filter()
+            ->join(config('cms.seo.title.separator', ' '));
     }
 }
