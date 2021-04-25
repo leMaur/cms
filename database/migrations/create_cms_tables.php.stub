@@ -35,7 +35,7 @@ class CreateCmsTables extends Migration
         });
 
         Schema::table('tags', function (Blueprint $table) {
-            $table->schemalessAttributes('extra_attributes')->after('order_column');
+            $table->schemalessAttributes('extra_attributes')->after('type');
         });
     }
 }
