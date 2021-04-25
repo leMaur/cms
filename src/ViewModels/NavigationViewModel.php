@@ -17,6 +17,12 @@ class NavigationViewModel extends ViewModel
             ?? $this->navigation->page->toViewModel()->title();
     }
 
+    public function slug(): string
+    {
+        return $this->navigation->slug
+            ?? $this->navigation->page->toViewModel()->slug();
+    }
+
     public function url(): string
     {
         return $this->navigation->url

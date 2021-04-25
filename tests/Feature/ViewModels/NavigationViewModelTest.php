@@ -19,6 +19,7 @@ class NavigationViewModelTest extends TestCase
 
         $this->navi = Navigation::factory()->create([
             'name' => 'About',
+            'slug' => 'about',
             'url' => 'http://localhost/about',
         ]);
     }
@@ -27,6 +28,12 @@ class NavigationViewModelTest extends TestCase
     public function it_has_name(): void
     {
         self::assertEquals('About', $this->navi->toViewModel()->name());
+    }
+
+    /** @test */
+    public function it_has_slug(): void
+    {
+        self::assertEquals('about', $this->navi->toViewModel()->slug());
     }
 
     /** @test */
