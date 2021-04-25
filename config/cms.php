@@ -89,8 +89,8 @@ return [
 
     'reserved_domain_prefixes' => [
 //        'nova',
-//        'backend',
-//        'dashboard',
+        'backend',
+        'dashboard',
     ],
 
 

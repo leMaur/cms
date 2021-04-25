@@ -31,7 +31,7 @@ class PageRepository implements Findable
     private function findBySlug(string $slug): Page
     {
         if (ReservedSlug::isReserved($slug)) {
-            return $this->page->where('slug', $slug)->firstOrFail();
+            return Page::where('slug', $slug)->firstOrFail();
         }
 
         $slugs = Str::of($slug)->explode('/')->toBase();
@@ -40,7 +40,7 @@ class PageRepository implements Findable
         $parent = $slugs->count() === 0 ? null : $slugs->join('/');
 
         // @TODO: cache it
-        return $this->page
+        return Page::query()
             ->where('slug', $slug)
             ->when($parent, function (Builder $query) use ($parent) {
                 $query->where('parent', $parent);

@@ -8,8 +8,8 @@ use Lemaur\Cms\Repositories\SocialRepository;
 
 class SocialController
 {
-    public function __invoke(SocialRepository $socialRepo, string $social): RedirectResponse
+    public function __invoke(SocialRepository $social, string $slug): RedirectResponse
     {
-        return Redirect::away($socialRepo->find($social)->url);
+        return Redirect::away($social->find($slug)->url);
     }
 }

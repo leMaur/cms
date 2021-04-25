@@ -4,7 +4,7 @@
     <loc>http://localhost</loc>
     <lastmod>2016-01-01T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>http://localhost/blog</loc>
@@ -22,13 +22,13 @@
     <loc>http://localhost/about</loc>
     <lastmod>2016-01-01T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>http://localhost/contact</loc>
     <lastmod>2016-01-01T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>http://localhost/biophilic-design-guide</loc>
