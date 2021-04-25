@@ -87,6 +87,15 @@ Change values of `encrypt` and `same_site` in your config/session.php
 'same_site' => 'strict', // <= the cookie will not be sent along with requests initiated by third party websites
 ```
 
+### Need some pages to start with
+
+```bash
+php artisan db:seed
+```
+
+### Need to generate "Terms of service" and "Privacy Policy"
+You can find a good starting point at [getterms.io](https://getterms.io/). They offer T.o.S. for small websites for free.
+
 ## Testing
 
 ```bash
