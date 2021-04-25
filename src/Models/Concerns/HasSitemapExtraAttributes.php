@@ -3,7 +3,6 @@
 namespace Lemaur\Cms\Models\Concerns;
 
 use Spatie\Sitemap\Tags\Url;
-use function GuzzleHttp\Psr7\str;
 
 trait HasSitemapExtraAttributes
 {
