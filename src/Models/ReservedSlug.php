@@ -21,10 +21,10 @@ class ReservedSlug
         // @TODO: cache it?
         if (strlen($slug) > 1) {
             $shortenedSlug = Str::of($slug)->explode('/')->last();
-            $shortenedSlug = Str::of($shortenedSlug)->explode('.')->first();
+            $shortenedSlug = Str::of($shortenedSlug)->explode('.')->first(); // ignore extension
 
             $collection = collect(static::$slugs)->filter(function ($item) use ($shortenedSlug) {
-                $shortenedItem = Str::of($item)->explode('.')->first();
+                $shortenedItem = Str::of($item)->explode('.')->first(); // ignore extension
 
                 return (bool) preg_match(sprintf('|%s|', $shortenedItem), $shortenedSlug);
             });

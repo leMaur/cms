@@ -29,7 +29,7 @@ class NavigationViewModel extends ViewModel
             ?? $this->navigation->page->toViewModel()->url();
     }
 
-    public function image(string $collection = 'navigation.image'): ImageViewModel | null
+    public function image(string $collection = 'navigation.image'): ?ImageViewModel
     {
         $media = $this->navigation->getFirstMedia($collection);
 

@@ -26,7 +26,7 @@ class PageViewModel extends ViewModel
         return $this->page->title;
     }
 
-    public function parent(): PageViewModel | null
+    public function parent(): ?PageViewModel
     {
         // @TODO: cache it
         $parent = Page::whereSlug($this->page->parent)->first();
@@ -73,7 +73,7 @@ class PageViewModel extends ViewModel
         return url($this->slug());
     }
 
-    public function children(int $page = 1, int $perPage = 15): LengthAwarePaginator | null
+    public function children(int $page = 1, int $perPage = 15): ?LengthAwarePaginator
     {
         // @TODO: cache it
         $pages = Page::where('parent', $this->page->slug)
@@ -87,7 +87,7 @@ class PageViewModel extends ViewModel
         return $pages;
     }
 
-    public function coverImage(): ImageViewModel | null
+    public function coverImage(): ?ImageViewModel
     {
         // @TODO: cache it
         $mediaCollectionName = $this->page

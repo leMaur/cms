@@ -11,10 +11,6 @@ use Lemaur\Cms\Repositories\Contracts\Findable;
 
 class PageRepository implements Findable
 {
-    public function __construct(private Page $page)
-    {
-    }
-
     public function find(?string $slug = null): Page
     {
         if (ReservedSlug::list()->keys()->contains($slug)) {
@@ -31,6 +27,7 @@ class PageRepository implements Findable
     private function findBySlug(string $slug): Page
     {
         if (ReservedSlug::isReserved($slug)) {
+            // @TODO: cache it
             return Page::where('slug', $slug)->firstOrFail();
         }
 
@@ -48,7 +45,6 @@ class PageRepository implements Findable
             ->when(Auth::guest(), function (Builder $query) {
                 $query->onlyPublished();
             })
-            ->orderBy('id')
             ->firstOrFail();
     }
 }
