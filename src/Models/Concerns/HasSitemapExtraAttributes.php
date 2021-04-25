@@ -6,20 +6,19 @@ use Spatie\Sitemap\Tags\Url;
 
 trait HasSitemapExtraAttributes
 {
+    public static array $availableFrequencies = [
+        Url::CHANGE_FREQUENCY_ALWAYS,
+        Url::CHANGE_FREQUENCY_HOURLY,
+        Url::CHANGE_FREQUENCY_DAILY,
+        Url::CHANGE_FREQUENCY_WEEKLY,
+        Url::CHANGE_FREQUENCY_MONTHLY,
+        Url::CHANGE_FREQUENCY_YEARLY,
+        Url::CHANGE_FREQUENCY_NEVER,
+    ];
+
     public function setSitemapFrequencyAttribute(string $value): void
     {
-        // @TODO: export this list to a separate class
-        $availableFrequencies = [
-            Url::CHANGE_FREQUENCY_ALWAYS,
-            Url::CHANGE_FREQUENCY_HOURLY,
-            Url::CHANGE_FREQUENCY_DAILY,
-            Url::CHANGE_FREQUENCY_WEEKLY,
-            Url::CHANGE_FREQUENCY_MONTHLY,
-            Url::CHANGE_FREQUENCY_YEARLY,
-            Url::CHANGE_FREQUENCY_NEVER,
-        ];
-
-        if (! in_array($value, $availableFrequencies, true)) {
+        if (! in_array($value, self::$availableFrequencies, true)) {
             return;
         }
 
