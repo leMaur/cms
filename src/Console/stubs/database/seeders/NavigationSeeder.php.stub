@@ -1,0 +1,40 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Lemaur\Cms\Models\Navigation;
+use Lemaur\Cms\Models\Page;
+
+class NavigationSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $navigations = collect([
+
+            /** Primary */
+            ['page_id' => Page::where('slug', 'about')->first()->id, 'type' => Navigation::PRIMARY],
+            ['page_id' => Page::where('slug', 'contact')->first()->id, 'type' => Navigation::PRIMARY],
+
+            /** Secondary */
+            ['page_id' => Page::where('slug', 'about')->first()->id, 'type' => Navigation::SECONDARY],
+            ['page_id' => Page::where('slug', 'contact')->first()->id, 'type' => Navigation::SECONDARY],
+            ['page_id' => Page::where('slug', 'cookie-policy')->first()->id, 'type' => Navigation::SECONDARY],
+            ['page_id' => Page::where('slug', 'privacy-policy')->first()->id, 'type' => Navigation::SECONDARY],
+            ['page_id' => Page::where('slug', 'terms-of-service')->first()->id, 'type' => Navigation::SECONDARY],
+            ['name' => 'RSS', 'url' => '/', 'type' => Navigation::SECONDARY],
+
+            /** Social */
+            ['name' => 'Instagram', 'url' => 'https://www.instagram.com', 'type' => Navigation::SOCIAL],
+            ['name' => 'Twitter', 'url' => 'https://twitter.com', 'type' => Navigation::SOCIAL],
+            ['name' => 'Facebook', 'url' => 'https://www.facebook.com', 'type' => Navigation::SOCIAL],
+        ]);
+
+        $navigations->each(fn ($navigation) => Navigation::create(collect($navigation)->toArray()));
+    }
+}

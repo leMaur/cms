@@ -1,0 +1,32 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Lemaur\Cms\Models\Page;
+use Lemaur\Cms\Models\ReservedSlug;
+
+class PageSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $pages = collect([
+            ['title' => 'Welcome', 'slug' => ReservedSlug::HOMEPAGE],
+
+            ['title' => 'About'],
+            ['title' => 'Contact'],
+            ['title' => 'Privacy Policy'],
+            ['title' => 'Cookie Policy'],
+            ['title' => 'Terms of Service'],
+
+            ['title' => 'Sitemap', 'slug' => ReservedSlug::SITEMAP, 'layout' => 'sitemap_index'],
+        ]);
+
+        $pages->each(fn ($page) => Page::create(collect($page)->merge(['published_at' => now()])->toArray()));
+    }
+}
