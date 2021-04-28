@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lemaur\Cms\Tests\Feature\Traits;
 
 use Illuminate\Database\Eloquent\Model;

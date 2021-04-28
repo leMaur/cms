@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lemaur\Cms\Tests\Unit;
 
 use Illuminate\Support\Facades\Route;

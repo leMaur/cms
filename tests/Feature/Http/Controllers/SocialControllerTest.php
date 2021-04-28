@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lemaur\Cms\Tests\Feature\Http\Controllers;
 
 use Lemaur\Cms\Models\Navigation;

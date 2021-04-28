@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lemaur\Cms\ViewModels;
 
 use Spatie\MediaLibrary\MediaCollections\Models\Media;

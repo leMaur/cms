@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lemaur\Cms;
 
 use League\CommonMark\EnvironmentInterface;

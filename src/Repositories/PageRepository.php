@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lemaur\Cms\Repositories;
 
 use Illuminate\Database\Eloquent\Builder;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lemaur\Cms\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
