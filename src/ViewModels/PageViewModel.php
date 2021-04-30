@@ -85,7 +85,8 @@ class PageViewModel extends ViewModel
     {
         // @TODO: cache it
         $pages = Page::where('parent', $this->page->slug)
-            ->when(Auth::guest(),
+            ->when(
+                Auth::guest(),
                 fn (Builder $query) => $query->onlyPublished()->latestPublished(),
                 fn (Builder $query) => $query->latest('updated_at')
             )
