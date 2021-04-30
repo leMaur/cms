@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Lemaur\Cms\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
+use function Illuminate\Events\queueable;
 
 trait HasGlobalScopeType
 {
@@ -14,6 +15,14 @@ trait HasGlobalScopeType
             $builder->withType(self::TYPE)->reorder()->ordered();
         });
 
+        /*
+         * Even if its totally fine registering model events in a closure
+         * (see https://laravel.com/docs/8.x/eloquent#events-using-closures),
+         * avoid this technique if you plan to use Laravel Octane.
+         *
+         * Instead move this snippet in its own observer class.
+         * (see https://laravel.com/docs/8.x/eloquent#observers)
+         */
         static::saving(function ($model) {
             $model->type = self::TYPE;
         });
