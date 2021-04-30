@@ -20,7 +20,7 @@ trait HasParent
         }
 
         if (is_string($value)) {
-            $ancestor = self::where('slug', $value)->first()?->parent;
+            $ancestor = self::firstWhere('slug', $value)?->parent;
 
             $slug->push($ancestor);
             $slug->push($value);

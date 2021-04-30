@@ -37,7 +37,11 @@ class PageViewModel extends ViewModel
             return null;
         }
 
-        $parent = Page::where('slug', $this->page->parent)->first();
+        $parent = Page::firstWhere('slug', $this->page->parent);
+
+        if (is_null($parent)) {
+            return null;
+        }
 
         return new PageViewModel($parent);
     }
@@ -81,12 +85,10 @@ class PageViewModel extends ViewModel
     {
         // @TODO: cache it
         $pages = Page::where('parent', $this->page->slug)
-            ->when(Auth::guest(), function (Builder $query) {
-                $query
-                    ->onlyPublished()
-                    ->latestPublished();
-            })
-            ->latest('updated_at')
+            ->when(Auth::guest(),
+                fn (Builder $query) => $query->onlyPublished()->latestPublished(),
+                fn (Builder $query) => $query->latest('updated_at')
+            )
             ->paginate($page, $perPage);
 
         if (is_null($pages) || $pages->count() === 0) {

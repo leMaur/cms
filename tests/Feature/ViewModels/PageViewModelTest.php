@@ -9,6 +9,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Storage;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Models\ReservedSlug;
+use Lemaur\Cms\Tests\Feature\User;
 use Lemaur\Cms\Tests\TestCase;
 use Lemaur\Cms\ViewModels\ImageViewModel;
 use Lemaur\Cms\ViewModels\PageViewModel;
@@ -63,9 +64,9 @@ class PageViewModelTest extends TestCase
             [null, ReservedSlug::SITEMAP, 'sitemap.xml'],
             [null, 'blog', 'blog'],
             ['blog', 'article', 'blog/article'],
-            [null, 'services-shop', 'services-shop'],
-            ['services-shop', 'ebook', 'services-shop/ebook'],
-            ['services-shop/ebook', 'biophilia', 'services-shop/ebook/biophilia'],
+            [null, 'shop', 'shop'],
+            ['shop', 'ebook', 'shop/ebook'],
+            ['shop/ebook', 'coding-with-laravel', 'shop/ebook/coding-with-laravel'],
         ];
     }
 
@@ -90,16 +91,39 @@ class PageViewModelTest extends TestCase
     }
 
     /** @test */
+    public function it_may_has_not_children(): void
+    {
+        $parent = Page::factory()->create();
+
+        self::assertNull($parent->toViewModel()->children());
+    }
+
+    /** @test */
     public function it_may_has_children(): void
     {
-        $parent = Page::factory()->create(['slug' => 'blog']);
-        self::assertNull($parent->toViewModel()->children());
+        $this->actingAs(User::create(['name' => 'John', 'email' => 'john@example.com']));
 
-        $children = Page::factory(5)->create(['parent' => 'blog']);
+        $parent = Page::factory()->published()->create(['slug' => 'blog']);
+        $drafts = Page::factory(5)->create(['parent' => 'blog']);
+        $published = Page::factory(5)->published()->create(['parent' => 'blog']);
 
-        self::assertInstanceOf(LengthAwarePaginator::class, $parent->toViewModel()->children());
+        self::assertInstanceOf(LengthAwarePaginator::class, $parent->fresh()->toViewModel()->children());
+        self::assertEquals(10, $parent->toViewModel()->children()->total());
+        self::assertNotContains($parent, $published);
+        self::assertNotContains($parent, $drafts);
+    }
+
+    /** @test */
+    public function it_may_has__only_published_children(): void
+    {
+        $parent = Page::factory()->published()->create(['slug' => 'blog']);
+        $drafts = Page::factory(5)->create(['parent' => 'blog']);
+        $published = Page::factory(5)->published()->create(['parent' => 'blog']);
+
+        self::assertInstanceOf(LengthAwarePaginator::class, $parent->fresh()->toViewModel()->children());
         self::assertEquals(5, $parent->toViewModel()->children()->total());
-        self::assertNotContains($parent, $children);
+        self::assertNotContains($parent, $published);
+        self::assertNotContains($parent, $drafts);
     }
 
     /** @test */

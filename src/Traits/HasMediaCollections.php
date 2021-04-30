@@ -67,7 +67,7 @@ trait HasMediaCollections
 
     private function getDimensionsFromAspectRatio(string $ratio, Media $media): array
     {
-        [$denominator, $numerator] = explode(':', $ratio, 2);
+        [$denominator, $numerator] = array_map('intval', explode(':', $ratio, 2));
 
         $method = $denominator > $numerator ? 'getHeightFromAspectRatio' : 'getWidthFromAspectRatio';
 

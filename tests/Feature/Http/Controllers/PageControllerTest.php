@@ -43,6 +43,8 @@ class PageControllerTest extends TestCase
     /** @test */
     public function it_shows_a_third_level_nested_page(): void
     {
+        $this->withoutExceptionHandling();
+
         Page::factory()->published()->create(['slug' => 'first']);
         Page::factory()->published()->create(['parent' => 'first', 'slug' => 'second']);
         Page::factory()->published()->create(['parent' => 'first/second', 'slug' => 'third', 'content' => 'Hello world!']);
