@@ -8,6 +8,7 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 
+/** @codeCoverageIgnore  */
 class PublishCommand extends Command
 {
     protected $signature = 'cms:install

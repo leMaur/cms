@@ -8,7 +8,7 @@ use Lemaur\Cms\Models\Tag;
 use Lemaur\Cms\Tests\TestCase;
 use Lemaur\Cms\Traits\HasGlobalScopeType;
 
-class HasTagOfTypeTest extends TestCase
+class HasGlobalScopeTypeTest extends TestCase
 {
     /** @test */
     public function it_add_a_global_scope(): void

@@ -14,6 +14,6 @@ trait HasType
             return $query;
         }
 
-        return $query->where('type', $type)->reorder()->ordered();
+        return $query->where('type', $type);
     }
 }

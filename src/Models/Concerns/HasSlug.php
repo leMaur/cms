@@ -16,10 +16,6 @@ trait HasSlug
 
     public function getSlugOptions(): SlugOptions
     {
-        if (! property_exists($this, 'slugFrom')) {
-            throw new InvalidArgumentException('Property "slugFrom" not defined.');
-        }
-
         return SlugOptions::create()
             ->generateSlugsFrom($this->slugFrom)
             ->saveSlugsTo('slug');
