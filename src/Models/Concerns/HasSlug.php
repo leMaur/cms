@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Lemaur\Cms\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
-use InvalidArgumentException;
 use Lemaur\Cms\Models\ReservedSlug;
 use Spatie\Sluggable\HasSlug as SpatieHasSlug;
 use Spatie\Sluggable\SlugOptions;
