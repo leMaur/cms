@@ -13,6 +13,7 @@ use Spatie\Tags\Tag as SpatieTag;
 class Tag extends SpatieTag implements HasMedia
 {
     public const FOREIGN_PIVOT_KEY = 'tag_id';
+    public const MORPH_TABLE_NAME = 'taggable';
 
     use HasMediaCollections;
     use HasSchemalessAttributes;
