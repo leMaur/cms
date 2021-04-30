@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Lemaur\Cms\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
-use function Illuminate\Events\queueable;
 
 trait HasGlobalScopeType
 {
