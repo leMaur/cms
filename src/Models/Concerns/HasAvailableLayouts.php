@@ -10,8 +10,7 @@ trait HasAvailableLayouts
     {
         // @TODO: cache it
         return static::distinct()
-            ->select('layout')
-            ->orderBy('layout', 'asc')
+            ->select('layout', 'order_column')
             ->get()
             ->pluck('layout')
             ->all();

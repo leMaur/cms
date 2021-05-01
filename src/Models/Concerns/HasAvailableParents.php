@@ -10,9 +10,8 @@ trait HasAvailableParents
     {
         // @TODO: cache it
         return static::distinct()
-            ->select('slug')
+            ->select('slug', 'order_column')
             ->whereNull('parent')
-            ->orderBy('slug', 'asc')
             ->get()
             ->pluck('slug')
             ->all();
