@@ -96,7 +96,7 @@ If you plan to use Laravel Nova, you have to change the `path` on "config/nova.p
 
 ### Increase security
 
-Change values of `encrypt` and `same_site` in your config/session.php
+Change values of `encrypt` and `same_site` on your "config/session.php" file.
 ```bash
 'encrypt' => true, // <= automatically encrypt your cookies
 
