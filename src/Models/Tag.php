@@ -34,11 +34,17 @@ class Tag extends SpatieTag implements HasMedia
     protected array $mediaConfiguration = [
         'image' => 'single_image',
     ];
-    
+
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        
+
+        /**
+         * Since table name is guessed from the model name.
+         * By explicitly define it in the constructor,
+         * we can extend the class without setting
+         * its name on each extended class.
+         */
         $this->setTable((string) config('cms.tags.table'));
     }
 
