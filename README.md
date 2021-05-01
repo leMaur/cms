@@ -15,6 +15,12 @@ You can install the package via composer:
 composer require lemaur/cms
 ```
 
+You can launch the installation:
+
+```bash
+php artisan cms:install --force
+```
+
 You can publish and run the migrations with:
 
 ```bash
