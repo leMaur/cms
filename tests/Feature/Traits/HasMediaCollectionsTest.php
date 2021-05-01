@@ -7,7 +7,6 @@ namespace Lemaur\Cms\Tests\Feature\Traits;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use InvalidArgumentException;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Tests\TestCase;
 use Lemaur\Cms\Traits\HasMediaCollections;
@@ -17,11 +16,11 @@ use Spatie\MediaLibrary\Support\ImageFactory;
 class HasMediaCollectionsTest extends TestCase
 {
     /** @test */
-    public function it_thrown_an_exception_if_property_is_not_set(): void
+    public function it_does_nothing_if_property_is_not_set(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $mediaCollections = (new TestModel())->getRegisteredMediaCollections();
 
-        (new TestModel())->getRegisteredMediaCollections();
+        self::assertCount(0, $mediaCollections);
     }
 
     /** @test */

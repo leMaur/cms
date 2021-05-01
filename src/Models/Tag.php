@@ -34,6 +34,13 @@ class Tag extends SpatieTag implements HasMedia
     protected array $mediaConfiguration = [
         'image' => 'single_image',
     ];
+    
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        
+        $this->setTable((string) config('cms.tags.table'));
+    }
 
     public function toViewModel(): TagViewModel
     {

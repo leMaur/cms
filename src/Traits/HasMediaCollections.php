@@ -47,7 +47,7 @@ trait HasMediaCollections
     {
         if ($this->mediaCollections === []) {
             if (! property_exists($this, 'mediaConfiguration')) {
-                throw new InvalidArgumentException('Property "mediaConfiguration" not defined.');
+                return;
             }
 
             $config = (array) config('cms.media', []);
