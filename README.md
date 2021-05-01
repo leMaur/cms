@@ -33,6 +33,8 @@ Route::cms('cms', '/');
 You can publish the config file with:
 ```bash
 php artisan vendor:publish --provider="Lemaur\Cms\CmsServiceProvider" --tag="cms-config"
+
+# You also need this 3rd party configuration file.
 php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="config"
 ```
 
@@ -44,7 +46,7 @@ php artisan vendor:publish --provider="Lemaur\Cms\CmsServiceProvider" --tag="cms
 ### Apply a sensible default
 
 Add `domain` to your "config/app.php". I advise you to append it after `asset_url`. 
-```
+```php
     /*
     |--------------------------------------------------------------------------
     | Application URL
@@ -74,6 +76,22 @@ CMS_DOMAIN=${APP_DOMAIN}
 ...
 
 SESSION_DOMAIN=.${APP_DOMAIN}
+```
+
+If you plan to use Laravel Nova, you have to change the `path` on "config/nova.php" file to `'/'` instead of the original value `'/nova'`.
+```php
+    /*
+    |--------------------------------------------------------------------------
+    | Nova Path
+    |--------------------------------------------------------------------------
+    |
+    | This is the URI path where Nova will be accessible from. Feel free to
+    | change this path to anything you like. Note that this URI will not
+    | affect Nova's internal API routes which aren't exposed to users.
+    |
+    */
+
+    'path' => '/',
 ```
 
 ### Increase security
