@@ -19,16 +19,16 @@ trait HasMediaCollections
     public function registerMediaConversions(Media $media = null): void
     {
         if ($this->mediaConversions === []) {
-            $config = config('cms.media_conversions', []);
+            $config = (array) config('cms.media_conversions', []);
 
             foreach ($this->mediaConversionConfiguration ?? [] as $name => $key) {
                 foreach (Arr::wrap($key) as $configKey) {
-                    $mediaConfig = data_get($config, $configKey, []);
+                    $mediaConfig = (array) data_get($config, $configKey, []);
 
                     $width = (int) data_get($mediaConfig, 'width');
                     $height = (int) data_get($mediaConfig, 'height');
 
-                    if (! is_null($media) && data_get($mediaConfig, 'aspect_ratio', false)) {
+                    if (! is_null($media) && (bool) data_get($mediaConfig, 'aspect_ratio')) {
                         $ratio = (string) data_get($mediaConfig, 'aspect_ratio');
                         [$width, $height] = $this->getDimensionsFromAspectRatio($ratio, $media);
                     }
@@ -49,11 +49,11 @@ trait HasMediaCollections
                 throw new InvalidArgumentException('Property "mediaConfiguration" not defined.');
             }
 
-            $config = config('cms.media', []);
+            $config = (array) config('cms.media', []);
 
             foreach ($this->mediaConfiguration as $name => $key) {
                 $media = data_get($config, $key, []);
-                $onlyKeepLatest = data_get($media, 'only_keep_latest', null);
+                $onlyKeepLatest = data_get($media, 'only_keep_latest');
 
                 $this
                     ->addMediaCollection($this->getMediaCollectionName($name))
@@ -92,6 +92,6 @@ trait HasMediaCollections
     {
         $className = (string) Str::of(get_class($this))->lower()->explode('\\')->last();
 
-        return sprintf('%s.%s', $className, $name);
+        return sprintf('%s.%s', $className, Str::lower($name));
     }
 }

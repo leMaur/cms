@@ -6,7 +6,7 @@ namespace Lemaur\Cms\Traits;
 
 trait HasExcerpt
 {
-    public function setExcerptAttribute($value): void
+    public function setExcerptAttribute(?string $value): void
     {
         $this->extra_attributes->set('excerpt', $value);
     }
