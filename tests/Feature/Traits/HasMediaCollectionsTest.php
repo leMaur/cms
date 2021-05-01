@@ -7,9 +7,9 @@ namespace Lemaur\Cms\Tests\Feature\Traits;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Lemaur\Cms\Models\Concerns\HasMediaCollections;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Tests\TestCase;
-use Lemaur\Cms\Models\Concerns\HasMediaCollections;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\Support\ImageFactory;
 
