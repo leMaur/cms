@@ -6,7 +6,6 @@ namespace Lemaur\Cms\Traits;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use InvalidArgumentException;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\InteractsWithMedia as SpatieInteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\MediaCollection;
