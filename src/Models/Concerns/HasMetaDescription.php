@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Lemaur\Cms\Traits;
+namespace Lemaur\Cms\Models\Concerns;
 
 use Illuminate\Support\Str;
 use Lemaur\Cms\Markdown;

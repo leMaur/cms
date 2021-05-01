@@ -6,7 +6,7 @@ namespace Lemaur\Cms\Tests\Feature\Traits;
 
 use Lemaur\Cms\Models\Tag;
 use Lemaur\Cms\Tests\TestCase;
-use Lemaur\Cms\Traits\HasGlobalScopeType;
+use Lemaur\Cms\Models\Concerns\HasGlobalScopeType;
 
 class HasGlobalScopeTypeTest extends TestCase
 {

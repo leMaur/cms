@@ -9,7 +9,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Tests\TestCase;
-use Lemaur\Cms\Traits\HasMediaCollections;
+use Lemaur\Cms\Models\Concerns\HasMediaCollections;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\Support\ImageFactory;
 

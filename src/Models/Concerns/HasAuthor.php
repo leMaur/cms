@@ -12,7 +12,7 @@ trait HasAuthor
     {
         if (Auth::check()) {
             static::creating(function ($model) {
-                $model->user_id = Auth::user()?->id;
+                $model->user_id = Auth::user()->id;
             });
         }
     }

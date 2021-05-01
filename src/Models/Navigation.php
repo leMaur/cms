@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Lemaur\Cms\Models\Concerns\HasSlug;
 use Lemaur\Cms\Models\Concerns\HasType;
-use Lemaur\Cms\Traits\HasMediaCollections;
+use Lemaur\Cms\Models\Concerns\HasMediaCollections;
 use Lemaur\Cms\ViewModels\NavigationViewModel;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
