@@ -1,4 +1,4 @@
-# A simple CMS backend functionality for Laravel
+# A simple CMS backend functionality for your next website
 
 [![Latest Stable Version](https://poser.pugx.org/lemaur/laravel-cms/v)](//packagist.org/packages/lemaur/laravel-cms)
 [![Total Downloads](https://poser.pugx.org/lemaur/laravel-cms/downloads)](//packagist.org/packages/lemaur/laravel-cms)
@@ -47,22 +47,22 @@ php artisan vendor:publish --provider="Lemaur\Cms\CmsServiceProvider" --tag="cms
 
 Add `domain` to your "config/app.php". I advise you to append it after `asset_url`. 
 ```php
-    /*
-    |--------------------------------------------------------------------------
-    | Application URL
-    |--------------------------------------------------------------------------
-    |
-    | This URL is used by the console to properly generate URLs when using
-    | the Artisan command line tool. You should set this to the root of
-    | your application so that it is used when running Artisan tasks.
-    |
-    */
+/*
+|--------------------------------------------------------------------------
+| Application URL
+|--------------------------------------------------------------------------
+|
+| This URL is used by the console to properly generate URLs when using
+| the Artisan command line tool. You should set this to the root of
+| your application so that it is used when running Artisan tasks.
+|
+*/
 
-    'url' => env('APP_URL', 'http://localhost'),
+'url' => env('APP_URL', 'http://localhost'),
 
-    'asset_url' => env('ASSET_URL', null),
+'asset_url' => env('ASSET_URL', null),
 
-    'domain' => env('APP_DOMAIN', 'localhost'),
+'domain' => env('APP_DOMAIN', 'localhost'),
 ```
 
 Change your `.env` file like:
@@ -80,18 +80,18 @@ SESSION_DOMAIN=.${APP_DOMAIN}
 
 If you plan to use Laravel Nova, you have to change the `path` on "config/nova.php" file to `'/'` instead of the original value `'/nova'`.
 ```php
-    /*
-    |--------------------------------------------------------------------------
-    | Nova Path
-    |--------------------------------------------------------------------------
-    |
-    | This is the URI path where Nova will be accessible from. Feel free to
-    | change this path to anything you like. Note that this URI will not
-    | affect Nova's internal API routes which aren't exposed to users.
-    |
-    */
+/*
+|--------------------------------------------------------------------------
+| Nova Path
+|--------------------------------------------------------------------------
+|
+| This is the URI path where Nova will be accessible from. Feel free to
+| change this path to anything you like. Note that this URI will not
+| affect Nova's internal API routes which aren't exposed to users.
+|
+*/
 
-    'path' => '/',
+'path' => '/',
 ```
 
 ### Increase security
@@ -147,7 +147,7 @@ If you use it in production, then I ask that you [**buy the world a tree**](http
 
 Read more about [Treeware](https://treeware.earth).
 
-## Battery Included
+## Wall of Fame
 - [Seo Tools by Artesaos](https://github.com/artesaos/seotools)
 - [Common Mark by League](https://github.com/league/commonmark)
 - [Eloquent Publishing by Lemaur (it's me :sunglasses:)](https://github.com/lemaur/eloquent-publishing)
