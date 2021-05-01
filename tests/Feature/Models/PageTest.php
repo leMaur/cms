@@ -9,14 +9,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
+use Lemaur\Cms\Models\Concerns\HasExcerpt;
+use Lemaur\Cms\Models\Concerns\HasMetaDescription;
+use Lemaur\Cms\Models\Concerns\HasMetaTitle;
 use Lemaur\Cms\Models\Navigation;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Tests\Feature\User;
 use Lemaur\Cms\Tests\Feature\User as TestUser;
 use Lemaur\Cms\Tests\TestCase;
-use Lemaur\Cms\Models\Concerns\HasExcerpt;
-use Lemaur\Cms\Models\Concerns\HasMetaDescription;
-use Lemaur\Cms\Models\Concerns\HasMetaTitle;
 
 class PageTest extends TestCase
 {
