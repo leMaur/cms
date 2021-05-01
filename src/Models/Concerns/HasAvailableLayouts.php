@@ -9,10 +9,11 @@ trait HasAvailableLayouts
     public static function getAvailableLayouts(): array
     {
         // @TODO: cache it
-        return static::distinct()
-            ->select('layout', 'order_column')
+        return static::select('layout')
             ->get()
             ->pluck('layout')
+            ->unique()
+            ->values()
             ->all();
     }
 }

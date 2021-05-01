@@ -14,6 +14,7 @@ use Lemaur\Cms\Models\Concerns\HasMetaDescription;
 use Lemaur\Cms\Models\Concerns\HasMetaTitle;
 use Lemaur\Cms\Models\Navigation;
 use Lemaur\Cms\Models\Page;
+use Lemaur\Cms\Models\ReservedSlug;
 use Lemaur\Cms\Tests\Feature\User;
 use Lemaur\Cms\Tests\Feature\User as TestUser;
 use Lemaur\Cms\Tests\TestCase;
@@ -264,12 +265,14 @@ class PageTest extends TestCase
     /** @test */
     public function it_returns_the_available_parents_page(): void
     {
+        Page::factory()->create(['slug' => ReservedSlug::HOMEPAGE]);
         $parents = Page::factory()->count(3)->create();
         $child = Page::factory()->create(['parent' => $parents->first()->slug]);
 
         self::assertIsArray(Page::getAvailableParents());
-        self::assertCount(3, Page::getAvailableParents());
+        self::assertCount(4, Page::getAvailableParents());
         self::assertArrayNotHasKey($child->slug, Page::getAvailableParents());
+        self::assertArrayNotHasKey(ReservedSlug::HOMEPAGE, Page::getAvailableParents());
     }
 
     /** @test */
