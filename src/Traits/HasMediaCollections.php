@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\InteractsWithMedia as SpatieInteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\MediaCollection;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\Support\ImageFactory;
 
@@ -58,7 +59,7 @@ trait HasMediaCollections
                 $this
                     ->addMediaCollection($this->getMediaCollectionName($name))
                     ->acceptsMimeTypes((array) data_get($media, 'accepts_mime_types', []))
-                    ->when((bool) $onlyKeepLatest, function ($mediaCollection) use ($onlyKeepLatest) {
+                    ->when((bool) $onlyKeepLatest, function (MediaCollection $mediaCollection) use ($onlyKeepLatest) {
                         $mediaCollection->onlyKeepLatest((int) $onlyKeepLatest);
                     });
             }

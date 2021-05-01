@@ -109,20 +109,16 @@ return [
         ],
     ],
 
-
     /*
     |--------------------------------------------------------------------------
-    | Define Media Collection Types
+    | Define Media Conversions
     |--------------------------------------------------------------------------
-    | For mime types refer to the IANA archives.
-    | https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
-    |
     */
 
     'media_conversions' => [
         'meta' => [
             'width' => 1200,
-            'height' => 600,
+            'height' => 1200,
         ],
 
         '3:4' => [
@@ -133,6 +129,16 @@ return [
             'aspect_ratio' => '4:3',
         ],
     ],
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Define Media Collection Types
+    |--------------------------------------------------------------------------
+    | For mime types refer to the IANA archives.
+    | https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
+    |
+    */
 
     'media' => [
         'single_image' => [
