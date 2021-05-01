@@ -1,4 +1,4 @@
-# A simple CMS backend functionality for your next website
+# A simple CMS backbone for your next website
 
 [![Latest Stable Version](https://poser.pugx.org/lemaur/laravel-cms/v)](//packagist.org/packages/lemaur/laravel-cms)
 [![Total Downloads](https://poser.pugx.org/lemaur/laravel-cms/downloads)](//packagist.org/packages/lemaur/laravel-cms)
