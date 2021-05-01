@@ -64,6 +64,8 @@ return [
 
     'tags' => [
         'table' => 'tags',
+        'pivot_key' => 'tag_id',
+        'pivot_table_name' => 'taggable',
     ],
 
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lemaur\Cms\Models;
 
+use Lemaur\Cms\Models\Concerns\HasGlobalScopeType;
 use Lemaur\Cms\Models\Concerns\HasSchemalessAttributes;
 use Lemaur\Cms\Models\Concerns\HasMediaCollections;
 use Lemaur\Cms\ViewModels\TagViewModel;
@@ -12,18 +13,6 @@ use Spatie\Tags\Tag as SpatieTag;
 
 class Tag extends SpatieTag implements HasMedia
 {
-    /**
-     * Morph to Many: related pivot Key
-     * Morphed by Many: foreign pivot key
-     */
-    public const PIVOT_KEY = 'tag_id';
-
-    /**
-     * Morph to Many: table name
-     * Morphed by many: table name
-     */
-    public const PIVOT_TABLE_NAME = 'taggable';
-
     use HasMediaCollections;
     use HasSchemalessAttributes;
 
@@ -51,5 +40,25 @@ class Tag extends SpatieTag implements HasMedia
     public function toViewModel(): TagViewModel
     {
         return new TagViewModel($this);
+    }
+
+    /**
+     * Helpful when you want to define:
+     *   - Morph to Many: related pivot key
+     *   - Morphed by Many: foreign pivot key
+     */
+    public static function pivotKey(): string
+    {
+        return (string) config('cms.tags.pivot_key', '');
+    }
+
+    /**
+     * Helpful when you want to define:
+     *   - Morph to Many: table name
+     *   - Morphed by many: table name
+     */
+    public static function pivotTableName(): string
+    {
+        return (string) config('cms.tags.pivot_table_name', '');
     }
 }
