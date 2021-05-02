@@ -35,7 +35,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Define User Model and Table Name
+    | User Model and Table Name
     |--------------------------------------------------------------------------
     */
 
@@ -47,7 +47,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Define Page Model and Table Name
+    | Page Model and Table Name
     |--------------------------------------------------------------------------
     */
 
@@ -58,7 +58,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Define Tag Table Name
+    | Tag Table Name
     |--------------------------------------------------------------------------
     */
 
@@ -71,7 +71,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Define Navigation Model and Table Name
+    | Navigation Model and Table Name
     |--------------------------------------------------------------------------
     */
 
@@ -83,16 +83,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Define a domain
+    | Define a Domain
     |--------------------------------------------------------------------------
     */
 
-    'domain' => env('CMS_DOMAIN', null),
+    'domain' => env('CMS_DOMAIN', env('APP_DOMAIN', null)),
 
 
     /*
     |--------------------------------------------------------------------------
-    | Define reserved domain prefixes
+    | Reserved Domain Prefixes
     |--------------------------------------------------------------------------
     |
     | Those domain prefixes are not caught by social prefix url.
@@ -100,15 +100,30 @@ return [
     */
 
     'reserved_domain_prefixes' => [
-        'nova',
-//        'backend',
-//        'dashboard',
+        // 'nova',
     ],
 
 
     /*
     |--------------------------------------------------------------------------
-    | Define markdown configuration
+    | Reserved Uri
+    |--------------------------------------------------------------------------
+    |
+    | Those uri are not caught by cms route.
+    |
+    */
+
+    'reserved_uri' => [
+        'nova',
+        'vapor-ui',
+        'telescope',
+        'horizon',
+    ],
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Markdown Configuration
     |--------------------------------------------------------------------------
     |
     | https://commonmark.thephpleague.com/1.5/customization/overview/
@@ -123,7 +138,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Define Media Conversions
+    | Media Conversions
     |--------------------------------------------------------------------------
     */
 
@@ -145,7 +160,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Define Media Collection Types
+    | Media Collection Types
     |--------------------------------------------------------------------------
     | For mime types refer to the IANA archives.
     | https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
