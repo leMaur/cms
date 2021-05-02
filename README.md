@@ -1,4 +1,4 @@
-# A simple CMS backbone for your next website
+# A simple CMS backbone for your next project
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/lemaur/cms.svg?style=flat-square)](https://packagist.org/packages/lemaur/cms)
 [![Total Downloads](https://img.shields.io/packagist/dt/lemaur/cms.svg?style=flat-square)](https://packagist.org/packages/lemaur/cms)
