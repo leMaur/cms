@@ -1,28 +1,40 @@
 # A simple CMS backbone for your next website
 
-[![Latest Stable Version](https://poser.pugx.org/lemaur/laravel-cms/v)](//packagist.org/packages/lemaur/laravel-cms)
-[![Total Downloads](https://poser.pugx.org/lemaur/laravel-cms/downloads)](//packagist.org/packages/lemaur/laravel-cms)
-[![License](https://poser.pugx.org/lemaur/laravel-cms/license)](//packagist.org/packages/lemaur/laravel-cms)
-![Tests](https://github.com/leMaur/laravel-cms/workflows/Tests/badge.svg)
-[![Treeware](https://img.shields.io/badge/dynamic/json?color=brightgreen&label=Treeware&query=%24.total&url=https%3A%2F%2Fpublic.offset.earth%2Fusers%2Ftreeware%2Ftrees)](https://treeware.earth)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/lemaur/cms.svg?style=flat-square)](https://packagist.org/packages/lemaur/cms)
+[![Total Downloads](https://img.shields.io/packagist/dt/lemaur/cms.svg?style=flat-square)](https://packagist.org/packages/lemaur/cms)
+[![License](https://img.shields.io/packagist/l/lemaur/cms.svg?style=flat-square&color=yellow)](https://github.com/leMaur/cms/blob/master/LICENSE.md)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/lemaur/cms/run-tests?label=tests&style=flat-square)](https://github.com/lemaur/cms/actions?query=workflow%3Arun-tests+branch%3Amaster)
+[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/lemaur/cms/Check%20&%20fix%20styling?label=code%20style&style=flat-square)](https://github.com/lemaur/cms/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amaster)
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/lemaur?style=flat-square&color=ea4aaa)](https://github.com/sponsors/leMaur)
+[![Trees](https://img.shields.io/badge/dynamic/json?color=yellowgreen&style=flat-square&label=Trees&query=%24.total&url=https%3A%2F%2Fpublic.offset.earth%2Fusers%2Flemaur%2Ftrees)](https://ecologi.com/lemaur?r=6012e849de97da001ddfd6c9)
 
+## Support Me
+
+Hey folks,
+
+Do you like this package? Do you find it useful and it fits well in your project?
+
+I am glad to help you, and I would be so grateful if you considered supporting my work.
+
+You can even choose 😃:
+* You can [sponsor me 😎](https://github.com/sponsors/leMaur) with a monthly subscription.
+* You can [buy me a coffee ☕ or a pizza 🍕](https://github.com/sponsors/leMaur?frequency=one-time&sponsor=leMaur) just for this package.
+* You can [plant trees 🌴](https://ecologi.com/lemaur?r=6012e849de97da001ddfd6c9). By using this link we will both receive 30 trees for free and the planet (and me) will thank you. 
+* You can "Star ⭐" this repository (it's free 😉).
 
 ## Installation
 
 You can install the package via composer:
-
 ```bash
 composer require lemaur/cms
 ```
 
 You can launch the installation:
-
 ```bash
 php artisan cms:install --force
 ```
 
 You can publish and run the migrations with:
-
 ```bash
 php artisan vendor:publish --provider="Lemaur\Cms\CmsServiceProvider" --tag="cms-migrations"
 php artisan migrate
@@ -75,29 +87,6 @@ Change your `.env` file like:
 ```
 APP_DOMAIN=your-website.com
 APP_URL=https://${APP_DOMAIN}
-
-CMS_DOMAIN=${APP_DOMAIN}
-#NOVA_DOMAIN_NAME=nova.${APP_DOMAIN} # <- this is optional. Uncomment if you use Laravel Nova and use the prefix you like.
-
-...
-
-SESSION_DOMAIN=.${APP_DOMAIN}
-```
-
-If you plan to use Laravel Nova, you have to change the `path` on "config/nova.php" file to `'/'` instead of the original value `'/nova'`.
-```php
-/*
-|--------------------------------------------------------------------------
-| Nova Path
-|--------------------------------------------------------------------------
-|
-| This is the URI path where Nova will be accessible from. Feel free to
-| change this path to anything you like. Note that this URI will not
-| affect Nova's internal API routes which aren't exposed to users.
-|
-*/
-
-'path' => '/',
 ```
 
 ### Increase security
@@ -118,7 +107,7 @@ php artisan db:seed
 ```
 
 ### Need to generate "Terms of service" and "Privacy Policy"
-You can find a good starting point at [getterms.io](https://getterms.io/). They offer T.o.S. for small websites for free.
+You can find a good starting point at [getterms.io](https://getterms.io/).
 
 ## Testing
 
@@ -146,12 +135,6 @@ Please review [our security policy](../../security/policy) on how to report secu
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-## Treeware
-
-If you use it in production, then I ask that you [**buy the world a tree**](https://plant.treeware.earth/leMaur/eloquent-publishing) to thank me for my work. By contributing to the Treeware forest you’ll be creating employment for local families and restoring wildlife habitats.
-
-Read more about [Treeware](https://treeware.earth).
 
 ## Wall of Fame
 - [Seo Tools by Artesaos](https://github.com/artesaos/seotools)
