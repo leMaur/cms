@@ -48,4 +48,20 @@ class TagTest extends TestCase
 
         self::assertSame($image->name, $this->tag->getMedia('tag.image')->first()->file_name);
     }
+
+    /** @test */
+    public function it_has_a_pivot_table_name_helper(): void
+    {
+        $pivotTableName = Tag::pivotTableName();
+
+        self::assertEquals('taggable', $pivotTableName);
+    }
+
+    /** @test */
+    public function it_has_a_pivot_key_helper(): void
+    {
+        $pivotKey = Tag::pivotKey();
+
+        self::assertEquals('tag_id', $pivotKey);
+    }
 }
