@@ -81,6 +81,11 @@ class Page extends Model implements Sortable, HasMedia
         return $this->hasMany((string) config('cms.navigations.model'), 'page_id');
     }
 
+    public function getPathAttribute(): string
+    {
+        return ReservedSlug::toSlug($this->slug);
+    }
+
     public function toViewModel(): PageViewModel
     {
         return new PageViewModel($this);

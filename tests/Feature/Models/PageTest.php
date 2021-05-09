@@ -375,6 +375,15 @@ class PageTest extends TestCase
         self::assertTrue(collect(Page::getAvailableTypes())->values()->containsStrict('service'));
         self::assertTrue(collect(Page::getAvailableTypes())->values()->containsStrict('page'));
     }
+
+    /** @test */
+    public function it_returns_slug(): void
+    {
+        $page = Page::factory()->create(['slug' => '@home']);
+
+        self::assertSame('/', $page->path);
+        self::assertSame('@home', $page->slug);
+    }
 }
 
 class TestPage extends Page
