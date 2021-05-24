@@ -9,7 +9,7 @@ use Lemaur\Cms\Markdown;
 
 trait HasMetaDescription
 {
-    public function setMetaDescriptionAttribute(string $value): void
+    public function setMetaDescriptionAttribute(?string $value): void
     {
         $this->extra_attributes->set('meta_description', $value);
     }
@@ -27,6 +27,6 @@ trait HasMetaDescription
             ->trim()
             ->limit((int) config('cms.seo.meta_description_limit', 150) - 3);
 
-        return $this->extra_attributes->get('meta_description', $metaDescription, '');
+        return $this->extra_attributes->get('meta_description', $metaDescription);
     }
 }

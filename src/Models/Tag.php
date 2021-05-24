@@ -48,7 +48,7 @@ class Tag extends SpatieTag implements HasMedia
      */
     public static function pivotKey(): string
     {
-        return (string) config('cms.tags.pivot_key', '');
+        return (string) config('cms.tags.pivot_key', 'tag_id');
     }
 
     /**
@@ -58,6 +58,6 @@ class Tag extends SpatieTag implements HasMedia
      */
     public static function pivotTableName(): string
     {
-        return (string) config('cms.tags.pivot_table_name', '');
+        return (string) config('cms.tags.pivot_table_name', 'taggables');
     }
 }
