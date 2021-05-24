@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lemaur\Cms\Models\Concerns;
 
+use Illuminate\Support\Str;
 use Spatie\Sitemap\Tags\Url;
 
 trait HasSitemapExtraAttributes
@@ -17,6 +18,13 @@ trait HasSitemapExtraAttributes
         Url::CHANGE_FREQUENCY_YEARLY,
         Url::CHANGE_FREQUENCY_NEVER,
     ];
+
+    public static function getAvailableFrequencies(): array
+    {
+        return collect(self::$availableFrequencies)->mapWithKeys(function ($frequency) {
+            return [$frequency => Str::title($frequency)];
+        })->toArray();
+    }
 
     public function setSitemapFrequencyAttribute(string $value): void
     {
