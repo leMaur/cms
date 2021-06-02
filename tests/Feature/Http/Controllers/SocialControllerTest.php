@@ -12,7 +12,6 @@ class SocialControllerTest extends TestCase
     /** @test */
     public function it_redirects_to_the_given_social_network(): void
     {
-        $this->withoutExceptionHandling();
         Navigation::factory()->social()->create([
             'name' => 'Pinterest',
             'slug' => 'pinterest',
