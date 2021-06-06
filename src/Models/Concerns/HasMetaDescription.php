@@ -20,14 +20,14 @@ trait HasMetaDescription
             return '';
         }
 
-        $html = Markdown::convert($this->content, config('cms.markdown.options', []));
+//        $html = Markdown::convert($this->content, config('cms.markdown.options', []));
 
-        $metaDescription = (string) Str::of(htmlentities(strip_tags($html)))
-            ->replaceMatches('/\R+|(?:\&nbsp;)+/', ' ')
-            ->replaceMatches('/\s+/', ' ')
-            ->trim()
-            ->limit((int) config('cms.seo.meta_description_limit', 150) - 3);
+//        $metaDescription = (string) Str::of(htmlentities(strip_tags($html)))
+//            ->replaceMatches('/\R+|(?:\&nbsp;)+/', ' ')
+//            ->replaceMatches('/\s+/', ' ')
+//            ->trim()
+//            ->limit((int) config('cms.seo.meta_description_limit', 150) - 3);
 
-        return $this->extra_attributes->get('meta_description', $metaDescription, '');
+        return $this->extra_attributes->get('meta_description', '');
     }
 }
