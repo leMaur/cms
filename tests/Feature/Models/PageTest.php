@@ -384,6 +384,19 @@ class PageTest extends TestCase
         self::assertSame('/', $page->path);
         self::assertSame('@home', $page->slug);
     }
+
+    /** @test */
+    public function it_list_all_available_sitemap_frequencies(): void
+    {
+        self::assertIsArray(Page::getAvailableFrequencies());
+        self::assertArrayHasKey('always', Page::getAvailableFrequencies());
+        self::assertArrayHasKey('hourly', Page::getAvailableFrequencies());
+        self::assertArrayHasKey('daily', Page::getAvailableFrequencies());
+        self::assertArrayHasKey('weekly', Page::getAvailableFrequencies());
+        self::assertArrayHasKey('monthly', Page::getAvailableFrequencies());
+        self::assertArrayHasKey('yearly', Page::getAvailableFrequencies());
+        self::assertArrayHasKey('never', Page::getAvailableFrequencies());
+    }
 }
 
 class TestPage extends Page

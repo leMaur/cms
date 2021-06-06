@@ -19,7 +19,7 @@ class SocialRepositoryTest extends TestCase
             'url' => 'https://instagram.com',
         ]);
 
-        $social = (new SocialRepository(new Navigation()))->find('instagram');
+        $social = (new SocialRepository())->find('instagram');
         self::assertEquals('Instagram', $social->name);
         self::assertEquals('https://instagram.com', $social->url);
     }
@@ -29,6 +29,6 @@ class SocialRepositoryTest extends TestCase
     {
         $this->expectException(ModelNotFoundException::class);
 
-        (new SocialRepository(new Navigation()))->find('not-valid-social');
+        (new SocialRepository())->find('not-valid-social');
     }
 }

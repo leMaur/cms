@@ -64,4 +64,10 @@ class TagTest extends TestCase
 
         self::assertEquals('tag_id', $pivotKey);
     }
+
+    /** @test */
+    public function it_has_a_scope_to_find_the_exact_name(): void
+    {
+        self::assertSame('New Tag', Tag::whereExactName('New Tag')->first()->name);
+    }
 }

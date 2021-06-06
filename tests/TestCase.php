@@ -51,10 +51,10 @@ class TestCase extends Orchestra
     public function getEnvironmentSetUp($app)
     {
         $app['config']->set('app.key', 'base64:ygJ6fXnImxW2fktgrY06dCqkaVOuzxcSNI4jXWqB2E4=');
-        $app['config']->set('app.domain', 'localhost');
+        $app['config']->set('app.url', 'http://website.com');
 
         $app['config']->set('cms', include __DIR__.'/../config/cms.php');
-        $app['config']->set('cms.seo.twitter.site', '@dfordesignstyle');
+        $app['config']->set('cms.seo.twitter.site', '@username');
         $app['config']->set('cms.users.model', \Lemaur\Cms\Tests\Feature\User::class);
 
         $app['config']->set('database.default', 'sqlite');

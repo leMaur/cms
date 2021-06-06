@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lemaur\Cms\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Lemaur\Cms\Models\Concerns\HasMediaCollections;
 use Lemaur\Cms\Models\Concerns\HasSchemalessAttributes;
 use Lemaur\Cms\ViewModels\TagViewModel;
@@ -59,5 +60,12 @@ class Tag extends SpatieTag implements HasMedia
     public static function pivotTableName(): string
     {
         return (string) config('cms.tags.pivot_table_name', 'taggables');
+    }
+
+    public function scopeWhereExactName(Builder $query, string $name, $locale = null): Builder
+    {
+        $locale = $locale ?? app()->getLocale();
+
+        return $query->whereRaw('lower(' . $this->getQuery()->getGrammar()->wrap('name->' . $locale) . ') = ?', mb_strtolower($name));
     }
 }

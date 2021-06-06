@@ -17,13 +17,13 @@ class PageControllerTest extends TestCase
     /** @test */
     public function it_shows_homepage(): void
     {
-        Page::factory()->create([
+        Page::factory()->published()->create([
             'title' => 'Welcome',
             'slug' => ReservedSlug::HOMEPAGE,
             'content' => 'Hey there!',
         ]);
 
-        $this->get('/')
+        $this->get(route('cms'))
             ->assertOk()
             ->assertSee('Hey there!');
     }
@@ -34,7 +34,7 @@ class PageControllerTest extends TestCase
         Page::factory()->published()->create(['slug' => 'blog']);
         Page::factory()->published()->create(['parent' => 'blog', 'slug' => 'article', 'content' => 'Once upon a time...']);
 
-        $this->get('/blog/article')
+        $this->get(route('cms', '/blog/article'))
             ->assertOk()
             ->assertSee('Once upon a time...');
     }
@@ -46,7 +46,7 @@ class PageControllerTest extends TestCase
         Page::factory()->published()->create(['parent' => 'first', 'slug' => 'second']);
         Page::factory()->published()->create(['parent' => 'first/second', 'slug' => 'third', 'content' => 'Hello world!']);
 
-        $this->get('/first/second/third')
+        $this->get(route('cms', '/first/second/third'))
             ->assertOk()
             ->assertSee('Hello world!');
     }
@@ -54,7 +54,7 @@ class PageControllerTest extends TestCase
     /** @test */
     public function it_shows_404_if_page_not_found(): void
     {
-        $this->get('/page-not-found')->assertNotFound();
+        $this->get(route('cms', '/page-not-found'))->assertNotFound();
 
         Page::factory()->create([
             'title' => 'Sitemap',
@@ -84,7 +84,7 @@ class PageControllerTest extends TestCase
             ->toMediaCollection('page.cover', 'local');
 
         $this->assertMatchesHtmlSnapshot(
-            $this->get('/my-title')->content()
+            $this->get(route('cms', '/my-title'))->content()
         );
     }
 
@@ -107,7 +107,6 @@ class PageControllerTest extends TestCase
 
             ['title' => 'About'],
             ['title' => 'Contact'],
-            ['title' => 'Biophilic Design Guide'],
             ['title' => 'Ethical Manifesto'],
             ['title' => 'Press'],
             ['title' => 'Privacy Policy'],
@@ -119,7 +118,7 @@ class PageControllerTest extends TestCase
         ])->each(fn ($page) => Page::create(collect($page)->merge(['published_at' => now()])->toArray()));
 
         $this->assertMatchesXmlSnapshot(
-            $this->get('/sitemap.xml')->content()
+            $this->get(route('cms', '/sitemap.xml'))->content()
         );
     }
 
@@ -140,11 +139,9 @@ class PageControllerTest extends TestCase
             ['title' => 'Project', 'layout' => 'service', 'type' => 'service', 'parent' => 'services-shop', 'sitemap_priority' => 1.0],
             ['title' => 'Videocall', 'layout' => 'service', 'type' => 'service', 'parent' => 'services-shop', 'sitemap_priority' => 1.0],
             ['title' => 'Editorial', 'layout' => 'service', 'type' => 'service', 'parent' => 'services-shop', 'sitemap_priority' => 1.0],
-            ['title' => 'Planner 2021 Printable', 'layout' => 'shop', 'type' => 'service', 'parent' => 'services-shop', 'sitemap_priority' => 1.0],
 
             ['title' => 'About', 'sitemap_frequency' => 'not-existent-frequency-fallback-to-yearly'],
             ['title' => 'Contact'],
-            ['title' => 'Biophilic Design Guide', 'sitemap_priority' => 1.0],
             ['title' => 'Ethical Manifesto', 'sitemap_priority' => 0.8],
             ['title' => 'Press', 'sitemap_priority' => 0.8],
             ['title' => 'Privacy Policy', 'sitemap_priority' => 0.2],
@@ -167,15 +164,15 @@ class PageControllerTest extends TestCase
         Carbon::setTestNow($this->now->addYears(3));
 
         $this->assertMatchesXmlSnapshot(
-            $this->get('/sitemaps/sitemap-articles.xml')->content()
+            $this->get(route('cms', '/sitemaps/sitemap-articles.xml'))->content()
         );
 
         $this->assertMatchesXmlSnapshot(
-            $this->get('/sitemaps/sitemap-pages.xml')->content()
+            $this->get(route('cms', '/sitemaps/sitemap-pages.xml'))->content()
         );
 
         $this->assertMatchesXmlSnapshot(
-            $this->get('/sitemaps/sitemap-services.xml')->content()
+            $this->get(route('cms', '/sitemaps/sitemap-services.xml'))->content()
         );
     }
 }

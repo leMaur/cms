@@ -21,7 +21,7 @@ class PageRepositoryTest extends TestCase
         // Homepage will be always visible. For guests or authenticated users.
         Page::factory()->create(['slug' => ReservedSlug::HOMEPAGE]);
 
-        $page = (new PageRepository(new Page()))->find();
+        $page = (new PageRepository())->find();
 
         self::assertInstanceOf(Page::class, $page);
         self::assertEquals(ReservedSlug::HOMEPAGE, $page->slug);
@@ -33,7 +33,7 @@ class PageRepositoryTest extends TestCase
         $slug = 'blog';
         Page::factory()->published()->create(['slug' => $slug]);
 
-        $page = (new PageRepository(new Page()))->find($slug);
+        $page = (new PageRepository())->find($slug);
         self::assertEquals($slug, $page->slug);
     }
 
@@ -42,7 +42,7 @@ class PageRepositoryTest extends TestCase
     {
         $this->expectException(NotFoundHttpException::class);
 
-        (new PageRepository(new Page()))->find(ReservedSlug::HOMEPAGE);
+        (new PageRepository())->find(ReservedSlug::HOMEPAGE);
     }
 
     /** @test */
@@ -50,19 +50,19 @@ class PageRepositoryTest extends TestCase
     {
         $this->expectException(ModelNotFoundException::class);
 
-        (new PageRepository(new Page()))->find('not-found-page');
+        (new PageRepository())->find('not-found-page');
     }
 
     /** @test */
     public function it_returns_only_the_published_pages_for_guest_users(): void
     {
         Page::factory()->published()->create(['slug' => ReservedSlug::HOMEPAGE]);
-        $page = (new PageRepository(new Page()))->find();
+        $page = (new PageRepository())->find();
         self::assertEquals(ReservedSlug::HOMEPAGE, $page->slug);
 
         $this->expectException(ModelNotFoundException::class);
         Page::factory()->create(['slug' => 'blog']);
-        (new PageRepository(new Page()))->find('blog');
+        (new PageRepository())->find('blog');
     }
 
     /** @test */
@@ -70,14 +70,14 @@ class PageRepositoryTest extends TestCase
     {
         Page::factory()->published()->create(['slug' => ReservedSlug::HOMEPAGE]);
 
-        $page = (new PageRepository(new Page()))->find();
+        $page = (new PageRepository())->find();
         self::assertEquals(ReservedSlug::HOMEPAGE, $page->slug);
 
         Auth::login(User::create(['email' => 'me@example.com']));
 
         Page::factory()->create(['slug' => 'blog']);
 
-        $page = (new PageRepository(new Page()))->find('blog');
+        $page = (new PageRepository())->find('blog');
         self::assertEquals('blog', $page->slug);
     }
 }

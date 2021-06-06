@@ -22,7 +22,9 @@ class PageViewModel extends ViewModel
 
     public function __construct(private Page $page)
     {
-        $this->view = sprintf('cms::%s', $this->page->layout);
+        $layout = $this->page->layout ?? 'basic';
+
+        $this->view = sprintf('cms::%s', $layout);
     }
 
     public function title(): string
