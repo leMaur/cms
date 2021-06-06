@@ -22,8 +22,9 @@ trait HasMetaDescription
 
         $html = Markdown::convert($this->content, config('cms.markdown.options', []));
 
-        $metaDescription = (string) Str::of(strip_tags($html))
-            ->replace("\n", ' ')
+        $metaDescription = (string) Str::of(htmlentities(strip_tags($html)))
+            ->replaceMatches('/\R+|(?:\&nbsp;)+/', ' ')
+            ->replaceMatches('/\s+/', ' ')
             ->trim()
             ->limit((int) config('cms.seo.meta_description_limit', 150) - 3);
 
