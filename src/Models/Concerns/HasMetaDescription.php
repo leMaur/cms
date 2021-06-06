@@ -28,10 +28,6 @@ trait HasMetaDescription
             ->trim()
             ->limit((int) config('cms.seo.meta_description_limit', 150) - 3);
 
-        if (is_null($metaDescription)) {
-            return '';
-        }
-
-        return $this->extra_attributes->get('meta_description', $metaDescription);
+        return $this->extra_attributes->get('meta_description', $metaDescription, '');
     }
 }
