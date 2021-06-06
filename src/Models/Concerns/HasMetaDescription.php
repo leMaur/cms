@@ -16,18 +16,19 @@ trait HasMetaDescription
 
     public function getMetaDescriptionAttribute(): string
     {
-        if (is_null($this->content)) {
-            return '';
-        }
+        return (string) $this->extra_attributes->get('meta_description', $this->getDefaultMetaDescription());
+    }
 
-//        $html = Markdown::convert($this->content, config('cms.markdown.options', []));
+    private function getDefaultMetaDescription(): string
+    {
+        $html = Markdown::convert($this->content, config('cms.markdown.options', []));
 
-//        $metaDescription = (string) Str::of(htmlentities(strip_tags($html)))
-//            ->replaceMatches('/\R+|(?:\&nbsp;)+/', ' ')
-//            ->replaceMatches('/\s+/', ' ')
-//            ->trim()
-//            ->limit((int) config('cms.seo.meta_description_limit', 150) - 3);
+        $metaDescription = Str::of(htmlentities(strip_tags($html)))
+            ->replaceMatches('/\R+|(?:\&nbsp;)+/', ' ')
+            ->replaceMatches('/\s+/', ' ')
+            ->trim()
+            ->limit((int) config('cms.seo.meta_description_limit', 150) - 3);
 
-        return $this->extra_attributes->get('meta_description', '');
+        return (string) $metaDescription;
     }
 }
