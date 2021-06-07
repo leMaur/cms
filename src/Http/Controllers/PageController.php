@@ -13,6 +13,7 @@ class PageController
     public function __invoke(PageRepository $page, ?string $slug = null): PageViewModel
     {
         Log::channel('errorlog')->alert("Hit PageController '{$slug}'");
+
         return $page->find($slug)->toViewModel();
     }
 }
