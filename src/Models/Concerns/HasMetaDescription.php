@@ -23,6 +23,10 @@ trait HasMetaDescription
     {
         $html = Markdown::convert($this->content, config('cms.markdown.options', []));
 
+        if (is_null($html)) {
+            return '';
+        }
+
         $metaDescription = Str::of(htmlentities(strip_tags($html)))
             ->replaceMatches('/\R+|(?:\&nbsp;)+/', ' ')
             ->replaceMatches('/\s+/', ' ')
