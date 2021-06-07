@@ -13,31 +13,15 @@ class RouteTest extends TestCase
     /** @test */
     public function it_as_cms_route(): void
     {
-        Config::set('app.url', 'http://website.com');
-
-        Route::cms('cms', '/');
-
-        self::assertEquals('http://website.com', route('cms'));
-    }
-
-    /** @test */
-    public function it_as_cms_route_on_prefixed_url(): void
-    {
-        Config::set('app.url', 'http://preview.website.com');
-
-        Route::cms('cms', '/');
-
-        self::assertEquals('http://preview.website.com', route('cms'));
+        self::assertEquals('http://localhost', route('cms'));
     }
 
     /** @test */
     public function it_has_personalised_cms_route(): void
     {
-        Config::set('app.url', 'http://website.com');
-
         Route::cms('custom-cms', '/cms');
 
-        self::assertEquals('http://website.com/cms', route('custom-cms'));
+        self::assertEquals('http://localhost/cms', route('custom-cms'));
     }
 
     /** @test */
