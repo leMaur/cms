@@ -16,7 +16,7 @@ class PageRepository implements Findable
     public function find(?string $slug = null): Page
     {
         if (ReservedSlug::list()->keys()->contains($slug)) {
-            abort(404);
+            abort(404, "Trying to access to a reserved slug '{$slug}' directly");
         }
 
         if (is_null($slug)) {
@@ -30,7 +30,13 @@ class PageRepository implements Findable
     {
         if (ReservedSlug::isReserved($slug)) {
             // @TODO: cache it
-            return Page::where('slug', $slug)->firstOrFail();
+            $page = Page::where('slug', $slug)->first();
+
+            if (is_null($page)) {
+                abort(404, "Reserved slug '{$slug}' not found");
+            }
+
+            return $page;
         }
 
         $slugs = Str::of($slug)->explode('/')->toBase();
@@ -39,7 +45,7 @@ class PageRepository implements Findable
         $parent = $slugs->count() === 0 ? null : $slugs->join('/');
 
         // @TODO: cache it
-        return Page::query()
+        $page = Page::query()
             ->where('slug', $slug)
             ->when($parent, function (Builder $query) use ($parent) {
                 $query->where('parent', $parent);
@@ -48,5 +54,11 @@ class PageRepository implements Findable
                 $query->onlyPublished();
             })
             ->firstOrFail();
+
+        if (is_null($page)) {
+            abort(404, "page '{$page}' not found");
+        }
+
+        return $page;
     }
 }
