@@ -33,6 +33,8 @@ class CmsServiceProvider extends PackageServiceProvider
         $this->bootingMacros();
 
         $this->bootingConfigurationOverride();
+
+
     }
 
     private function bootingMigrations(): void
