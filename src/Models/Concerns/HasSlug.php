@@ -34,7 +34,7 @@ trait HasSlug
             }
         }
 
-        if ($this->isDirty($this->slugFrom) && ReservedSlug::isReserved($this->slug)) {
+        if (ReservedSlug::isReserved($this->slug)) {
             return;
         }
 
