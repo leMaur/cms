@@ -6,11 +6,10 @@ namespace Lemaur\Cms\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class BlockIndexing
 {
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
         $response = $next($request);
 
