@@ -412,7 +412,7 @@ class PageTest extends TestCase
     {
         $page = Page::factory()->create([
             'title' => 'Homepage',
-            'slug' => '@home'
+            'slug' => '@home',
         ]);
 
         self::assertSame('Homepage', $page->title);
