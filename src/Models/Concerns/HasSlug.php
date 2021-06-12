@@ -20,6 +20,27 @@ trait HasSlug
             ->saveSlugsTo('slug');
     }
 
+    protected function generateSlugOnUpdate(): void
+    {
+        $this->slugOptions = $this->getSlugOptions();
+
+        if (! $this->slugOptions->generateSlugsOnUpdate) {
+            return;
+        }
+
+        if ($this->slugOptions->preventOverwrite) {
+            if ($this->{$this->slugOptions->slugField} !== null) {
+                return;
+            }
+        }
+
+        if ($this->isDirty($this->slugFrom) && ReservedSlug::isReserved($this->slug)) {
+            return;
+        }
+
+        $this->addSlug();
+    }
+
     public function scopeWithSlug(Builder $query, string $slug): Builder
     {
         return $query->where('slug', ReservedSlug::toReserved($slug));
