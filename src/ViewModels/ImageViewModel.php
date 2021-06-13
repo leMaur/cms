@@ -27,4 +27,9 @@ class ImageViewModel extends ViewModel
     {
         return $this->media->getCustomProperty('caption', null);
     }
+
+    public function html(string $conversionName = '', array $extraAttributes = []): string
+    {
+        return (string) $this->media->img($conversionName, $extraAttributes)->toHtml();
+    }
 }

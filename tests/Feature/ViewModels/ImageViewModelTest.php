@@ -13,7 +13,8 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ImageViewModelTest extends TestCase
 {
-    private Media $media;
+    private ?Media $media;
+    private Page $page;
     private string $disk = 'local';
     private string $imageName = 'photo1.jpg';
     private string $mediaCollection = 'page.cover';
@@ -26,12 +27,12 @@ class ImageViewModelTest extends TestCase
 
         $content = Page::factory()->raw();
 
-        $page = tap(Page::create($content), function ($page): void {
+        $this->page = tap(Page::create($content), function ($page): void {
             $page->addMedia(UploadedFile::fake()->image($this->imageName))
                 ->toMediaCollection($this->mediaCollection, $this->disk);
         });
 
-        $this->media = $page->fresh()->getFirstMedia($this->mediaCollection);
+        $this->media = $this->page->fresh()->getFirstMedia($this->mediaCollection);
     }
 
     /** @test */
@@ -64,5 +65,15 @@ class ImageViewModelTest extends TestCase
 
         $viewModel = new ImageViewModel($this->media);
         self::assertEquals('caption text', $viewModel->caption());
+    }
+
+    /** @test */
+    public function it_has_html(): void
+    {
+        self::markTestSkipped();
+
+        $html = $this->page->toViewModel()->coverImage()->html();
+
+        $this->assertMatchesHtmlSnapshot($html);
     }
 }
