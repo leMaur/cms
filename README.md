@@ -1,5 +1,7 @@
 # A simple CMS backbone for your next project
 
+> :construction: Under development - Don't use in production!
+
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/lemaur/cms.svg?style=flat-square)](https://packagist.org/packages/lemaur/cms)
 [![Total Downloads](https://img.shields.io/packagist/dt/lemaur/cms.svg?style=flat-square)](https://packagist.org/packages/lemaur/cms)
 [![License](https://img.shields.io/packagist/l/lemaur/cms.svg?style=flat-square&color=yellow)](https://github.com/leMaur/cms/blob/master/LICENSE.md)
