@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Lemaur\Cms;
 
 use League\CommonMark\EnvironmentInterface;
-use League\CommonMark\GithubFlavoredMarkdownConverter;
+use League\CommonMark\CommonMarkConverter;
 
-class Markdown extends GithubFlavoredMarkdownConverter
+class Markdown extends CommonMarkConverter
 {
     public static function convert(?string $markdown = null, array $config = [], EnvironmentInterface $environment = null): ?string
     {
