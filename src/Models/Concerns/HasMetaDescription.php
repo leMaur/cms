@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lemaur\Cms\Models\Concerns;
 
 use Illuminate\Support\Str;
-use Lemaur\Cms\Markdown;
+use Lemaur\Cms\Support\Markdown;;
 
 trait HasMetaDescription
 {

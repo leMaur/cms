@@ -7,7 +7,7 @@ namespace Lemaur\Cms\ViewModels;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
-use Lemaur\Cms\Markdown;
+use Lemaur\Cms\Support\Markdown;;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Models\ReservedSlug;
 use Lemaur\Cms\ViewModels\Concerns\HasMetaTags;
