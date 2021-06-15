@@ -29,7 +29,7 @@ class BladeComponentParser implements InlineParserInterface
 
         $cursor->advance();
 
-        $handle = $cursor->match('/^[A-Za-z\-\.]+/');
+        $handle = $cursor->match('/^[A-Za-z0-9_-\.]+(?!\w)/');
 
         if (empty($handle)) {
             $cursor->restoreState($previousState);
