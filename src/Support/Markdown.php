@@ -20,7 +20,7 @@ class Markdown
         $options = config('cms.markdown.options', []);
 
         $environment = Environment::createCommonMarkEnvironment();
-//        $environment->addInlineParser(new BladeComponentParser());
+        $environment->addInlineParser(new BladeComponentParser());
 
         $converter = new CommonMarkConverter($options, $environment);
 
