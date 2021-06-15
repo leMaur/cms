@@ -11,7 +11,7 @@ use Lemaur\Cms\Support\Parsers\BladeComponentParser;
 
 class Markdown
 {
-    public static function convert(?string $markdown = null): ?HtmlString
+    public static function convert(?string $markdown = null): ?string
     {
         if (is_null($markdown)) {
             return null;
@@ -24,6 +24,6 @@ class Markdown
 
         $converter = new CommonMarkConverter($options, $environment);
 
-        return new HtmlString($converter->convertToHtml($markdown));
+        return (string) new HtmlString($converter->convertToHtml($markdown));
     }
 }
