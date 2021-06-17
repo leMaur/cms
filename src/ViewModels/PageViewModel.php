@@ -7,11 +7,11 @@ namespace Lemaur\Cms\ViewModels;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
-use Lemaur\Cms\Models\Page;;
+use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Models\ReservedSlug;
-use Lemaur\Cms\Support\Markdown;
 use Lemaur\Cms\ViewModels\Concerns\HasMetaTags;
 use Lemaur\Cms\ViewModels\Concerns\HasSitemaps;
+use Lemaur\Markdown\Markdown;
 use Spatie\ViewModels\ViewModel;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -61,13 +61,13 @@ class PageViewModel extends ViewModel
     public function content(): ?string
     {
         // @TODO: cache it
-        return Markdown::convert($this->page->content, config('cms.markdown.options', []));
+        return (string) Markdown::render($this->page->content);
     }
 
     public function excerpt(): ?string
     {
         // @TODO: cache it
-        return Markdown::convert($this->page->excerpt, config('cms.markdown.options', []));
+        return (string) Markdown::render($this->page->excerpt);
     }
 
     public function slug(): string

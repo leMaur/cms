@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lemaur\Cms\Models\Concerns;
 
 use Illuminate\Support\Str;
-use Lemaur\Cms\Support\Markdown;;
+use Lemaur\Markdown\Markdown;
 
 trait HasMetaDescription
 {
@@ -21,18 +21,20 @@ trait HasMetaDescription
 
     private function getDefaultMetaDescription(): string
     {
-        $html = Markdown::convert($this->content, config('cms.markdown.options', []));
+        $text = Markdown::render($this->content);
 
-        if (is_null($html)) {
+        if (is_null($text)) {
             return '';
         }
 
-        $metaDescription = Str::of(htmlentities(strip_tags($html)))
+        $text = strip_tags($text);
+        $text = html_entity_decode(preg_replace("/[\r\n]{2,}/", "\n\n", $text), ENT_QUOTES, 'UTF-8');
+        $text = htmlentities($text);
+
+        return (string) Str::of($text)
             ->replaceMatches('/\R+|(?:\&nbsp;)+/', ' ')
             ->replaceMatches('/\s+/', ' ')
             ->trim()
             ->limit((int) config('cms.seo.meta_description_limit', 150) - 3);
-
-        return (string) $metaDescription;
     }
 }
