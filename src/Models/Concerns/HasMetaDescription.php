@@ -21,17 +21,17 @@ trait HasMetaDescription
 
     private function getDefaultMetaDescription(): string
     {
-        $text = Markdown::render($this->content);
+        $html = Markdown::render($this->content);
 
-        if (is_null($text)) {
+        if ($html->isEmpty()) {
             return '';
         }
 
-        $text = strip_tags($text);
-        $text = html_entity_decode(preg_replace("/[\r\n]{2,}/", "\n\n", $text), ENT_QUOTES, 'UTF-8');
-        $text = htmlentities($text);
+        $html = strip_tags($html->toHtml());
+        $html = html_entity_decode(preg_replace("/[\r\n]{2,}/", "\n\n", $html), ENT_QUOTES, 'UTF-8');
+        $html = htmlentities($html);
 
-        return (string) Str::of($text)
+        return (string) Str::of($html)
             ->replaceMatches('/\R+|(?:\&nbsp;)+/', ' ')
             ->replaceMatches('/\s+/', ' ')
             ->trim()

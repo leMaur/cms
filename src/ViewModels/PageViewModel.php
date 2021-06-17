@@ -61,13 +61,25 @@ class PageViewModel extends ViewModel
     public function content(): ?string
     {
         // @TODO: cache it
-        return (string) Markdown::render($this->page->content);
+        $content = Markdown::render($this->page->content);
+
+        if ($content->isEmpty()) {
+            return null;
+        }
+
+        return $content->toHtml();
     }
 
     public function excerpt(): ?string
     {
         // @TODO: cache it
-        return (string) Markdown::render($this->page->excerpt);
+        $content = Markdown::render($this->page->excerpt);
+
+        if ($content->isEmpty()) {
+            return null;
+        }
+
+        return $content->toHtml();
     }
 
     public function slug(): string
