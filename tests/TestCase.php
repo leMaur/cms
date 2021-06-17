@@ -66,6 +66,8 @@ class TestCase extends Orchestra
 
         $app['config']->set('media-library', include __DIR__.'/../vendor/spatie/laravel-medialibrary/config/media-library.php');
         $app['config']->set('media-library.disk_name', 'local');
+
+        $app['config']->set('markdown', include __DIR__.'/../vendor/lemaur/markdown/config/markdown.php');
     }
 
     private function getDatabaseSetup($app)
