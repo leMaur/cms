@@ -19,13 +19,13 @@ trait HasMetaTags
         $this->generateSchemaOrg();
     }
 
-    private function generateMetaTags(): void
+    protected function generateMetaTags(): void
     {
         SEOTools::setTitle($this->pageTitle());
         SEOTools::setDescription($this->page->meta_description);
     }
 
-    private function generateOpengraphMetaTags(): void
+    protected function generateOpengraphMetaTags(): void
     {
         // @TODO: check opengraph metatags generator
         SEOTools::opengraph()
@@ -39,7 +39,7 @@ trait HasMetaTags
         // @TODO: meta tags opengraph product
     }
 
-    private function generateTwitterMetaTags(): void
+    protected function generateTwitterMetaTags(): void
     {
         if ((bool) $this->metaImage()) {
             SEOTools::twitter()->addImage($this->metaImage());
@@ -48,12 +48,12 @@ trait HasMetaTags
         // @TODO: meta tags twitter product
     }
 
-    private function generateSchemaOrg(): void
+    protected function generateSchemaOrg(): void
     {
         // @TODO: generate schema org
     }
 
-    private function opengraphType(): string
+    protected function opengraphType(): string
     {
         // @TODO: complete opengraph types
         $types = [
@@ -66,7 +66,7 @@ trait HasMetaTags
         return $types[$this->page->type] ?? 'website';
     }
 
-    private function metaImage(): ?string
+    protected function metaImage(): ?string
     {
         return $this->coverImage()?->url('meta');
     }

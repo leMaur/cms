@@ -9,7 +9,7 @@ use Spatie\ViewModels\ViewModel;
 
 class NavigationViewModel extends ViewModel
 {
-    public function __construct(private Navigation $navigation)
+    public function __construct(protected Navigation $navigation)
     {
     }
 

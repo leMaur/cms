@@ -26,7 +26,7 @@ class PageRepository implements Findable
         return $this->findBySlug(ReservedSlug::toReserved($slug));
     }
 
-    private function findBySlug(string $slug): Page
+    protected function findBySlug(string $slug): Page
     {
         if (ReservedSlug::isReserved($slug)) {
             // @TODO: cache it

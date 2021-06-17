@@ -19,7 +19,7 @@ trait HasMetaDescription
         return (string) $this->extra_attributes->get('meta_description', $this->getDefaultMetaDescription());
     }
 
-    private function getDefaultMetaDescription(): string
+    protected function getDefaultMetaDescription(): string
     {
         $html = Markdown::render($this->content);
 

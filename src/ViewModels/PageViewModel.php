@@ -20,7 +20,7 @@ class PageViewModel extends ViewModel
     use HasMetaTags;
     use HasSitemaps;
 
-    public function __construct(private Page $page)
+    public function __construct(protected Page $page)
     {
         $layout = $this->page->layout ?? 'basic';
 

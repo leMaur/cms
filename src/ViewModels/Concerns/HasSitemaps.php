@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 trait HasSitemaps
 {
-    private function sitemapToResponse($request): Response
+    protected function sitemapToResponse($request): Response
     {
         $type = $this->getSitemapType($request);
 
@@ -52,7 +52,7 @@ trait HasSitemaps
         return $sitemap->toResponse($request);
     }
 
-    private function sitemapIndexToResponse($request): Response
+    protected function sitemapIndexToResponse($request): Response
     {
         $sitemapIndex = SitemapIndex::create();
 
@@ -63,19 +63,19 @@ trait HasSitemaps
         return $sitemapIndex->toResponse($request);
     }
 
-    private function getSitemapType($request): string
+    protected function getSitemapType($request): string
     {
         return (string) Str::of($request->segment(2))
             ->replace(['sitemap', '.xml', '-', '_'], ['', '', '', ''])
             ->singular();
     }
 
-    private function isSitemapIndex(): bool
+    protected function isSitemapIndex(): bool
     {
         return $this->page->layout === 'sitemap_index';
     }
 
-    private function isSitemap($request): bool
+    protected function isSitemap($request): bool
     {
         return count($request->segments()) === 2 && $request->segment(1) === 'sitemaps';
     }

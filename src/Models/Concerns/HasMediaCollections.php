@@ -65,7 +65,7 @@ trait HasMediaCollections
         }
     }
 
-    private function getDimensionsFromAspectRatio(string $ratio, Media $media): array
+    protected function getDimensionsFromAspectRatio(string $ratio, Media $media): array
     {
         [$denominator, $numerator] = array_map('intval', explode(':', $ratio, 2));
 
@@ -74,21 +74,21 @@ trait HasMediaCollections
         return $this->{$method}($denominator, $numerator, $media);
     }
 
-    private function getWidthFromAspectRatio(int $denominator, int $numerator, Media $media): array
+    protected function getWidthFromAspectRatio(int $denominator, int $numerator, Media $media): array
     {
         $height = ImageFactory::load($media->getPath())->getHeight();
 
         return [($denominator * $height) / $numerator, $height];
     }
 
-    private function getHeightFromAspectRatio(int $denominator, int $numerator, Media $media): array
+    protected function getHeightFromAspectRatio(int $denominator, int $numerator, Media $media): array
     {
         $width = ImageFactory::load($media->getPath())->getWidth();
 
         return [$width, ($numerator * $width) / $denominator];
     }
 
-    private function getMediaCollectionName(string $name): string
+    protected function getMediaCollectionName(string $name): string
     {
         $className = (string) Str::of(get_class($this))->lower()->explode('\\')->last();
 

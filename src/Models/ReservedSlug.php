@@ -13,7 +13,7 @@ class ReservedSlug
     public const HOMEPAGE = '@home';
     public const SITEMAP = '@sitemap';
 
-    private static array $slugs = [
+    protected static array $slugs = [
         self::HOMEPAGE => '/',
         self::SITEMAP => 'sitemap.xml',
     ];
