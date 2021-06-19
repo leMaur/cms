@@ -56,28 +56,26 @@ class PageRepositoryTest extends TestCase
     /** @test */
     public function it_returns_only_the_published_pages_for_guest_users(): void
     {
+        Auth::logout();
+
         Page::factory()->published()->create(['slug' => ReservedSlug::HOMEPAGE]);
-        $page = (new PageRepository())->find();
-        self::assertEquals(ReservedSlug::HOMEPAGE, $page->slug);
+        Page::factory()->create(['slug' => 'blog']);
+
+        self::assertEquals(ReservedSlug::HOMEPAGE, (new PageRepository())->find()->slug);
 
         $this->expectException(ModelNotFoundException::class);
-        Page::factory()->create(['slug' => 'blog']);
         (new PageRepository())->find('blog');
     }
 
     /** @test */
     public function it_returns_all_pages_for_authenticated_users(): void
     {
-        Page::factory()->published()->create(['slug' => ReservedSlug::HOMEPAGE]);
-
-        $page = (new PageRepository())->find();
-        self::assertEquals(ReservedSlug::HOMEPAGE, $page->slug);
-
         Auth::login(User::create(['email' => 'me@example.com']));
 
+        Page::factory()->published()->create(['slug' => ReservedSlug::HOMEPAGE]);
         Page::factory()->create(['slug' => 'blog']);
 
-        $page = (new PageRepository())->find('blog');
-        self::assertEquals('blog', $page->slug);
+        self::assertEquals(ReservedSlug::HOMEPAGE, (new PageRepository())->find()->slug);
+        self::assertEquals('blog', (new PageRepository())->find('blog')->slug);
     }
 }
