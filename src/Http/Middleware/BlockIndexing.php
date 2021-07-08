@@ -13,7 +13,7 @@ class BlockIndexing
     {
         $response = $next($request);
 
-        if ((bool) config('cms.seo.block_indexing')) {
+        if ((bool) config('cms.seo.block_indexing') && $request->isMethod('GET')) {
             $response->header('X-Robots-Tag', 'noindex');
         }
 

@@ -40,10 +40,6 @@ class BlockIndexingTest extends TestCase
             'slug' => ReservedSlug::HOMEPAGE,
             'content' => 'ok',
         ]);
-
-        Route::middleware(BlockIndexing::class)->group(function () {
-            Route::cms('cms', '/');
-        });
     }
 
     /** @test */

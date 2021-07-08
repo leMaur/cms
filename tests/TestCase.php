@@ -30,9 +30,6 @@ class TestCase extends Orchestra
         Factory::guessFactoryNamesUsing(
             fn (string $modelName) => 'Lemaur\\Cms\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
-
-        Route::social('social');
-        Route::cms('cms', '/');
     }
 
     protected function getPackageProviders($app)

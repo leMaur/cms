@@ -88,44 +88,53 @@ return [
     ],
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | Define a Domain
-    |--------------------------------------------------------------------------
-    */
+    'routes' => [
 
-    'domain' => env('CMS_DOMAIN'),
+        'main' => [
 
+            'prefix' => '/',
 
-    /*
-    |--------------------------------------------------------------------------
-    | Reserved Domain Prefixes
-    |--------------------------------------------------------------------------
-    |
-    | Those domain prefixes are not caught by social prefix url.
-    |
-    */
+            'name' => 'cms',
 
-    'reserved_domain_prefixes' => [
-        // 'nova',
-    ],
+            'middleware' => ['web', \Lemaur\Cms\Http\Middleware\BlockIndexing::class],
 
+            /*
+            |--------------------------------------------------------------------------
+            | Reserved Uri
+            |--------------------------------------------------------------------------
+            |
+            | Those uri are not caught by cms route.
+            |
+            */
 
-    /*
-    |--------------------------------------------------------------------------
-    | Reserved Uri
-    |--------------------------------------------------------------------------
-    |
-    | Those uri are not caught by cms route.
-    |
-    */
+            'reserved_uri' => [
+                'nova',
+                'vapor',
+                'vapor-ui',
+                'telescope',
+                'horizon',
+            ],
+        ],
 
-    'reserved_uri' => [
-        'nova',
-        'vapor',
-        'vapor-ui',
-        'telescope',
-        'horizon',
+        'social' => [
+
+            'name' => 'social',
+
+            'middleware' => ['web'],
+
+            /*
+            |--------------------------------------------------------------------------
+            | Reserved Domain Prefixes
+            |--------------------------------------------------------------------------
+            |
+            | Those domain prefixes are not caught by social prefix url.
+            |
+            */
+
+            'reserved_domain_prefixes' => [
+                // 'nova',
+            ],
+        ],
     ],
 
 
