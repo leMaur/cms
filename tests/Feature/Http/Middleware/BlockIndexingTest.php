@@ -6,7 +6,6 @@ namespace Lemaur\Cms\Tests\Feature\Http\Middleware;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Testing\TestResponse;
-use Lemaur\Cms\Http\Middleware\BlockIndexing;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Models\ReservedSlug;
 use Lemaur\Cms\Tests\TestCase;
