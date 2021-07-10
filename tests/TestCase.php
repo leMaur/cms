@@ -7,7 +7,6 @@ namespace Lemaur\Cms\Tests;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Route;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\Snapshots\MatchesSnapshots;
 
