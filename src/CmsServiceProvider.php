@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Str;
 use Lemaur\Cms\Console\PublishCommand;
+use Lemaur\Cms\Http\Authorization\Gate;
+use Lemaur\Cms\Http\Authorization\GateContract;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Spatie\MediaLibrary\MediaCollections\MediaCollection;
@@ -24,6 +26,13 @@ class CmsServiceProvider extends PackageServiceProvider
             ->hasCommand(PublishCommand::class);
     }
 
+    public function packageRegistered(): void
+    {
+        parent::packageRegistered();
+
+        $this->registerSingletons();
+    }
+
     public function bootingPackage(): void
     {
         parent::bootingPackage();
@@ -33,8 +42,6 @@ class CmsServiceProvider extends PackageServiceProvider
         $this->bootingMacros();
 
         $this->bootingConfigurationOverride();
-
-
     }
 
     private function bootingMigrations(): void
@@ -74,5 +81,10 @@ class CmsServiceProvider extends PackageServiceProvider
 
             return $this;
         });
+    }
+
+    private function registerSingletons(): void
+    {
+        $this->app->singleton(GateContract::class, Gate::class);
     }
 }
