@@ -22,7 +22,7 @@ trait HasMetaTags
     protected function generateMetaTags(): void
     {
         SEOTools::setTitle($this->pageTitle());
-        SEOTools::setDescription($this->page->meta_description);
+        SEOTools::setDescription($this->model->meta_description);
     }
 
     protected function generateOpengraphMetaTags(): void
@@ -63,7 +63,7 @@ trait HasMetaTags
 //            'article' => 'article',
         ];
 
-        return $types[$this->page->type] ?? 'website';
+        return $types[$this->model->type] ?? 'website';
     }
 
     protected function metaImage(): ?string
@@ -75,7 +75,7 @@ trait HasMetaTags
     {
         return collect([
                 config('cms.seo.title.prefix', null),
-                $this->page->meta_title,
+                $this->model->meta_title,
                 config('app.name'),
             ])
             ->filter()

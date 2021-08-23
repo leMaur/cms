@@ -26,7 +26,7 @@ trait HasSitemaps
 
         // @TODO: cache it (make cache decorator)
         $pages = Page::withType($type)
-            ->withoutSlug($this->page->slug)
+            ->withoutSlug($this->model->slug)
             ->orderBy('id')
             ->get();
 
@@ -72,7 +72,7 @@ trait HasSitemaps
 
     protected function isSitemapIndex(): bool
     {
-        return $this->page->layout === 'sitemap_index';
+        return $this->model->layout === 'sitemap_index';
     }
 
     protected function isSitemap($request): bool
