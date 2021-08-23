@@ -9,27 +9,27 @@ use Spatie\ViewModels\ViewModel;
 
 class ImageViewModel extends ViewModel
 {
-    public function __construct(protected Media $media)
+    public function __construct(protected Media $model)
     {
     }
 
     public function url(string $conversion = ''): string
     {
-        return $this->media->getFullUrl($conversion);
+        return $this->model->getFullUrl($conversion);
     }
 
     public function alt(): ?string
     {
-        return $this->media->getCustomProperty('alt', null);
+        return $this->model->getCustomProperty('alt', null);
     }
 
     public function caption(): ?string
     {
-        return $this->media->getCustomProperty('caption', null);
+        return $this->model->getCustomProperty('caption', null);
     }
 
     public function html(string $conversionName = '', array $extraAttributes = []): string
     {
-        return (string) $this->media->img($conversionName, $extraAttributes)->toHtml();
+        return (string) $this->model->img($conversionName, $extraAttributes)->toHtml();
     }
 }

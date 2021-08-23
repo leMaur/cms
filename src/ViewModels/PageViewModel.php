@@ -20,26 +20,26 @@ class PageViewModel extends ViewModel
     use HasMetaTags;
     use HasSitemaps;
 
-    public function __construct(protected Page $page)
+    public function __construct(protected Page $model)
     {
-        $layout = $this->page->layout ?? 'basic';
+        $layout = $this->model->layout ?? 'basic';
 
         $this->view = sprintf('cms::%s', $layout);
     }
 
     public function title(): string
     {
-        return $this->page->title;
+        return $this->model->title;
     }
 
     public function parent(): ?PageViewModel
     {
         // @TODO: cache it
-        if (is_null($this->page->parent)) {
+        if (is_null($this->model->parent)) {
             return null;
         }
 
-        $parent = Page::firstWhere('slug', $this->page->parent);
+        $parent = Page::firstWhere('slug', $this->model->parent);
 
         if (is_null($parent)) {
             return null;
@@ -50,18 +50,18 @@ class PageViewModel extends ViewModel
 
     public function type(): string
     {
-        return $this->page->type;
+        return $this->model->type;
     }
 
     public function layout(): string
     {
-        return $this->page->layout;
+        return $this->model->layout;
     }
 
     public function content(): ?string
     {
         // @TODO: cache it
-        $content = Markdown::render($this->page->content);
+        $content = Markdown::render($this->model->content);
 
         if ($content->isEmpty()) {
             return null;
@@ -73,7 +73,7 @@ class PageViewModel extends ViewModel
     public function excerpt(): ?string
     {
         // @TODO: cache it
-        $content = Markdown::render($this->page->excerpt);
+        $content = Markdown::render($this->model->excerpt);
 
         if ($content->isEmpty()) {
             return null;
@@ -85,7 +85,7 @@ class PageViewModel extends ViewModel
     public function slug(): string
     {
         // @TODO: cache it
-        $string = collect([$this->page->parent, ReservedSlug::toSlug($this->page->slug)])->join('/');
+        $string = collect([$this->model->parent, ReservedSlug::toSlug($this->model->slug)])->join('/');
 
         return trim($string, '/');
     }
@@ -98,7 +98,7 @@ class PageViewModel extends ViewModel
     public function children(int $page = 1, int $perPage = 15): ?LengthAwarePaginator
     {
         // @TODO: cache it
-        $pages = Page::where('parent', $this->page->slug)
+        $pages = Page::where('parent', $this->model->slug)
             ->when(
                 Auth::guest(),
                 fn (Builder $query) => $query->onlyPublished()->latestPublished(),
@@ -116,13 +116,13 @@ class PageViewModel extends ViewModel
     public function coverImage(): ?ImageViewModel
     {
         // @TODO: cache it
-        $mediaCollectionName = $this->page
+        $mediaCollectionName = $this->model
             ->getRegisteredMediaCollections()
             ->pluck('name')
             ->filter(fn ($item) => str_contains($item, "cover"))
             ->first();
 
-        $media = $this->page->getFirstMedia($mediaCollectionName);
+        $media = $this->model->getFirstMedia($mediaCollectionName);
 
         if (is_null($media)) {
             return null;

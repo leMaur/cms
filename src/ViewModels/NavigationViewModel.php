@@ -9,31 +9,31 @@ use Spatie\ViewModels\ViewModel;
 
 class NavigationViewModel extends ViewModel
 {
-    public function __construct(protected Navigation $navigation)
+    public function __construct(protected Navigation $model)
     {
     }
 
     public function name(): string
     {
-        return $this->navigation->name
-            ?? $this->navigation->page->toViewModel()->title();
+        return $this->model->name
+            ?? $this->model->page->toViewModel()->title();
     }
 
     public function slug(): string
     {
-        return $this->navigation->slug
-            ?? $this->navigation->page->toViewModel()->slug();
+        return $this->model->slug
+            ?? $this->model->page->toViewModel()->slug();
     }
 
     public function url(): string
     {
-        return $this->navigation->url
-            ?? $this->navigation->page->toViewModel()->url();
+        return $this->model->url
+            ?? $this->model->page->toViewModel()->url();
     }
 
     public function image(string $collection = 'navigation.image'): ?ImageViewModel
     {
-        $media = $this->navigation->getFirstMedia($collection);
+        $media = $this->model->getFirstMedia($collection);
 
         if (is_null($media)) {
             return null;

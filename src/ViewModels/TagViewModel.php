@@ -9,22 +9,22 @@ use Spatie\ViewModels\ViewModel;
 
 class TagViewModel extends ViewModel
 {
-    public function __construct(protected Tag $tag)
+    public function __construct(protected Tag $model)
     {
     }
 
     public function name(): string
     {
-        return $this->tag->name;
+        return $this->model->name;
     }
 
     public function slug(): string
     {
-        return $this->tag->slug;
+        return $this->model->slug;
     }
 
     public function type(): string
     {
-        return $this->tag->type;
+        return $this->model->type;
     }
 }
