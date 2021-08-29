@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lemaur\Cms\Models\Concerns;
 
+use Illuminate\Database\Eloquent\Builder;
 use Spatie\SchemalessAttributes\SchemalessAttributes;
 
 /**
@@ -47,5 +48,10 @@ trait HasSchemalessAttributes
         }
 
         $this->save();
+    }
+
+    public function scopeWithExtraAttributes(): Builder
+    {
+        return $this->extra_attributes->modelScope();
     }
 }

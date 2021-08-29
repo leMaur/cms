@@ -27,6 +27,7 @@ use Lemaur\Publishing\Database\Eloquent\Publishes;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
+use Spatie\SchemalessAttributes\Casts\SchemalessAttributes;
 
 class Page extends Model implements Sortable, HasMedia
 {
@@ -51,7 +52,7 @@ class Page extends Model implements Sortable, HasMedia
     protected $guarded = [];
 
     protected $casts = [
-        'extra_attributes' => 'array',
+        'extra_attributes' => SchemalessAttributes::class,
     ];
 
     protected array $mediaConfiguration = [
