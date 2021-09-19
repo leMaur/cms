@@ -30,6 +30,7 @@ class NavigationViewModelTest extends TestCase
     public function it_has_name(): void
     {
         self::assertEquals('About', $this->navi->toViewModel()->name());
+        self::assertNull($this->navi->toViewModel()->group());
     }
 
     /** @test */
@@ -75,5 +76,14 @@ class NavigationViewModelTest extends TestCase
 
         self::assertInstanceOf(ImageViewModel::class, $viewModel->image());
         self::assertEquals('http://localhost/storage/1/photo1.jpg', $viewModel->image()->url());
+    }
+
+    /** @test */
+    public function it_may_has_group_name(): void
+    {
+        $navi = Navigation::factory()->forPage(['title' => 'About'])->create(['name' => 'About Group']);
+
+        self::assertEquals('About', $navi->toViewModel()->name());
+        self::assertEquals('About Group', $navi->toViewModel()->group());
     }
 }

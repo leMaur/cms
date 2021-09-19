@@ -15,8 +15,8 @@ class NavigationViewModel extends ViewModel
 
     public function name(): string
     {
-        return $this->model->name
-            ?? $this->model->page->toViewModel()->title();
+        return $this->model->name && !$this->model->page
+            ? $this->model->name : $this->model->page->toViewModel()->title();
     }
 
     public function slug(): string
@@ -40,5 +40,11 @@ class NavigationViewModel extends ViewModel
         }
 
         return new ImageViewModel($media);
+    }
+
+    public function group(): string | null
+    {
+        return $this->model->name && $this->model->page
+            ? $this->model->name : null;
     }
 }
