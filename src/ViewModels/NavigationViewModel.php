@@ -15,7 +15,7 @@ class NavigationViewModel extends ViewModel
 
     public function name(): string
     {
-        return $this->model->name && !$this->model->page
+        return $this->model->name && ! $this->model->page
             ? $this->model->name : $this->model->page->toViewModel()->title();
     }
 
