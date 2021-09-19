@@ -21,13 +21,13 @@ class NavigationViewModel extends ViewModel
 
     public function slug(): string
     {
-        return $this->model->slug && !$this->model->page
+        return $this->model->slug && ! $this->model->page
             ? $this->model->slug : $this->model->page->toViewModel()->slug();
     }
 
     public function url(): string
     {
-        return $this->model->url && !$this->model->page
+        return $this->model->url && ! $this->model->page
             ? $this->model->url : $this->model->page->toViewModel()->url();
     }
 
