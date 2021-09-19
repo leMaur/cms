@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Lemaur\Cms\Tests\Feature\Http\Middleware;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Testing\TestResponse;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Models\ReservedSlug;
