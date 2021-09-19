@@ -17,7 +17,8 @@ trait HasSlug
     {
         return SlugOptions::create()
             ->generateSlugsFrom($this->slugFrom)
-            ->saveSlugsTo('slug');
+            ->saveSlugsTo('slug')
+            ->doNotGenerateSlugsOnUpdate();
     }
 
     protected function generateSlugOnUpdate(): void
