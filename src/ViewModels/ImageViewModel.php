@@ -20,16 +20,26 @@ class ImageViewModel extends ViewModel
 
     public function alt(): ?string
     {
-        return $this->model->getCustomProperty('alt', null);
+        return $this->model->getCustomProperty('alt');
     }
 
     public function caption(): ?string
     {
-        return $this->model->getCustomProperty('caption', null);
+        return $this->model->getCustomProperty('caption');
+    }
+
+    public function width(): ?string
+    {
+        return $this->model->getCustomProperty('width');
+    }
+
+    public function height(): ?string
+    {
+        return $this->model->getCustomProperty('height');
     }
 
     public function html(string $conversionName = '', array $extraAttributes = []): string
     {
-        return (string) $this->model->img($conversionName, $extraAttributes)->toHtml();
+        return $this->model->img($conversionName, $extraAttributes)->toHtml();
     }
 }
