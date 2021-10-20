@@ -124,6 +124,10 @@ class PageViewModel extends ViewModel
             ->filter(fn ($item) => str_contains($item, "cover"))
             ->first();
 
+        if (is_null($mediaCollectionName)) {
+            return null;
+        }
+
         $media = $this->model->getFirstMedia($mediaCollectionName);
 
         if (is_null($media)) {
