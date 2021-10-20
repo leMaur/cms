@@ -7,11 +7,12 @@ namespace Lemaur\Cms\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Lemaur\Cms\Models\Concerns\HasMediaCollections;
 use Lemaur\Cms\Models\Concerns\HasSchemalessAttributes;
+use Lemaur\Cms\ViewModels\Contracts\Viewable;
 use Lemaur\Cms\ViewModels\TagViewModel;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\Tags\Tag as SpatieTag;
 
-class Tag extends SpatieTag implements HasMedia
+class Tag extends SpatieTag implements HasMedia, Viewable
 {
     use HasMediaCollections;
     use HasSchemalessAttributes;

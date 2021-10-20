@@ -10,6 +10,8 @@ use Illuminate\Support\Str;
 use Lemaur\Cms\Console\PublishCommand;
 use Lemaur\Cms\Http\Authorization\Gate;
 use Lemaur\Cms\Http\Authorization\GateContract;
+use Lemaur\Cms\Http\Responses\Response;
+use Lemaur\Cms\Http\Responses\ResponseContract;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Spatie\MediaLibrary\MediaCollections\MediaCollection;
@@ -46,8 +48,6 @@ class CmsServiceProvider extends PackageServiceProvider
 
     private function bootingMigrations(): void
     {
-        $now = Carbon::now();
-
         $migrationFileNames = [
             'create_media_table' => '/../vendor/spatie/laravel-medialibrary/database/migrations/create_media_table.php.stub',
             'create_tag_tables' => '/../vendor/spatie/laravel-tags/database/migrations/create_tag_tables.php.stub',
@@ -56,7 +56,7 @@ class CmsServiceProvider extends PackageServiceProvider
 
         foreach ($migrationFileNames as $migrationFileName => $migrationFilePath) {
             $this->publishes([
-                $this->package->basePath($migrationFilePath) => database_path('migrations/' . $now->addSecond()->format('Y_m_d_His') . '_' . Str::finish($migrationFileName, '.php')),
+                $this->package->basePath($migrationFilePath) => database_path('migrations/' . Carbon::now()->addSecond()->format('Y_m_d_His') . '_' . Str::finish($migrationFileName, '.php')),
             ], "{$this->package->shortName()}-migrations");
         }
     }
@@ -86,5 +86,6 @@ class CmsServiceProvider extends PackageServiceProvider
     private function registerSingletons(): void
     {
         $this->app->singleton(GateContract::class, Gate::class);
+        $this->app->singleton(ResponseContract::class, Response::class);
     }
 }

@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace Lemaur\Cms\Http\Controllers;
 
+use Illuminate\Contracts\Support\Responsable;
 use Lemaur\Cms\Http\Authorization\GateContract;
+use Lemaur\Cms\Http\Responses\ResponseContract;
 use Lemaur\Cms\Repositories\PageRepository;
-use Lemaur\Cms\ViewModels\PageViewModel;
 
 class PageController
 {
-    public function __invoke(PageRepository $page, ?string $slug = null): PageViewModel
+    public function __invoke(PageRepository $page, ?string $slug = null): Responsable
     {
-        $model = $page->find($slug);
+        $resource = $page->find($slug);
 
-        app(GateContract::class)($model);
+        app(GateContract::class)($resource);
 
-        return $model->toViewModel();
+        return app(ResponseContract::class)($resource)->toViewModel();
     }
 }

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Lemaur\Cms\Http\Authorization;
 
-use Illuminate\Database\Eloquent\Model;
+use Lemaur\Cms\Models\Page;
 
 class Gate implements GateContract
 {
-    public function __invoke(Model $model): void
+    public function __invoke(Page $page): void
     {
         //
     }

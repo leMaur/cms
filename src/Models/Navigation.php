@@ -10,12 +10,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Lemaur\Cms\Models\Concerns\HasMediaCollections;
 use Lemaur\Cms\Models\Concerns\HasSlug;
 use Lemaur\Cms\Models\Concerns\HasType;
+use Lemaur\Cms\ViewModels\Contracts\Viewable;
 use Lemaur\Cms\ViewModels\NavigationViewModel;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
 
-class Navigation extends Model implements Sortable, HasMedia
+class Navigation extends Model implements Sortable, HasMedia, Viewable
 {
     use HasMediaCollections;
     use HasFactory;

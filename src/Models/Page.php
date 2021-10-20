@@ -22,6 +22,7 @@ use Lemaur\Cms\Models\Concerns\HasSchemalessAttributes;
 use Lemaur\Cms\Models\Concerns\HasSitemapExtraAttributes;
 use Lemaur\Cms\Models\Concerns\HasSlug;
 use Lemaur\Cms\Models\Concerns\HasType;
+use Lemaur\Cms\ViewModels\Contracts\Viewable;
 use Lemaur\Cms\ViewModels\PageViewModel;
 use Lemaur\Publishing\Database\Eloquent\Publishes;
 use Spatie\EloquentSortable\Sortable;
@@ -29,7 +30,7 @@ use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\SchemalessAttributes\Casts\SchemalessAttributes;
 
-class Page extends Model implements Sortable, HasMedia
+class Page extends Model implements Sortable, HasMedia, Viewable
 {
     use HasAuthor;
     use HasAvailableLayouts;
