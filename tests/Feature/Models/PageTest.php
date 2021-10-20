@@ -63,10 +63,6 @@ class PageTest extends TestCase
         $page = Page::create(['title' => 'My Page']);
 
         $this->assertDatabaseHas('pages', ['title' => 'My Page', 'slug' => 'my-page']);
-
-        $page->update(['title' => 'New Title']);
-
-        $this->assertDatabaseHas('pages', ['title' => 'New Title', 'slug' => 'new-title']);
     }
 
     /** @test */
