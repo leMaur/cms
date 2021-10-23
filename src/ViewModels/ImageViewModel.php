@@ -13,6 +13,11 @@ class ImageViewModel extends ViewModel
     {
     }
 
+    public function uuid(): string
+    {
+        return $this->model->uuid;
+    }
+
     public function url(string $conversion = ''): string
     {
         return $this->model->getFullUrl($conversion);
