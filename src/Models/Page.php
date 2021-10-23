@@ -30,6 +30,9 @@ use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\SchemalessAttributes\Casts\SchemalessAttributes;
 
+/**
+ * @property string $type
+ */
 class Page extends Model implements Sortable, HasMedia, Viewable
 {
     use HasAuthor;
