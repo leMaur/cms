@@ -7,10 +7,24 @@ namespace Lemaur\Cms\ViewModels;
 use Lemaur\Cms\Models\Tag;
 use Spatie\ViewModels\ViewModel;
 
+/**
+ * @template ModelType
+ */
 class TagViewModel extends ViewModel
 {
-    public function __construct(protected Tag $model)
+    /**
+     * @param ModelType $model
+     */
+    public function __construct(protected mixed $model)
     {
+    }
+
+    /**
+     * @return ModelType
+     */
+    public function toModel()
+    {
+        return $this->model;
     }
 
     public function name(): string

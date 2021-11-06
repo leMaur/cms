@@ -7,10 +7,24 @@ namespace Lemaur\Cms\ViewModels;
 use Lemaur\Cms\Models\Navigation;
 use Spatie\ViewModels\ViewModel;
 
+/**
+ * @template ModelType
+ */
 class NavigationViewModel extends ViewModel
 {
-    public function __construct(protected Navigation $model)
+    /**
+     * @param ModelType $model
+     */
+    public function __construct(protected mixed $model)
     {
+    }
+
+    /**
+     * @return ModelType
+     */
+    public function toModel()
+    {
+        return $this->model;
     }
 
     public function name(): string

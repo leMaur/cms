@@ -7,10 +7,24 @@ namespace Lemaur\Cms\ViewModels;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\ViewModels\ViewModel;
 
+/**
+ * @template ModelType
+ */
 class ImageViewModel extends ViewModel
 {
-    public function __construct(protected Media $model)
+    /**
+     * @param ModelType $model
+     */
+    public function __construct(protected mixed $model)
     {
+    }
+
+    /**
+     * @return ModelType
+     */
+    public function toModel()
+    {
+        return $this->model;
     }
 
     public function uuid(): string

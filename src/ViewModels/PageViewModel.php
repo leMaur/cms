@@ -15,18 +15,32 @@ use Lemaur\Markdown\Markdown;
 use Spatie\ViewModels\ViewModel;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @template ModelType
+ */
 class PageViewModel extends ViewModel
 {
     use HasMetaTags;
     use HasSitemaps;
 
-    public function __construct(protected Page $model)
+    /**
+     * @param ModelType $model
+     */
+    public function __construct(protected mixed $model)
     {
         $view = sprintf('cms::%s', $this->model->layout ?? '');
 
         $view = view()->exists($view) ? $view : 'cms::basic';
 
         $this->view($view);
+    }
+
+    /**
+     * @return ModelType
+     */
+    public function toModel()
+    {
+        return $this->model;
     }
 
     public function title(): string
