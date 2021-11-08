@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "artesaos/seotools": "^0.20.0",
+        "artesaos/seotools": "^v0.20.1",
         "illuminate/contracts": "^8.0",
         "lemaur/eloquent-publishing": "^1.0",
         "lemaur/laravel-image-sitemap": "^1.0",
@@ -24,7 +24,7 @@
         "spatie/eloquent-sortable": "^4.0",
         "spatie/laravel-medialibrary": "^9.0",
         "spatie/laravel-package-tools": "^1.4",
-        "spatie/laravel-schemaless-attributes": "^2.0",
+        "spatie/laravel-schemaless-attributes": "^2.1",
         "spatie/laravel-sluggable": "^3.0",
         "spatie/laravel-tags": "^4.0",
         "spatie/laravel-view-models": "^1.3"
