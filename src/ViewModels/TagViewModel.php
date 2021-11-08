@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Lemaur\Cms\ViewModels;
 
-use Lemaur\Cms\Models\Tag;
 use Spatie\ViewModels\ViewModel;
 
 /**
