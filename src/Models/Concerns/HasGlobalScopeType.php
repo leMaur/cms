@@ -11,7 +11,7 @@ trait HasGlobalScopeType
     public static function bootHasGlobalScopeType(): void
     {
         static::addGlobalScope(self::TYPE, function (Builder $builder): void {
-            $builder->withType(self::TYPE)->reorder()->ordered();
+            $builder->withType(self::TYPE);
         });
 
         /*
