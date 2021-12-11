@@ -151,6 +151,11 @@ class PageViewModel extends ViewModel
         return new ImageViewModel($media);
     }
 
+    public function isDraft(): bool
+    {
+        return $this->model->isNotPublished();
+    }
+
     public function toResponse($request): Response
     {
         if ($this->isSitemap($request)) {
