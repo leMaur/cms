@@ -5,7 +5,6 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/lemaur/cms.svg?style=flat-square)](https://packagist.org/packages/lemaur/cms)
 [![Total Downloads](https://img.shields.io/packagist/dt/lemaur/cms.svg?style=flat-square)](https://packagist.org/packages/lemaur/cms)
 [![License](https://img.shields.io/packagist/l/lemaur/cms.svg?style=flat-square&color=yellow)](https://github.com/leMaur/cms/blob/master/LICENSE.md)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/lemaur/cms/run-tests?label=tests&style=flat-square)](https://github.com/lemaur/cms/actions?query=workflow%3Arun-tests+branch%3Amaster)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/lemaur/cms/Check%20&%20fix%20styling?label=code%20style&style=flat-square)](https://github.com/lemaur/cms/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amaster)
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/lemaur?style=flat-square&color=ea4aaa)](https://github.com/sponsors/leMaur)
 [![Trees](https://img.shields.io/badge/dynamic/json?color=yellowgreen&style=flat-square&label=Trees&query=%24.total&url=https%3A%2F%2Fpublic.offset.earth%2Fusers%2Flemaur%2Ftrees)](https://ecologi.com/lemaur?r=6012e849de97da001ddfd6c9)
@@ -63,43 +62,23 @@ You can publish views with:
 php artisan vendor:publish --provider="Lemaur\Cms\CmsServiceProvider" --tag="cms-views"
 ```
 
-### Apply a sensible default
-
-Add `domain` to your "config/app.php". I advise you to append it after `asset_url`. 
-```php
-/*
-|--------------------------------------------------------------------------
-| Application URL
-|--------------------------------------------------------------------------
-|
-| This URL is used by the console to properly generate URLs when using
-| the Artisan command line tool. You should set this to the root of
-| your application so that it is used when running Artisan tasks.
-|
-*/
-
-'url' => env('APP_URL', 'http://localhost'),
-
-'asset_url' => env('ASSET_URL', null),
-
-'domain' => env('APP_DOMAIN', 'localhost'),
-```
-
-Change your `.env` file like:
-```
-APP_DOMAIN=your-website.com
-APP_URL=https://${APP_DOMAIN}
-```
-
 ### Increase security
 
-Change values of `encrypt` and `same_site` on your "config/session.php" file.
+Change values of `encrypt` and `secure` on your "config/session.php" file.
 ```bash
-'encrypt' => true, // <= automatically encrypt your cookies
+'encrypt' => env('SESSION_ENCRYPT_COOKIE', true),
 
 ...
 
-'same_site' => 'strict', // <= the cookie will not be sent along with requests initiated by third party websites
+'secure' => env('SESSION_SECURE_COOKIE', true),
+```
+
+And then add it into your .env.example file as a commented out option:
+```
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+#SESSION_SECURE_COOKIE=false
+#SESSION_ENCRYPT_COOKIE=false
 ```
 
 ### Do you need some pages to start with?
