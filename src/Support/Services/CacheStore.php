@@ -188,15 +188,15 @@ class CacheStore
 
     public function __destruct()
     {
-        if (!(bool)$this->key) {
+        if (! (bool)$this->key) {
             throw new \InvalidArgumentException('A `key` should be provided.');
         }
 
-        if (!(bool)$this->ttl && $this->forever === false) {
+        if (! (bool)$this->ttl && $this->forever === false) {
             throw new \InvalidArgumentException('A `ttl` should be provided.');
         }
 
-        if (!(bool)$this->remember) {
+        if (! (bool)$this->remember) {
             throw new \InvalidArgumentException('A `callback` should be provided.');
         }
 
