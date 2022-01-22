@@ -41,7 +41,10 @@
         "psr-4": {
             "Lemaur\\Cms\\": "src",
             "Lemaur\\Cms\\Database\\Factories\\": "database/factories"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
