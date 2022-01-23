@@ -10,9 +10,7 @@ trait HasGlobalScopeType
 {
     public static function bootHasGlobalScopeType(): void
     {
-        static::addGlobalScope(self::TYPE, function (Builder $builder): void {
-            $builder->withType(self::TYPE);
-        });
+        static::addGlobalScope(self::TYPE, fn (Builder $builder) => $builder->withType(self::TYPE));
 
         /*
          * Even if its totally fine registering model events in a closure
@@ -22,8 +20,6 @@ trait HasGlobalScopeType
          * Instead move this snippet in its own observer class.
          * (see https://laravel.com/docs/8.x/eloquent#observers)
          */
-        static::saving(function ($model) {
-            $model->type = self::TYPE;
-        });
+        static::saving(fn ($model) => $model->type = self::TYPE);
     }
 }

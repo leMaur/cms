@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 use Lemaur\Cms\Models\Concerns\HasAuthor;
 use Lemaur\Cms\Models\Concerns\HasAvailableLayouts;
 use Lemaur\Cms\Models\Concerns\HasAvailableParents;
@@ -68,6 +69,35 @@ class Page extends Model implements Sortable, HasMedia, Viewable
     ];
 
     protected string $slugFrom = 'title';
+
+    protected static function booted(): void
+    {
+        static::created(function () {
+            Cache::forget('page.layouts');
+            Cache::forget('page.parents');
+            Cache::forget('page.types');
+        });
+
+        static::saved(function ($model) {
+            if ($model->wasChanged('layout')) {
+                Cache::forget('page.layouts');
+            }
+
+            if ($model->wasChanged('parent')) {
+                Cache::forget('page.parents');
+            }
+
+            if ($model->wasChanged('type')) {
+                Cache::forget('page.types');
+            }
+        });
+
+        static::deleted(function () {
+            Cache::forget('page.layouts');
+            Cache::forget('page.parents');
+            Cache::forget('page.types');
+        });
+    }
 
     public function __construct(array $attributes = [])
     {
