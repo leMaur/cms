@@ -10,9 +10,9 @@ trait HasAvailableLayouts
 {
     public static function getAvailableLayouts(): array
     {
-        $cacheKey = cacheKeyGenerator('page.layouts');
+        $cacheKey = cacheKeyGenerator('page', 'layouts');
 
-        return Cache::rememberForever($cacheKey, fn () =>
+        return Cache::tags(['cms', 'page'])->rememberForever($cacheKey, fn () =>
             static::query()
                 ->select('layout')
                 ->get()

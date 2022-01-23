@@ -10,9 +10,9 @@ trait HasAvailableTypes
 {
     public static function getAvailableTypes(): array
     {
-        $cacheKey = cacheKeyGenerator('page.types');
+        $cacheKey = cacheKeyGenerator('page', 'types');
 
-        return Cache::rememberForever($cacheKey, fn () =>
+        return Cache::tags(['cms', 'page'])->rememberForever($cacheKey, fn () =>
             static::query()
                 ->distinct()
                 ->select('type')

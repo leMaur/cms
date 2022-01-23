@@ -14,7 +14,7 @@ class SocialRepository implements Findable
     {
         $cacheKey = cacheKeyGenerator('navigation', 'social', $slug);
 
-        return Cache::rememberForever($cacheKey, fn () =>
+        return Cache::tags(['cms', 'navigation'])->rememberForever($cacheKey, fn () =>
             Navigation::query()
                 ->withType(Navigation::SOCIAL)
                 ->where('slug', $slug)

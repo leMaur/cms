@@ -73,9 +73,11 @@ class Page extends Model implements Sortable, HasMedia, Viewable
     protected static function booted(): void
     {
         static::created(function () {
-            Cache::forget('page.layouts');
-            Cache::forget('page.parents');
-            Cache::forget('page.types');
+            Cache::tags(['cms', 'page'])->flush();
+        });
+
+        static::deleted(function () {
+            Cache::tags(['cms', 'page'])->flush();
         });
 
         static::saved(function ($model) {
@@ -90,12 +92,6 @@ class Page extends Model implements Sortable, HasMedia, Viewable
             if ($model->wasChanged('type')) {
                 Cache::forget('page.types');
             }
-        });
-
-        static::deleted(function () {
-            Cache::forget('page.layouts');
-            Cache::forget('page.parents');
-            Cache::forget('page.types');
         });
     }
 
