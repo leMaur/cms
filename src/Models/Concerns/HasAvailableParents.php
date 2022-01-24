@@ -13,7 +13,9 @@ trait HasAvailableParents
     {
         $cacheKey = cacheKeyGenerator('page', 'parents');
 
-        return Cache::tags(['cms', 'page'])->rememberForever($cacheKey, fn () =>
+        return Cache::tags(['cms', 'page'])->rememberForever(
+            $cacheKey,
+            fn () =>
             static::query()
                 ->select('slug')
                 ->whereNull('parent')
