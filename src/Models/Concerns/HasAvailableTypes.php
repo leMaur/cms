@@ -12,7 +12,7 @@ trait HasAvailableTypes
     {
         $cacheKey = cacheKeyGenerator('page', 'types');
 
-        return Cache::tags(['cms', 'page'])->rememberForever(
+        return Cache::rememberForever(
             $cacheKey,
             fn () =>
             static::query()

@@ -12,7 +12,7 @@ trait HasAvailableLayouts
     {
         $cacheKey = cacheKeyGenerator('page', 'layouts');
 
-        return Cache::tags(['cms', 'page'])->rememberForever(
+        return Cache::rememberForever(
             $cacheKey,
             fn () =>
             static::query()
