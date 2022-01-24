@@ -7,6 +7,7 @@ namespace Lemaur\Cms\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Cache;
 use Lemaur\Cms\Models\Concerns\HasMediaCollections;
 use Lemaur\Cms\Models\Concerns\HasSlug;
 use Lemaur\Cms\Models\Concerns\HasType;
@@ -35,6 +36,17 @@ class Navigation extends Model implements Sortable, HasMedia, Viewable
     ];
 
     protected string $slugFrom = 'name';
+
+    protected static function booted(): void
+    {
+        static::saved(function ($model) {
+            Cache::forget(cacheKeyGenerator('navigation', 'social', $model->slug));
+        });
+
+        static::deleted(function ($model) {
+            Cache::forget(cacheKeyGenerator('navigation', 'social', $model->slug));
+        });
+    }
 
     public function __construct(array $attributes = [])
     {
