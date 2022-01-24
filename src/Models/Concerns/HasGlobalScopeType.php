@@ -20,6 +20,10 @@ trait HasGlobalScopeType
          * Instead move this snippet in its own observer class.
          * (see https://laravel.com/docs/8.x/eloquent#observers)
          */
-        static::saving(fn ($model) => $model->type = self::TYPE);
+        static::saved(function ($model) {
+            $model->type = self::TYPE;
+
+            $model->saveQuietly();
+        });
     }
 }
