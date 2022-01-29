@@ -70,22 +70,33 @@ class Page extends Model implements Sortable, HasMedia, Viewable
 
     protected string $slugFrom = 'title';
 
-    // @TODO: move to observer class
     protected static function booted(): void
     {
-        static::created(function () {
+        self::created(static function () {
             Cache::forget('page.layouts');
             Cache::forget('page.parents');
             Cache::forget('page.types');
         });
 
-        static::deleted(function () {
+        self::deleted(static function () {
             Cache::forget('page.layouts');
             Cache::forget('page.parents');
             Cache::forget('page.types');
         });
 
-        static::saved(function ($model) {
+        self::restored(static function () {
+            Cache::forget('page.layouts');
+            Cache::forget('page.parents');
+            Cache::forget('page.types');
+        });
+
+        self::forceDeleted(static function () {
+            Cache::forget('page.layouts');
+            Cache::forget('page.parents');
+            Cache::forget('page.types');
+        });
+
+        self::saved(static function ($model) {
             if ($model->wasChanged('layout')) {
                 Cache::forget('page.layouts');
             }

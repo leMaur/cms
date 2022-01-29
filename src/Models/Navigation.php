@@ -37,14 +37,15 @@ class Navigation extends Model implements Sortable, HasMedia, Viewable
 
     protected string $slugFrom = 'name';
 
-    // @TODO: move to observer class
+    protected $with = ['page'];
+
     protected static function booted(): void
     {
-        static::saved(function ($model) {
+        self::saved(static function ($model) {
             Cache::forget(cacheKeyGenerator('navigation', 'social', $model->slug));
         });
 
-        static::deleted(function ($model) {
+        self::deleted(static function ($model) {
             Cache::forget(cacheKeyGenerator('navigation', 'social', $model->slug));
         });
     }
