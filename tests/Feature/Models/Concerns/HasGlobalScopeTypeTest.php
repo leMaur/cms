@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Lemaur\Cms\Tests\Feature\Models\Concerns;
 
-use Illuminate\Support\Str;
 use Lemaur\Cms\Models\Concerns\HasGlobalScopeType;
 use Lemaur\Cms\Models\Contracts\Typeable;
 use Lemaur\Cms\Models\Tag;
