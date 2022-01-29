@@ -37,6 +37,7 @@ class Navigation extends Model implements Sortable, HasMedia, Viewable
 
     protected string $slugFrom = 'name';
 
+    // @TODO: move to observer class
     protected static function booted(): void
     {
         static::saved(function ($model) {

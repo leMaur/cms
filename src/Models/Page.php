@@ -70,6 +70,7 @@ class Page extends Model implements Sortable, HasMedia, Viewable
 
     protected string $slugFrom = 'title';
 
+    // @TODO: move to observer class
     protected static function booted(): void
     {
         static::created(function () {
