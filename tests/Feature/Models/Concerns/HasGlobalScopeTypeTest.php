@@ -13,16 +13,16 @@ class HasGlobalScopeTypeTest extends TestCase
     /** @test */
     public function it_add_a_global_scope(): void
     {
-        $topic = Topic::create(['name' => 'Biophilic Travels']);
-        $category = Category::create(['name' => 'Tableware']);
+        $topic = Topic::create(['name' => 'Biophilic Travels', 'type' => 'topic']);
+        $category = Category::create(['name' => 'Tableware', 'type' => 'category']);
 
         self::assertCount(1, Topic::get());
-        self::assertEquals($topic->name, Topic::first()->name);
-        self::assertEquals($topic->type, Topic::first()->type);
+        self::assertEquals($topic->name, 'Biophilic Travels');
+        self::assertEquals($topic->type, Topic::TYPE);
 
         self::assertCount(1, Category::get());
-        self::assertEquals($category->name, Category::first()->name);
-        self::assertEquals($category->type, Category::first()->type);
+        self::assertEquals($category->name, 'Tableware');
+        self::assertEquals($category->type, Category::TYPE);
     }
 }
 
