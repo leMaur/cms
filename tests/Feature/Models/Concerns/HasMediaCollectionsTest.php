@@ -6,7 +6,6 @@ namespace Lemaur\Cms\Tests\Feature\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Lemaur\Cms\Models\Concerns\HasMediaCollections;
 use Lemaur\Cms\Models\Page;
 use Lemaur\Cms\Tests\TestCase;
