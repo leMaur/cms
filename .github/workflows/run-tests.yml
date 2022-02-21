@@ -13,9 +13,19 @@ jobs:
         php: [8.0, 8.1]
         laravel: [8.*, 9.*]
         stability: [prefer-lowest, prefer-stable]
-        exclude:
-          - php: 8.1
-            laravel: 8.*
+        include:
+          - laravel: 8.*
+            testbench: ^6.6
+            markdown: ^0.2
+            seotools: ^v0.20
+            publishing: ^1.0
+            medialibrary: ^9.0
+          - laravel: 9.*
+            testbench: 7.*
+            markdown: ^0.3
+            seotools: ^v0.22
+            publishing: ^2.0
+            medialibrary: ^10.0
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
@@ -37,7 +47,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "illuminate/contracts:${{ matrix.laravel }}" --no-interaction --no-update
+          composer require "illuminate/contracts:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "lemaur/markdown:${{ matrix.markdown }}" "artesaos/seotools:{{ matrix.seotools }}" "lemaur/eloquent-publishing:{{ matrix.publishing }}" "spatie/laravel-medialibrary:{{ matrix.medialibrary }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Execute tests
