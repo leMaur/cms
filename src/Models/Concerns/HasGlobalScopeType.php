@@ -11,6 +11,8 @@ trait HasGlobalScopeType
 {
     public static function bootHasGlobalScopeType(): void
     {
+        static::creating(fn ($model) => $model->type = $model::getType());
+
         static::addGlobalScope(new TypeScope());
     }
 
