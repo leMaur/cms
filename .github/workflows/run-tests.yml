@@ -28,7 +28,7 @@ jobs:
             markdown: ^0.3
             seotools: ^v0.22
             publishing: ^2.0
-            medialibrary: ^10.0
+            medialibrary: ^10.0.3
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
