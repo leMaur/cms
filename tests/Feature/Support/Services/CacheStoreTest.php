@@ -39,15 +39,19 @@ class CacheStoreTest extends TestCase
 
         (new CacheStore())
             ->key('foo')
-            ->for(3600);
+            ->for(3600)
+            ->remember(fn() => null);
     }
 
-    /** @TODO: skipped because tags is not defined */
+    /** @test */
     public function it_may_has_tags(): void
     {
-        Cache::shouldReceive('remember')
+        Cache::shouldReceive('tags')
+            ->withSomeOfArgs(['baz', 'bar'])
+            ->andReturnSelf()
+            ->shouldReceive('remember')
             ->once()
-            ->withSomeOfArgs('foo', 3600, ['baz', 'bar'])
+            ->withSomeOfArgs('foo', 3600)
             ->andReturn('hello world');
 
         (new CacheStore())
@@ -67,14 +71,18 @@ class CacheStoreTest extends TestCase
             ->withSomeOfArgs('foo')
             ->andReturn('hello world');
 
-        (new CacheStore())
+        $return = (new CacheStore())
             ->key('foo')
             ->forever()
             ->remember(fn() => 'hello world');
 
-        cacheStore('foo')
+        $this->assertEquals($return, 'hello world');
+
+        $return = cacheStore('foo')
             ->forever()
             ->remember(fn() => 'hello world');
+
+        $this->assertEquals($return, 'hello world');
     }
 
     /** @test */
@@ -101,9 +109,9 @@ class CacheStoreTest extends TestCase
 
     /**
      * @test
-     * @dataProvider cacheTtl
+     * @dataProvider cacheTtlData
      */
-    public function it_caches_for_period_of_time(string $method, int $ttl): void
+    public function it_caches_for_period_of_time($method, $ttl): void
     {
         Carbon::setTestNow();
 
@@ -122,7 +130,7 @@ class CacheStoreTest extends TestCase
             ->remember(fn() => 'hello world');
     }
 
-    public function cacheTtl(): array
+    public function cacheTtlData(): array
     {
         return [
             ['minute', 1],
@@ -138,8 +146,8 @@ class CacheStoreTest extends TestCase
             ['eightHours', 60 * 8],
             ['day', 60 * 24],
             ['week', 60 * 24 * 7],
-            ['month', 60 * 24 * 31],
-            ['quarter', 60 * 24 * 90],
+            ['month', 60 * 24 * 28],
+            ['quarter', 60 * 24 * 89],
             ['year', 60 * 24 * 365],
         ];
     }

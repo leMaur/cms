@@ -9,6 +9,7 @@ use DateInterval;
 use DateTimeInterface;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
+use InvalidArgumentException;
 
 class CacheStore
 {
@@ -36,11 +37,11 @@ class CacheStore
         return $this;
     }
 
-    public function remember(Closure $callback): static
+    public function remember(Closure $callback): mixed
     {
         $this->remember = $callback;
 
-        return $this;
+        return $this->execute();
     }
 
     public function for(DateTimeInterface|DateInterval|int $ttl): static
@@ -171,6 +172,8 @@ class CacheStore
 
     private function execute(): mixed
     {
+        $this->checkArguments();
+
         if ($this->forever) {
             if ($this->tags !== []) {
                 return Cache::tags($this->tags)->rememberForever($this->key, $this->remember);
@@ -186,20 +189,18 @@ class CacheStore
         return Cache::remember($this->key, $this->ttl, $this->remember);
     }
 
-    public function __destruct()
+    private function checkArguments(): void
     {
-        if (! (bool)$this->key) {
-            throw new \InvalidArgumentException('A `key` should be provided.');
+        if ($this->key === null) {
+            throw new InvalidArgumentException('A `key` should be provided.');
         }
 
-        if (! (bool)$this->ttl && $this->forever === false) {
-            throw new \InvalidArgumentException('A `ttl` should be provided.');
+        if ($this->ttl === null && $this->forever === false) {
+            throw new InvalidArgumentException('A `ttl` should be provided.');
         }
 
-        if (! (bool)$this->remember) {
-            throw new \InvalidArgumentException('A `callback` should be provided.');
+        if ($this->remember === null) {
+            throw new InvalidArgumentException('A `callback` should be provided.');
         }
-
-        return $this->execute();
     }
 }
