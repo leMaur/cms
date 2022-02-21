@@ -18,7 +18,7 @@
         "php": "^8.0",
         "artesaos/seotools": "^v0.20|^v0.22",
         "illuminate/contracts": "^8.0|^9.0",
-        "lemaur/eloquent-publishing": "^1.0",
+        "lemaur/eloquent-publishing": "^1.0|^2.0",
         "lemaur/laravel-image-sitemap": "^1.0",
         "lemaur/markdown": "^0.2.0|^0.3.0",
         "spatie/eloquent-sortable": "^4.0",
