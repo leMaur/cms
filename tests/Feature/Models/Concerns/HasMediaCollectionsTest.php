@@ -101,7 +101,6 @@ class HasMediaCollectionsTest extends TestCase
     /** @test */
     public function it_has_conversions(): void
     {
-//        Storage::fake('local');
         $image = UploadedFile::fake()->image('photo1.jpg', 2000, 2000);
 
         $page = tap(TestMediaModel::create(Page::factory()->raw()), static function ($page) use ($image) {

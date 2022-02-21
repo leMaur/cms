@@ -11,7 +11,7 @@ trait HasAuthor
         $authUser = auth()->user();
 
         if ($authUser !== null) {
-            self::creating(static fn ($model) => $model->user_id = $authUser->getKey());
+            static::creating(static fn ($model) => $model->user_id = $authUser->getKey());
         }
     }
 }
