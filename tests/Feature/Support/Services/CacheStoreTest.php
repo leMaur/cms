@@ -33,17 +33,6 @@ class CacheStoreTest extends TestCase
     }
 
     /** @test */
-    public function it_throws_an_exception_if_remember_is_not_provided(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        (new CacheStore())
-            ->key('foo')
-            ->for(3600)
-            ->remember(fn() => null);
-    }
-
-    /** @test */
     public function it_may_has_tags(): void
     {
         Cache::shouldReceive('tags')

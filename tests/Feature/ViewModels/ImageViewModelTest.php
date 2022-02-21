@@ -70,7 +70,7 @@ class ImageViewModelTest extends TestCase
     /** @test */
     public function it_has_html(): void
     {
-        self::markTestSkipped();
+        $this->markTestSkipped();
 
         $html = $this->page->toViewModel()->coverImage()->html();
 
